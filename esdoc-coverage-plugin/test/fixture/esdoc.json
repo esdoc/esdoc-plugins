@@ -2,9 +2,6 @@
   "source": "./test/fixture/src",
   "destination": "./test/fixture/out",
   "plugins": [
-    {"name": "./src/index.js"}
-  ],
-
-  "/* for ESDoc v0.5 */": null,
-  "coverage": false
+    {"name": "./src/index.js", "option": {"coverage": true}}
+  ]
 }
