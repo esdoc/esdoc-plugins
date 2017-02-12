@@ -10,7 +10,7 @@ const _resultsForTest = [];
  * Lint Output Builder class.
  */
 class LintPlugin {
-  constructor(config, tags, option = {lint: true}) {
+  constructor(config, tags, option = {enable: true}) {
     this._config = config;
     this._tags = tags;
     this._option = option;
@@ -20,7 +20,7 @@ class LintPlugin {
    * execute building output.
    */
   exec() {
-    if (!this._option.lint) return;
+    if (!this._option.enable) return;
 
     const results = [];
     const docs = this._tags.filter(v => ['method', 'function'].includes(v.kind));

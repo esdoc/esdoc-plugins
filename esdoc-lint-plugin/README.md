@@ -10,7 +10,7 @@ npm install esdoc-lint-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-lint-plugin", "option": {"lint": true}}
+    {"name": "esdoc-lint-plugin", "option": {"enable": true}}
   ]
 }
 ```
