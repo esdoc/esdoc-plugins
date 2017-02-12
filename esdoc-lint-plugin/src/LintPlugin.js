@@ -10,7 +10,7 @@ const _resultsForTest = [];
  * Lint Output Builder class.
  */
 class LintPlugin {
-  constructor(config, tags, option) {
+  constructor(config, tags, option = {lint: true}) {
     this._config = config;
     this._tags = tags;
     this._option = option;

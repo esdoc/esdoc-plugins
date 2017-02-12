@@ -17,7 +17,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "test": "mocha --recursive ./test/src -R spec"
+    "test": "rm -rf ./test/fixture/out && mocha --recursive ./test/src -R spec"
   },
   "keywords": [
     "esdoc",
