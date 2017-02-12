@@ -10,7 +10,7 @@ npm install esdoc-coverage-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-coverage-plugin", "option": {"coverage": true}}
+    {"name": "esdoc-coverage-plugin", "option": {"enable": true}}
   ]
 }
 ```

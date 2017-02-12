@@ -5,7 +5,7 @@ const fs = require('fs-extra');
  * Coverage Plugin.
  */
 class CoveragePlugin {
-  constructor(config, tags, option = {coverage: true}) {
+  constructor(config, tags, option = {enable: true}) {
     this._config = config;
     this._tags = tags;
     this._option = option;
@@ -15,7 +15,7 @@ class CoveragePlugin {
    * execute building output.
    */
   exec() {
-    if (!this._option.coverage) return;
+    if (!this._option.enable) return;
 
     const docs = this._tags.filter(v => ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable'].includes(v.kind));
     const expectCount = docs.length;
