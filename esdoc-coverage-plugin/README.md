@@ -15,6 +15,8 @@ npm install esdoc-coverage-plugin
 }
 ```
 
+`enable` is default `true`.
+
 ## LICENSE
 MIT
 

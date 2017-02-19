@@ -5,6 +5,8 @@ class ExternalECMAScriptPlugin {
   constructor(config, option) {
     this._config = config;
     this._option = option;
+
+    if (!('enable' in this._option)) this._option.enable = true;
   }
 
   exec(){

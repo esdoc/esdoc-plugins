@@ -15,6 +15,8 @@ npm install esdoc-lint-plugin
 }
 ```
 
+`enable` is default `true`
+
 ## LICENSE
 MIT
 

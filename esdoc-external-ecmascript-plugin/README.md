@@ -15,6 +15,8 @@ npm install esdoc-external-ecmascript-plugin
 }
 ```
 
+`enable` is default `true`.
+
 ## LICENSE
 MIT
 

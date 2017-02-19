@@ -9,6 +9,8 @@ class CoveragePlugin {
     this._config = config;
     this._tags = tags;
     this._option = option;
+
+    if (!('enable' in this._option)) this._option.enable = true;
   }
 
   /**
