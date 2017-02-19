@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "description": "A accessor plugin for ESDoc",
   "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-standard-plugins",
+  "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-standard-plugins"
+    "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "devDependencies": {
     "esdoc": "latest",

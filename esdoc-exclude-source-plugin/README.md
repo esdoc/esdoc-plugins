@@ -1,7 +1,7 @@
-# ESDoc Lint Plugin
+# ESDoc Exclude Source Plugin
 ## Install
 ```bash
-npm install esdoc-lint-plugin
+npm install esdoc-exclude-source-plugin
 ```
 
 ## Config
@@ -10,7 +10,7 @@ npm install esdoc-lint-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-lint-plugin", "option": {"enable": true}}
+    {"name": "esdoc-exclude-source-plugin"}
   ]
 }
 ```
@@ -20,4 +20,3 @@ MIT
 
 ## Author
 [Ryo Maruyama@h13i32maru](https://github.com/h13i32maru)
-

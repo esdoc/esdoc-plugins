@@ -1,0 +1,16 @@
+{
+  "source": "./test/fixture/src",
+  "destination": "./test/fixture/out",
+  "package": "./test/fixture/package.json",
+  "plugins": [
+    {
+      "name": "./src/index.js",
+      "option": {
+        "replaces": [
+          {"from": "^src/", "to": "lib/"},
+          {"from": "^lib/ImportPathTest2.js", "to": "lib/foo"}
+        ]
+      }
+    }
+  ]
+}

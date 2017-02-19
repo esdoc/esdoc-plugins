@@ -14,3 +14,9 @@ npm install esdoc-accessor-plugin
   ]
 }
 ```
+
+## LICENSE
+MIT
+
+## Author
+[Ryo Maruyama@h13i32maru](https://github.com/h13i32maru)

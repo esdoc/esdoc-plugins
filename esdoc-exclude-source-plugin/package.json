@@ -1,7 +1,7 @@
 {
-  "name": "esdoc-coverage-plugin",
+  "name": "esdoc-exclude-source-plugin",
   "version": "0.0.1",
-  "description": "A coverage plugin for ESDoc",
+  "description": "A exclude source plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
@@ -9,10 +9,8 @@
     "type": "git",
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
-  "dependencies": {
-    "fs-extra": "1.0.0"
-  },
   "devDependencies": {
+    "cheerio": "0.22.0",
     "esdoc": "latest",
     "mocha": "2.5.3"
   },
@@ -24,7 +22,8 @@
   },
   "keywords": [
     "esdoc",
-    "coverage",
+    "exclude",
+    "source",
     "plugin"
   ],
   "files": [

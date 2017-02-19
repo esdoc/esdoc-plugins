@@ -15,5 +15,8 @@ npm install esdoc-external-ecmascript-plugin
 }
 ```
 
+## LICENSE
+MIT
 
-
+## Author
+[Ryo Maruyama@h13i32maru](https://github.com/h13i32maru)

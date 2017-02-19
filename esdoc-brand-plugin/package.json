@@ -1,7 +1,7 @@
 {
-  "name": "esdoc-coverage-plugin",
+  "name": "esdoc-brand-plugin",
   "version": "0.0.1",
-  "description": "A coverage plugin for ESDoc",
+  "description": "A brand plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
+    "cheerio": "0.22.0",
     "fs-extra": "1.0.0"
   },
   "devDependencies": {
@@ -24,7 +25,8 @@
   },
   "keywords": [
     "esdoc",
-    "coverage",
+    "brand",
+    "title",
     "plugin"
   ],
   "files": [
