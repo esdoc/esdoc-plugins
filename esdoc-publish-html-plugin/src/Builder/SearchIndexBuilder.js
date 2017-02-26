@@ -1,0 +1,76 @@
+import DocBuilder from './DocBuilder.js';
+
+/**
+ * Search index of identifier builder class.
+ */
+export default class SearchIndexBuilder extends DocBuilder {
+  exec(writeFile, copyDir) {
+    const searchIndex = [];
+    const docs = this._find({});
+
+    for (const doc of docs) {
+      if (doc.kind === 'index') continue;
+      if (doc.kind.indexOf('manual') === 0) continue;
+
+      let indexText;
+      let url;
+      let displayText;
+
+      if (doc.importPath) {
+        displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
+        indexText = `${doc.importPath}~${doc.name}`.toLowerCase();
+        url = this._getURL(doc);
+      } else if (doc.kind === 'testDescribe' || doc.kind === 'testIt') {
+        displayText = doc.testFullDescription;
+        indexText = [...(doc.testTargets || []), ...(doc._custom_test_targets || [])].join(' ').toLowerCase();
+        const filePath = doc.longname.split('~')[0];
+        const fileDoc = this._find({kind: 'testFile', name: filePath})[0];
+        url = `${this._getURL(fileDoc)}#lineNumber${doc.lineNumber}`;
+      } else if (doc.kind === 'external') {
+        displayText = doc.longname;
+        indexText = displayText.toLowerCase();
+        url = doc.externalLink;
+      } else if (doc.kind === 'file' || doc.kind === 'testFile') {
+        displayText = doc.name;
+        indexText = displayText.toLowerCase();
+        url = this._getURL(doc);
+      } else {
+        displayText = doc.longname;
+        indexText = displayText.toLowerCase();
+        url = this._getURL(doc);
+      }
+
+      let kind = doc.kind;
+      /* eslint-disable default-case */
+      switch (kind) {
+        case 'constructor':
+          kind = 'method';
+          break;
+        case 'get':
+        case 'set':
+          kind = 'member';
+          break;
+        case 'testDescribe':
+        case 'testIt':
+          kind = 'test';
+          break;
+      }
+
+      searchIndex.push([indexText, url, displayText, kind]);
+    }
+
+    searchIndex.sort((a, b)=>{
+      if (a[2] === b[2]) {
+        return 0;
+      } else if (a[2] < b[2]) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    const javascript = `window.esdocSearchIndex = ${JSON.stringify(searchIndex, null, 2)}`;
+
+    writeFile(javascript, 'script/search_index.js');
+  }
+}

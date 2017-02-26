@@ -1,0 +1,50 @@
+{
+  "name": "esdoc-publish-html-plugin",
+  "version": "0.0.1",
+  "description": "A publish HTML plugin for ESDoc",
+  "author": "h13i32maru",
+  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esdoc/esdoc-plugins"
+  },
+  "dependencies": {
+    "cheerio": "0.22.0",
+    "fs-extra": "1.0.0",
+    "escape-html": "1.0.3",
+    "babel-generator": "6.11.4",
+    "ice-cap": "0.0.4",
+    "marked": "0.3.6",
+    "taffydb": "2.7.2"
+  },
+  "devDependencies": {
+    "esdoc": "latest",
+    "mocha": "2.5.3",
+    "babel-cli": "6.11.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
+    "babel-register": "6.11.6",
+    "esdoc-accessor-plugin": "latest",
+    "esdoc-external-ecmascript-plugin": "latest",
+    "esdoc-undocumented-identifier-plugin": "latest",
+    "esdoc-coverage-plugin": "latest"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "build": "babel --out-dir out/src src",
+    "test": "rm -rf ./test/fixture/out && mocha -t 10000 --require ./node_modules/babel-register --require ./test/src/init.js --recursive ./test/src -R spec"
+  },
+  "keywords": [
+    "esdoc",
+    "publish",
+    "html",
+    "plugin"
+  ],
+  "files": [
+    "out/src",
+    "README.md"
+  ],
+  "main": "out/src/index.js"
+}
