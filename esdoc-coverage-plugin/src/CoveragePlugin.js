@@ -5,9 +5,7 @@ const fs = require('fs-extra');
  * Coverage Plugin.
  */
 class CoveragePlugin {
-  constructor(config, tags, option = {enable: true}) {
-    this._config = config;
-    this._tags = tags;
+  constructor(option = {enable: true}) {
     this._option = option;
 
     if (!('enable' in this._option)) this._option.enable = true;
@@ -16,10 +14,10 @@ class CoveragePlugin {
   /**
    * execute building output.
    */
-  exec() {
+  exec(tags, writeFile) {
     if (!this._option.enable) return;
 
-    const docs = this._tags.filter(v => ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable'].includes(v.kind));
+    const docs = tags.filter(v => ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable'].includes(v.kind));
     const expectCount = docs.length;
     let actualCount = 0;
     const files = {};
@@ -46,8 +44,7 @@ class CoveragePlugin {
       files: files
     };
 
-    const coverageOutPath = path.resolve(this._config.destination, 'coverage.json');
-    fs.outputFileSync(coverageOutPath, JSON.stringify(coverage, null, 2));
+    writeFile(JSON.stringify(coverage, null, 2), 'coverage.json');
 
     // create badge
     const ratio = Math.floor(100 * actualCount / expectCount);
@@ -65,8 +62,7 @@ class CoveragePlugin {
     badge = badge.replace(/@ratio@/g, `${ratio}%`);
     badge = badge.replace(/@color@/g, color);
 
-    const badgeOutPath = path.resolve(this._config.destination, 'badge.svg');
-    fs.outputFileSync(badgeOutPath, badge);
+    writeFile(badge, 'badge.svg');
   }
 }
 

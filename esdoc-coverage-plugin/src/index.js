@@ -1,17 +1,17 @@
 const CoveragePlugin = require('./CoveragePlugin');
 
-let config;
 let option;
+let tags;
 
 exports.onStart = function(ev) {
   option = ev.data.option;
 };
 
-exports.onHandleConfig = function(ev) {
-  config = ev.data.config;
+exports.onHandleTag = function(ev) {
+  tags = ev.data.tag;
 };
 
-exports.onHandleTag = function(ev) {
-  const plugin = new CoveragePlugin(config, ev.data.tag, option);
-  plugin.exec();
+exports.onPublish = function(ev) {
+  const plugin = new CoveragePlugin(option);
+  plugin.exec(tags, ev.data.writeFile);
 };
