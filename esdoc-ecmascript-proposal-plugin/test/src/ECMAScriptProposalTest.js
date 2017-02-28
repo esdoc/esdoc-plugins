@@ -74,7 +74,7 @@ describe('test ecmascript proposal result:', ()=> {
   });
 
   it('parses ObjectRestSpread', ()=>{
-    const doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method1');
+    let doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method1');
     assert.deepEqual(doc.params, [
       {
         name: 'objectPattern',
@@ -83,6 +83,75 @@ describe('test ecmascript proposal result:', ()=> {
         defaultValue: '{"x":null,"y":null,"z":{}}'
       }
     ]);
+
+    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method2');
+    assert.deepEqual(doc.params, [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config",
+        "description": "this is config."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config.x",
+        "description": "this is number x."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config.y",
+        "description": "this is string y."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config.a",
+        "description": "thi is number[] a."
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config.b",
+        "description": "thi is number[] b."
+      }
+    ]);
+
+    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method3');
+    assert.deepEqual(doc.return, {
+      "types": ["{\"a\": *, ...obj: Object}"]
+    });
+
+    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method4');
+    assert.deepEqual(doc.return, {
+      "nullable": null,
+      "types": [
+        "{a: number, b: string, c: boolean}"
+      ],
+      "spread": false,
+      "description": ""
+    });
   });
 });
 
