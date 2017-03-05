@@ -1,11 +1,6 @@
-let option;
-
-exports.onStart = function(ev) {
-  option = ev.data.option;
-};
-
 exports.onHandleCodeParser = function(ev) {
-  const plugins = ev.data.option.plugins;
+  const option = ev.data.option;
+  const plugins = ev.data.parserOption.plugins;
 
   if (option.all || option.classProperties) plugins.push('classProperties');
   if (option.all || option.objectRestSpread) plugins.push('objectRestSpread');
