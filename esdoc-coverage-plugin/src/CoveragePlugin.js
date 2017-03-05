@@ -44,7 +44,7 @@ class CoveragePlugin {
       files: files
     };
 
-    writeFile(JSON.stringify(coverage, null, 2), 'coverage.json');
+    writeFile('coverage.json', JSON.stringify(coverage, null, 2));
 
     // create badge
     const ratio = Math.floor(100 * actualCount / expectCount);
@@ -62,7 +62,7 @@ class CoveragePlugin {
     badge = badge.replace(/@ratio@/g, `${ratio}%`);
     badge = badge.replace(/@color@/g, color);
 
-    writeFile(badge, 'badge.svg');
+    writeFile('badge.svg', badge);
   }
 }
 
