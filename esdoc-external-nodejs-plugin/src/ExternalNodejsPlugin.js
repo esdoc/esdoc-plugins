@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const path = require('path');
 
 class ExternalECMAScriptPlugin {
-  constructor(config, option) {
+  constructor(config, option = {}) {
     this._config = config;
     this._option = option;
 

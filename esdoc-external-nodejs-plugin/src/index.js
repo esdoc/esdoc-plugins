@@ -1,14 +1,9 @@
 const ExternalNodejsPlugin = require('./ExternalNodejsPlugin');
 
-let option;
 let plugin;
 
-exports.onStart = function(ev) {
-  option = ev.data.option;
-};
-
 exports.onHandleConfig = function(ev) {
-  plugin = new ExternalNodejsPlugin(ev.data.config, option);
+  plugin = new ExternalNodejsPlugin(ev.data.config, ev.data.option);
   plugin.exec();
 };
 
