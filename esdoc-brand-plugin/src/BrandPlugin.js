@@ -43,7 +43,7 @@ class BrandPlugin {
   }
 
   exec(fileName, content){
-    if (path.extname(fileName) !== '.html') return;
+    if (path.extname(fileName) !== '.html') return content;
 
     const $ = cheerio.load(content);
 
