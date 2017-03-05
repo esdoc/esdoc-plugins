@@ -3,17 +3,17 @@ const path = require('path');
 const cheerio = require('cheerio');
 
 class InjectStylePlugin {
-  constructor(config, option = {}) {
-    this._config = config;
+  constructor(option = {}) {
     this._option = option;
 
     if (!('enable' in this._option)) this._option.enable = true;
   }
 
-  exec(html){
-    if (!this._option.enable) return;
+  exec(fileName, content){
+    if (!this._option.enable) return content;
+    if (path.extname(fileName) !== '.html') return content;
 
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(content);
 
     let i = 0;
     for (const style of this._option.styles) {
@@ -24,14 +24,14 @@ class InjectStylePlugin {
     return $.html();
   }
 
-  finish() {
+  writeFile(writeFile) {
     if (!this._option.enable) return;
 
     let i = 0;
     for (const style of this._option.styles) {
-      const tmp = `inject/css/${i}-${path.basename(style)}`;
-      const src = path.resolve(this._config.destination, tmp);
-      fs.copySync(style, src);
+      const outPath = `inject/css/${i}-${path.basename(style)}`;
+      const content = fs.readFileSync(style).toString();
+      writeFile(outPath, content);
     }
   }
 }
