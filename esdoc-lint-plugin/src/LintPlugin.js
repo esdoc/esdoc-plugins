@@ -10,8 +10,7 @@ const _resultsForTest = [];
  * Lint Output Builder class.
  */
 class LintPlugin {
-  constructor(config, tags, option = {enable: true}) {
-    this._config = config;
+  constructor(tags, option = {enable: true}) {
     this._tags = tags;
     this._option = option;
   }
@@ -128,17 +127,16 @@ class LintPlugin {
    * @private
    */
   _showResult(results) {
-    const sourceDir = path.dirname(path.resolve(this._config.source));
     for (const result of results) {
       const doc = result.doc;
       const node = result.node;
       const filePath = doc.longname.split('~')[0];
       const name = doc.longname.split('~')[1];
-      const absFilePath = path.resolve(sourceDir, filePath);
       const comment = node.leadingComments[node.leadingComments.length - 1];
       const startLineNumber = comment.loc.start.line;
       const endLineNumber = node.loc.start.line;
-      const lines = fs.readFileSync(absFilePath).toString().split('\n');
+      const fileDoc = this._tags.find(tag => tag.kind === 'file' && tag.name === filePath);
+      const lines = fileDoc.content.split('\n');
       const targetLines = [];
 
       for (let i = startLineNumber - 1; i < endLineNumber; i++) {
