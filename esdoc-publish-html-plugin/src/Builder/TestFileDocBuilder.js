@@ -16,7 +16,7 @@ export default class TestFileDocBuilder extends DocBuilder {
       ice.load('content', this._buildFileDoc(doc), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.text('title', title, IceCap.MODE_WRITE);
-      writeFile(ice.html, fileName);
+      writeFile(fileName, ice.html);
     }
   }
 

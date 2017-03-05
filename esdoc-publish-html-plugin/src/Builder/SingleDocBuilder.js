@@ -22,7 +22,7 @@ export default class SingleDocBuilder extends DocBuilder {
       ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.text('title', title, IceCap.MODE_WRITE);
-      writeFile(ice.html, fileName);
+      writeFile(fileName, ice.html);
     }
   }
 

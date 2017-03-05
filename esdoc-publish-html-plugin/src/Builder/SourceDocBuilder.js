@@ -18,7 +18,7 @@ export default class SourceDocBuilder extends DocBuilder {
     ice.load('content', this._buildSourceHTML());
     ice.text('title', title, IceCap.MODE_WRITE);
 
-    writeFile(ice.html, fileName);
+    writeFile(fileName, ice.html);
   }
 
   /**

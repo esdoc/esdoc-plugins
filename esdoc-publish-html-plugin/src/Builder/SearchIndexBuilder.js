@@ -71,6 +71,6 @@ export default class SearchIndexBuilder extends DocBuilder {
 
     const javascript = `window.esdocSearchIndex = ${JSON.stringify(searchIndex, null, 2)}`;
 
-    writeFile(javascript, 'script/search_index.js');
+    writeFile('script/search_index.js', javascript);
   }
 }

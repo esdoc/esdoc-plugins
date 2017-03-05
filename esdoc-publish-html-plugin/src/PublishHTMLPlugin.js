@@ -13,13 +13,12 @@ import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 import ManualDocBuilder from './Builder/ManualDocBuilder.js';
 
 export default class PublishHTMLPlugin {
-  constructor(config, option = {}) {
-    this._config = config;
+  constructor(option = {}) {
     this._option = option;
   }
 
   exec(tags, writeFile, copyDir, readFile) {
-    IceCap.debug = !!this._config.debug;
+    IceCap.debug = !!this._option.debug;
 
     const data = taffy(tags);
 

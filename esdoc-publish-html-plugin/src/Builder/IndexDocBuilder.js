@@ -12,7 +12,7 @@ export default class IndexDocBuilder extends DocBuilder {
     const title = this._getTitle('Home');
     ice.load('content', this._buildIndexDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
-    writeFile(ice.html, 'index.html');
+    writeFile('index.html', ice.html);
   }
 
   /**

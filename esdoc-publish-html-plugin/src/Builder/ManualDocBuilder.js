@@ -44,11 +44,11 @@ export default class ManualDocBuilder extends DocBuilder {
       ice.text('title', 'Manual', IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.attr('rootContainer', 'class', ' manual-index');
-      writeFile(ice.html, fileName);
+      writeFile(fileName, ice.html);
 
       if (manualIndex.globalIndex) {
         ice.attr('baseUrl', 'href', './', IceCap.MODE_WRITE);
-        writeFile(ice.html, 'index.html');
+        writeFile('index.html', ice.html);
       }
 
       ice.attr('rootContainer', 'class', ' manual-index', IceCap.MODE_REMOVE);
@@ -66,7 +66,7 @@ export default class ManualDocBuilder extends DocBuilder {
         ice.load('nav', this._buildManualNav(manuals, manualKinds), IceCap.MODE_WRITE);
         ice.text('title', title, IceCap.MODE_WRITE);
         ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
-        writeFile(ice.html, fileName);
+        writeFile(fileName, ice.html);
       }
     }
 
@@ -95,7 +95,7 @@ export default class ManualDocBuilder extends DocBuilder {
       let badge = this._readTemplate('image/manual-badge.svg');
       badge = badge.replace(/@value@/g, `${ratio}%`);
       badge = badge.replace(/@color@/g, color);
-      writeFile(badge, 'manual-badge.svg');
+      writeFile('manual-badge.svg', badge);
     }
   }
 

@@ -10,7 +10,7 @@ export default class IdentifiersDocBuilder extends DocBuilder {
     const title = this._getTitle('Reference');
     ice.load('content', this._buildIdentifierDoc());
     ice.text('title', title, IceCap.MODE_WRITE);
-    writeFile(ice.html, 'identifiers.html');
+    writeFile('identifiers.html', ice.html);
   }
 
   /**
