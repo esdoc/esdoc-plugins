@@ -1,4 +1,4 @@
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
 
@@ -42,8 +42,10 @@ class BrandPlugin {
     return null;
   }
 
-  exec(html){
-    const $ = cheerio.load(html);
+  exec(fileName, content){
+    if (path.extname(fileName) !== '.html') return;
+
+    const $ = cheerio.load(content);
 
     // title
     if (this._title) {
@@ -65,11 +67,11 @@ class BrandPlugin {
     return $.html();
   }
 
-  finish() {
+  writeIcon(writeFile) {
     if (this._repository.indexOf('https://github.com/') === 0) {
       const srcPath = path.resolve(__dirname, 'github.png');
-      const outPath = path.resolve(this._config.destination, 'image/github.png');
-      fs.copySync(srcPath, outPath);
+      const content = fs.readFileSync(srcPath).toString();
+      writeFile('image/github.png', content);
     }
   }
 }

@@ -25,6 +25,7 @@ describe('test brand result:', ()=> {
     const $ = cheerio.load(html);
     assert.equal($('header a[href="https://github.com/esdoc/esdoc-optional-plugins"]').length, 1);
     assert.equal($('header img[src="./image/github.png"]').length, 1);
+    assert(fs.readFileSync('./test/fixture/out/image/github.png'));
   });
 });
 

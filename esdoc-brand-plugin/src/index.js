@@ -1,20 +1,15 @@
 const BrandPlugin = require('./BrandPlugin');
 
-let option;
 let plugin;
 
-exports.onStart = function(ev) {
-  option = ev.data.option;
-};
-
 exports.onHandleConfig = function(ev) {
-  plugin = new BrandPlugin(ev.data.config, option);
+  plugin = new BrandPlugin(ev.data.config, ev.data.option);
 };
 
-exports.onHandleHTML = function(ev) {
-  ev.data.html = plugin.exec(ev.data.html);
+exports.onPublish = function(ev) {
+  plugin.writeIcon(ev.data.writeFile);
 };
 
-exports.onComplete = function() {
-  plugin.finish();
+exports.onHandleContent = function(ev) {
+  ev.data.content = plugin.exec(ev.data.fileName, ev.data.content);
 };

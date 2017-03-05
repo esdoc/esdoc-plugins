@@ -3,6 +3,7 @@
   "destination": "./test/fixture/out",
   "package": "./test/fixture/package.json",
   "plugins": [
+    {"name": "./test/fixture/publish-html-mock-plugin.js"},
     {"name": "./src/index.js"}
   ]
 }

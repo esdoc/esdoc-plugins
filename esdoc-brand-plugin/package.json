@@ -10,8 +10,7 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "0.22.0",
-    "fs-extra": "1.0.0"
+    "cheerio": "0.22.0"
   },
   "devDependencies": {
     "esdoc": "latest",
