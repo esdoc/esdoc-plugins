@@ -3,17 +3,17 @@ const path = require('path');
 const cheerio = require('cheerio');
 
 class InjectScriptPlugin {
-  constructor(config, option = {}) {
-    this._config = config;
+  constructor(option = {}) {
     this._option = option;
 
     if (!('enable' in this._option)) this._option.enable = true;
   }
 
-  exec(html){
-    if (!this._option.enable) return;
+  exec(fileName, content){
+    if (!this._option.enable) return content;
+    if (path.extname(fileName) !== '.html') return content;
 
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(content);
 
     let i = 0;
     for (const script of this._option.scripts) {
@@ -24,14 +24,15 @@ class InjectScriptPlugin {
     return $.html();
   }
 
-  finish() {
+  writeFile(writeFile) {
     if (!this._option.enable) return;
 
     let i = 0;
     for (const script of this._option.scripts) {
-      const tmp = `inject/script/${i}-${path.basename(script)}`;
-      const src = path.resolve(this._config.destination, tmp);
-      fs.copySync(script, src);
+      const outPath = `inject/script/${i}-${path.basename(script)}`;
+      const content = fs.readFileSync(script).toString();
+      console.log(content);
+      writeFile(outPath, content);
     }
   }
 }
