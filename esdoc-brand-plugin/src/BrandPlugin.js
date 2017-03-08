@@ -67,11 +67,10 @@ class BrandPlugin {
     return $.html();
   }
 
-  writeIcon(writeFile) {
+  writeIcon(copyFile) {
     if (this._repository.indexOf('https://github.com/') === 0) {
       const srcPath = path.resolve(__dirname, 'github.png');
-      const content = fs.readFileSync(srcPath).toString();
-      writeFile('image/github.png', content);
+      copyFile(srcPath, 'image/github.png');
     }
   }
 }

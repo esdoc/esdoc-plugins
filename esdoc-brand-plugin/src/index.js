@@ -7,7 +7,7 @@ exports.onHandleConfig = function(ev) {
 };
 
 exports.onPublish = function(ev) {
-  plugin.writeIcon(ev.data.writeFile);
+  plugin.writeIcon(ev.data.copyFile);
 };
 
 exports.onHandleContent = function(ev) {
