@@ -1,6 +1,6 @@
 {
   "name": "esdoc-publish-html-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -33,7 +33,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "build": "babel --out-dir out/src src",
+    "build": "rm -rf ./out/src && babel --out-dir out/src --ignore 'Builder/template' src && cp -a src/Builder/template out/src/Builder/",
     "test": "rm -rf ./test/fixture/out && mocha -t 10000 --require ./node_modules/babel-register --require ./test/src/init.js --recursive ./test/src -R spec"
   },
   "keywords": [
