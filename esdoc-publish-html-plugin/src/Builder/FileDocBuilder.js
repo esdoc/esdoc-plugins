@@ -28,7 +28,7 @@ export default class FileDocBuilder extends DocBuilder {
    */
   _buildFileDoc(doc) {
     const ice = new IceCap(this._readTemplate('file.html'));
-    ice.text('title', doc.longname);
+    ice.text('title', doc.name);
     ice.text('content', doc.content);
     ice.drop('emptySourceCode', !!doc.content);
     return ice.html;
