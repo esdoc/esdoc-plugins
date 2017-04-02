@@ -15,6 +15,9 @@ npm install esdoc-accessor-plugin
 }
 ```
 
+- `access` is default `["public", "protected", "private"]`
+- `autoPrivate` is default `true`
+
 ## LICENSE
 MIT
 

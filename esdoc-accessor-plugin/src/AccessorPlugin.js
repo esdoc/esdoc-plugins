@@ -2,10 +2,13 @@ class AccessorPlugin {
   constructor(tags, option = {}) {
     this._tags = tags;
     this._option = option;
+
+    if (!('access' in this._option)) this._option.access = ['public', 'protected', 'private'];
+    if (!('autoPrivate' in this._option)) this._option.autoPrivate = true;
   }
 
   exec(){
-    const access = this._option.access || ["public", "protected", "private"];
+    const access = this._option.access;
     const autoPrivate = this._option.autoPrivate;
     for (const tag of this._tags) {
       if (!tag.access) {
