@@ -13,6 +13,8 @@ class LintPlugin {
   constructor(tags, option = {enable: true}) {
     this._tags = tags;
     this._option = option;
+
+    if (!('enable' in this._option)) this._option.enable = true;
   }
 
   /**
