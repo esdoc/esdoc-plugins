@@ -6,7 +6,7 @@ class UndocumentedIdentifierPlugin {
   }
 
   exec(tags){
-    if (!this._option.enable) return;
+    if (!this._option.enable) return tags;
 
     for (const tag of tags) {
       if (tag.undocument === true && tag.ignore === true) tag.ignore = false;
