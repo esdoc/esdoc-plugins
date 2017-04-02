@@ -269,7 +269,7 @@ export default class ManualDocBuilder extends DocBuilder {
       ice.load('card', card.card);
     });
 
-    if (manualIndex) {
+    if (manualIndex && manualIndex.content) {
       const userIndex = this._convertMDToHTML(manualIndex.content);
       ice.load('manualUserIndex', userIndex);
     } else {
