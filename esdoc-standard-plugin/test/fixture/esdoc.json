@@ -7,32 +7,18 @@
   "plugins": [
     {
       "name": "./src/index.js",
-      "option": {
-        "lint": true,
-        "coverage": true,
-        "access": ["public", "protected", "private"],
-        "autoPrivate": true,
-        "title": "My Library",
-        "repository": "https://github.com/foo/bar"
-      }
+      "option": {}
+    },
+    {
+      "name": "./test/fixture/spy-plugin.js"
     }
   ],
-  "_______test": {
+  "test": {
     "type": "mocha",
     "source": "./test/fixture/test",
     "includes": ["Test.js$"]
   },
-  "_____manual": {
-    "index": "./test/fixture/manual/index.md",
-    "overview": ["./test/fixture/manual/overview.md"],
-    "design": ["./test/fixture/manual/design.md"],
-    "installation": ["./test/fixture/manual/installation.md"],
-    "usage": ["./test/fixture/manual/usage1.md", "./test/fixture/manual/usage2.md"],
-    "tutorial": ["./test/fixture/manual/tutorial.md"],
-    "configuration": ["./test/fixture/manual/configuration.md"],
-    "example": ["./test/fixture/manual/example.md"],
-    "advanced": ["./test/fixture/manual/advanced.md"],
-    "faq": ["./test/fixture/manual/faq.md"],
-    "changelog": ["./test/fixture/CHANGELOG.md"]
+  "manual": {
+    "overview": ["./test/fixture/manual/overview.md"]
   }
 }

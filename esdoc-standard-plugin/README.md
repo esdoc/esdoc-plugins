@@ -17,6 +17,7 @@ npm install esdoc-standard-plugin
         "coverage": true,
         "access": ["public", "protected", "private"],
         "autoPrivate": true,
+        "undocumentIdentifier": true,
         "title": "My Library",
         "repository": "https://github.com/foo/bar"
       }
