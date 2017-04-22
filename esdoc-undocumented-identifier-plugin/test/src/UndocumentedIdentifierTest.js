@@ -13,7 +13,7 @@ function cli() {
 cli();
 
 describe('test undocumented identifier result:', ()=> {
-  const tmp = fs.readFileSync('./test/fixture/out/dump.json').toString();
+  const tmp = fs.readFileSync('./test/fixture/out/index.json').toString();
   const tags = JSON.parse(tmp);
 
   it('does not ignore undocumented identifier.', ()=>{

@@ -13,7 +13,7 @@ function cli() {
 cli();
 
 describe('test external ecmascript results:', ()=>{
-  const tmp = fs.readFileSync('./test/fixture/out/dump.json').toString();
+  const tmp = fs.readFileSync('./test/fixture/out/index.json').toString();
   const tags = JSON.parse(tmp);
 
   it('has external ecmascript.', ()=>{

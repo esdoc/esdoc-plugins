@@ -7,6 +7,6 @@ exports.onHandleConfig = function(ev) {
   plugin.exec();
 };
 
-exports.onHandleTag = function(ev) {
-  plugin.cleanup(ev.data.tag);
+exports.onHandleDocs = function(ev) {
+  plugin.cleanup(ev.data.docs);
 };

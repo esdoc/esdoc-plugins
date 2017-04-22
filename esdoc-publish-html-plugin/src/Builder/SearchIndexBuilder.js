@@ -34,6 +34,8 @@ export default class SearchIndexBuilder extends DocBuilder {
         displayText = doc.name;
         indexText = displayText.toLowerCase();
         url = this._getURL(doc);
+      } else if (doc.kind === 'packageJSON'){
+        continue;
       } else {
         displayText = doc.longname;
         indexText = displayText.toLowerCase();

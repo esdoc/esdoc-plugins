@@ -1,6 +1,6 @@
 const ExcludeSourcePlugin = require('./ExcludeSourcePlugin');
 
-exports.onHandleTag = function(ev) {
+exports.onHandleDocs = function(ev) {
   const plugin = new ExcludeSourcePlugin();
-  ev.data.tag = plugin.exec(ev.data.tag);
+  ev.data.docs = plugin.exec(ev.data.docs);
 };

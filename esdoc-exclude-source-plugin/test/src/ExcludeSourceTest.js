@@ -14,10 +14,15 @@ function cli() {
 cli();
 
 describe('test exclude source result:', ()=> {
+  const tmp = fs.readFileSync('./test/fixture/out/index.json').toString();
+  const docs = JSON.parse(tmp);
+
   it('does not have source code.', ()=>{
-    const html = fs.readFileSync('./test/fixture/out/file/src/TestExcludeSource.js.html').toString();
-    const $ = cheerio.load(html);
-    assert.equal($('.content .source-code').text(), '');
+    docs.forEach((doc) => {
+      if (doc.kind === 'file' || doc.kind === 'testFile')  {
+        assert.equal(doc.content, '');
+      }
+    });
   });
 });
 

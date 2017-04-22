@@ -13,7 +13,7 @@ function cli() {
 cli();
 
 describe('test ecmascript proposal result:', ()=> {
-  const tmp = fs.readFileSync('./test/fixture/out/dump.json').toString();
+  const tmp = fs.readFileSync('./test/fixture/out/index.json').toString();
   const docs = JSON.parse(tmp);
 
   it('parses AsyncGenerators', ()=>{

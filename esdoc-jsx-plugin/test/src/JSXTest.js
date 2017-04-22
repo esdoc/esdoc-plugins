@@ -13,7 +13,7 @@ function cli() {
 cli();
 
 describe('test jsx result:', ()=> {
-  const dump = fs.readFileSync('./test/fixture/out/dump.json').toString();
+  const dump = fs.readFileSync('./test/fixture/out/index.json').toString();
   const tags = JSON.parse(dump);
 
   it('can parse jsx', ()=>{

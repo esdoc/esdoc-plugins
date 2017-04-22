@@ -1,6 +1,6 @@
 const UndocumentedIdentifierPlugin = require('./UndocumentedIdentifierPlugin');
 
-exports.onHandleTag = function(ev) {
+exports.onHandleDocs = function(ev) {
   const plugin = new UndocumentedIdentifierPlugin(ev.data.option);
-  ev.data.tag = plugin.exec(ev.data.tag);
+  ev.data.docs = plugin.exec(ev.data.docs);
 };

@@ -1,12 +1,12 @@
 const LintPlugin = require('./LintPlugin.js');
 
-let tags;
+let docs;
 
-exports.onHandleTag = function(ev) {
-  tags = ev.data.tag;
+exports.onHandleDocs = function(ev) {
+  docs = ev.data.docs;
 };
 
 exports.onComplete = function(ev) {
-  const lintPlugin = new LintPlugin(tags, ev.data.option);
+  const lintPlugin = new LintPlugin(docs, ev.data.option);
   lintPlugin.exec();
 };
