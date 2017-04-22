@@ -3,9 +3,6 @@ const fs = require('fs');
 // hack: using a internal code of esdoc.
 const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').default;
 
-/** @ignore */
-const _resultsForTest = [];
-
 /**
  * Lint Output Builder class.
  */
@@ -13,6 +10,7 @@ class LintPlugin {
   constructor(tags, option = {enable: true}) {
     this._tags = tags;
     this._option = option;
+    this._results = null;
 
     if (!('enable' in this._option)) this._option.enable = true;
   }
@@ -20,10 +18,10 @@ class LintPlugin {
   /**
    * execute building output.
    */
-  exec() {
+  exec(writeFile) {
     if (!this._option.enable) return;
 
-    const results = [];
+    const tmpResults = [];
     const docs = this._tags.filter(v => ['method', 'function'].includes(v.kind));
     for (const doc of docs) {
       if (doc.undocument) continue;
@@ -33,12 +31,14 @@ class LintPlugin {
       const docParams = this._getParamsFromDoc(doc);
       if (this._match(codeParams, docParams)) continue;
 
-      results.push({node, doc, codeParams, docParams});
+      tmpResults.push({node, doc, codeParams, docParams});
     }
 
-    _resultsForTest.push(...results);
+    const results = this._formatResult(tmpResults);
 
-    this._showResult(results);
+    writeFile('lint.json', JSON.stringify(results, null, 2));
+
+    this._results = results;
   }
 
   /**
@@ -121,15 +121,16 @@ class LintPlugin {
 
   /**
    * show invalid lint code.
-   * @param {Object[]} results - target results.
-   * @param {DocObject} results[].doc
-   * @param {ASTNode} results[].node
-   * @param {string[]} results[].codeParams
-   * @param {string[]} results[].docParams
+   * @param {Object[]} tmpResults - target results.
+   * @param {DocObject} tmpResults[].doc
+   * @param {ASTNode} tmpResults[].node
+   * @param {string[]} tmpResults[].codeParams
+   * @param {string[]} tmpResults[].docParams
    * @private
    */
-  _showResult(results) {
-    for (const result of results) {
+  _formatResult(tmpResults) {
+    const results = [];
+    for (const result of tmpResults) {
       const doc = result.doc;
       const node = result.node;
       const filePath = doc.longname.split('~')[0];
@@ -142,15 +143,30 @@ class LintPlugin {
       const targetLines = [];
 
       for (let i = startLineNumber - 1; i < endLineNumber; i++) {
-        targetLines.push(`${i}| ${lines[i]}`);
+        targetLines.push({lineNumber: i, line: lines[i]});
       }
 
-      console.log(`[33mwarning: signature mismatch: ${name} ${filePath}#${startLineNumber}[32m`);
-      console.log(targetLines.join('\n'));
+      results.push({
+        name: name,
+        filePath: filePath,
+        lines: targetLines,
+        codeParams: result.codeParams,
+        docParams: result.docParams,
+      });
+    }
+
+    return results;
+  }
+
+  showResult() {
+    for (const result of this._results) {
+      console.log(`[33mwarning: signature mismatch: ${result.name} ${result.filePath}#${result.lines[0].lineNumber}[32m`);
+      for (const line of result.lines) {
+        console.log(`${line.lineNumber}| ${line.line}`);
+      }
       console.log('[0m');
     }
   }
 }
 
 module.exports = LintPlugin;
-module.exports._resultsForTest = _resultsForTest;

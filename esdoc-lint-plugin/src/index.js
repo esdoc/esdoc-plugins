@@ -1,12 +1,15 @@
 const LintPlugin = require('./LintPlugin.js');
 
-let docs;
+let plugin;
 
 exports.onHandleDocs = function(ev) {
-  docs = ev.data.docs;
+  plugin = new LintPlugin(ev.data.docs, ev.data.option);
 };
 
-exports.onComplete = function(ev) {
-  const lintPlugin = new LintPlugin(docs, ev.data.option);
-  lintPlugin.exec();
+exports.onPublish = function(ev) {
+  plugin.exec(ev.data.writeFile);
+};
+
+exports.onComplete = function() {
+  plugin.showResult();
 };
