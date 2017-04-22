@@ -1,5 +1,6 @@
 import IceCap from 'ice-cap';
 import path from 'path';
+import {Buffer} from 'buffer';
 import cheerio from 'cheerio';
 import DocBuilder from './DocBuilder.js';
 import {markdown} from './util.js';
@@ -303,8 +304,22 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _convertMDToHTML(content) {
+    // support multi byte: convert multi-byte to base64
+    content = content.replace(/^(#+) *(.*)$/mg, (_, head, text) =>{
+      return `${head} ${Buffer.from(text).toString('base64')}`;
+    });
+
     const html = markdown(content);
     const $root = cheerio.load(html).root();
+
+    $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
+      const $el = cheerio(el);
+      const rawText = $el.text();
+      const text = Buffer.from(rawText, 'base64').toString('utf-8');
+      $el.text(text);
+      $el.attr('id', text.toLowerCase().replace(/[~!@#$%^&*()_+=\[\]\\{}|;':"<>?,.\/ ]/g, '-'));
+    });
+
     return $root.html();
   }
 }
