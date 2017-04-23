@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import escape from 'escape-html';
 import IceCap from 'ice-cap';
-import {shorten, parseExample} from './util.js';
+import {shorten, parseExample, escapeURLHash} from './util.js';
 import DocResolver from './DocResolver.js';
 import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
 
@@ -183,6 +183,8 @@ export default class DocBuilder {
     const kinds = ['class', 'function', 'variable', 'typedef', 'external'];
     const allDocs = this._find({kind: kinds}).filter(v => !v.builtinExternal);
     const kindOrder = {class: 0, interface: 1, function: 2, variable: 3, typedef: 4, external: 5};
+
+    // see: IdentifiersDocBuilder#_buildIdentifierDoc
     allDocs.sort((a, b)=>{
       const filePathA = a.longname.split('~')[0];
       const filePathB = b.longname.split('~')[0];
@@ -211,6 +213,7 @@ export default class DocBuilder {
       ice.load('kind', kindText);
       ice.attr('kind', 'class', kindClass);
       ice.text('dirPath', dirPath);
+      ice.attr('dirPath', 'href', `#${escapeURLHash(dirPath)}`);
       ice.drop('dirPath', lastDirPath === dirPath);
       lastDirPath = dirPath;
     });
@@ -290,10 +293,11 @@ export default class DocBuilder {
    * @param {DocObject[]} docs - target docs.
    * @param {string} title - summary title.
    * @param {boolean} innerLink - if true, link in summary is inner link.
+   * @param {boolean} kindIcon - use kind icon.
    * @return {IceCap} summary output.
-   * @private
+   * @protected
    */
-  _buildSummaryDoc(docs, title, innerLink) {
+  _buildSummaryDoc(docs, title, innerLink = false, kindIcon = false) {
     if (docs.length === 0) return null;
 
     const ice = new IceCap(this._readTemplate('summary.html'));
@@ -317,6 +321,14 @@ export default class DocBuilder {
         ice.text('static', doc.static ? 'static' : '');
       } else {
         ice.drop('static');
+      }
+
+      if (kindIcon) {
+        const kind = doc.interface ? 'interface' : doc.kind;
+        ice.text('kind-icon', kind.charAt(0).toUpperCase());
+        ice.attr('kind-icon', 'class', `kind-${kind}`, IceCap.MODE_APPEND);
+      } else {
+        ice.drop('kind-icon');
       }
 
       ice.text('since', doc.since);

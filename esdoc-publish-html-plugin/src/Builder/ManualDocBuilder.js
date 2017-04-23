@@ -3,7 +3,7 @@ import path from 'path';
 import {Buffer} from 'buffer';
 import cheerio from 'cheerio';
 import DocBuilder from './DocBuilder.js';
-import {markdown} from './util.js';
+import {markdown, escapeURLHash} from './util.js';
 
 /**
  * Manual Output Builder class.
@@ -317,7 +317,7 @@ export default class ManualDocBuilder extends DocBuilder {
       const rawText = $el.text();
       const text = Buffer.from(rawText, 'base64').toString('utf-8');
       $el.text(text);
-      $el.attr('id', text.toLowerCase().replace(/[~!@#$%^&*()_+=\[\]\\{}|;':"<>?,.\/ ]/g, '-'));
+      $el.attr('id', escapeURLHash(text));
     });
 
     return $root.html();

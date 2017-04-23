@@ -172,10 +172,10 @@ li > code {
 }
 
 .navigation .nav-dir-path {
+  display: block;
   margin-top: 0.7em;
   margin-bottom: 0.25em;
-  font-size: 0.8em;
-  color: #aaa;
+  font-weight: 600;
 }
 
 .kind-class,
@@ -192,6 +192,7 @@ li > code {
   border-radius: 0.2em;
   margin-right: 0.2em;
   font-weight: bold;
+  line-height: 1.2em;
 }
 
 .kind-class {
@@ -222,6 +223,10 @@ li > code {
 .kind-external {
   color: #0738c3;
   background-color: #bbcbea;
+}
+
+.summary span[class^="kind-"] {
+  margin-left: 0;
 }
 
 h1 .version,

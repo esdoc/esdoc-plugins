@@ -1,5 +1,7 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
+import path from 'path';
+import {escapeURLHash} from './util';
 
 /**
  * Identifier output builder class.
@@ -20,12 +22,44 @@ export default class IdentifiersDocBuilder extends DocBuilder {
    */
   _buildIdentifierDoc() {
     const ice = new IceCap(this._readTemplate('identifiers.html'));
-    ice.load('classSummary', this._buildSummaryHTML(null, 'class', 'Class Summary'), 'append');
-    ice.load('interfaceSummary', this._buildSummaryHTML(null, 'interface', 'Interface Summary'), 'append');
-    ice.load('functionSummary', this._buildSummaryHTML(null, 'function', 'Function Summary'), 'append');
-    ice.load('variableSummary', this._buildSummaryHTML(null, 'variable', 'Variable Summary'), 'append');
-    ice.load('typedefSummary', this._buildSummaryHTML(null, 'typedef', 'Typedef Summary'), 'append');
-    ice.load('externalSummary', this._buildSummaryHTML(null, 'external', 'External Summary'), 'append');
+
+    // traverse docs and create Map<dirPath, doc[]>
+    const dirDocs = new Map();
+    const kinds = ['class', 'interface', 'function', 'variable', 'typedef', 'external'];
+    for (const doc of this._tags) {
+      if (!kinds.includes(doc.kind)) continue;
+      if (doc.builtinExternal) continue;
+      if (doc.ignore) continue;
+
+      const filePath = doc.memberof.replace(/^.*?[/]/, '');
+      const dirPath = path.dirname(filePath);
+      if (!dirDocs.has(dirPath)) dirDocs.set(dirPath, []);
+      dirDocs.get(dirPath).push(doc);
+    }
+
+    // create a summary of dir
+    const dirPaths = Array.from(dirDocs.keys()).sort((a, b) => a > b ? 1 : -1);
+    const kindOrder = {class: 0, interface: 1, function: 2, variable: 3, typedef: 4, external: 5};
+    ice.loop('dirSummaryWrap', dirPaths, (i, dirPath, ice) =>{
+      const docs = dirDocs.get(dirPath);
+
+      // see: DocBuilder#_buildNavDoc
+      docs.sort((a, b) =>  {
+        const kindA = a.interface ? 'interface' : a.kind;
+        const kindB = b.interface ? 'interface' : b.kind;
+        if (kindA === kindB) {
+          return a.longname > b.longname ? 1 : -1;
+        } else {
+          return kindOrder[kindA] > kindOrder[kindB] ? 1 : -1;
+        }
+      });
+
+      const summary = this._buildSummaryDoc(docs, `${dirPath} summary`, false, true);
+      ice.text('dirPath', dirPath);
+      ice.attr('dirPath', 'id', escapeURLHash(dirPath));
+      ice.load('dirSummary', summary);
+    });
+
     return ice;
   }
 }

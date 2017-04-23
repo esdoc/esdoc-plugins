@@ -137,3 +137,12 @@ export function parseExample(example) {
 
   return {body, caption};
 }
+
+/**
+ * escape URL hash.
+ * @param {string} hash - URL hash for HTML a tag and id tag
+ * @returns {string} escaped URL hash
+ */
+export function escapeURLHash(hash) {
+  return hash.toLowerCase().replace(/[~!@#$%^&*()_+=\[\]\\{}|;':"<>?,.\/ ]/g, '-');
+}
