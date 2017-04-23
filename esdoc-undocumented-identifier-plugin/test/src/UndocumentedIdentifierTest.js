@@ -17,9 +17,15 @@ describe('test undocumented identifier result:', ()=> {
   const tags = JSON.parse(tmp);
 
   it('does not ignore undocumented identifier.', ()=>{
-    const tag = tags.find(tag => tag.name === 'TestUndocumentedIdentifier');
+    const tag = tags.find(tag => tag.name === 'TestUndocumentedIdentifier1');
     assert.equal(tag.undocument, true);
     assert.equal(tag.ignore, false);
+  });
+
+  it('ignores documented identifier with @ignore.', ()=>{
+    const tag = tags.find(tag => tag.name === 'TestUndocumentedIdentifier2');
+    assert.equal(tag.undocument, undefined);
+    assert.equal(tag.ignore, true);
   });
 });
 

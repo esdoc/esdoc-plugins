@@ -6,10 +6,12 @@ class UndocumentedIdentifierPlugin {
   }
 
   exec(tags){
-    if (!this._option.enable) return tags;
+    const ignore = !this._option.enable;
 
     for (const tag of tags) {
-      if (tag.undocument === true && tag.ignore === true) tag.ignore = false;
+      if (tag.undocument === true && !('ignore' in tag))  {
+        tag.ignore = ignore;
+      }
     }
 
     return tags;
