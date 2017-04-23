@@ -7,6 +7,7 @@ exports.onHandlePlugins = function(ev) {
     {name: 'esdoc-external-ecmascript-plugin'},
     {name: 'esdoc-brand-plugin', option: {title: option.title, repository: option.repository}},
     {name: 'esdoc-undocumented-identifier-plugin', option: {enable: option.undocumentIdentifier}},
+    {name: 'esdoc-unexported-identifier-plugin', option: {enable: option.unexportedIdentifier}},
     {name: 'esdoc-publish-html-plugin'}
   ];
 

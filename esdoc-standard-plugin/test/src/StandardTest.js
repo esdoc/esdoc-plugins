@@ -15,7 +15,7 @@ describe('test standard plugin:', ()=>{
   it('dynamically load plugins', ()=>{
     const plugins = require('../fixture/spy-plugin.js').testTargetPlugins;
 
-    assert.equal(plugins.length, 9);
+    assert.equal(plugins.length, 10);
 
     assert.equal(plugins[0].name, './src/index.js');
     assert.equal(plugins[1].name, './test/fixture/spy-plugin.js');
@@ -25,6 +25,7 @@ describe('test standard plugin:', ()=>{
     assert.equal(plugins[5].name, 'esdoc-external-ecmascript-plugin');
     assert.equal(plugins[6].name, 'esdoc-brand-plugin');
     assert.equal(plugins[7].name, 'esdoc-undocumented-identifier-plugin');
-    assert.equal(plugins[8].name, 'esdoc-publish-html-plugin');
+    assert.equal(plugins[8].name, 'esdoc-unexported-identifier-plugin');
+    assert.equal(plugins[9].name, 'esdoc-publish-html-plugin');
   });
 });

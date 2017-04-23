@@ -18,6 +18,7 @@ npm install esdoc-standard-plugin
         "access": ["public", "protected", "private"],
         "autoPrivate": true,
         "undocumentIdentifier": true,
+        "unexportedIdentifier": false,
         "title": "My Library",
         "repository": "https://github.com/foo/bar"
       }
@@ -38,6 +39,7 @@ The `esdoc-standard-plugin` is a glue plugin. The following plugins are used by 
     {"name": "esdoc-external-ecmascript-plugin"},
     {"name": "esdoc-brand-plugin"},
     {"name": "esdoc-undocumented-identifier-plugin"},
+    {"name": "esdoc-unexported-identifier-plugin"},
     {"name": "esdoc-publish-html-plugin"}
   ]
 }
