@@ -27,6 +27,7 @@
     "esdoc-accessor-plugin": "latest",
     "esdoc-external-ecmascript-plugin": "latest",
     "esdoc-undocumented-identifier-plugin": "latest",
+    "esdoc-unexported-identifier-plugin": "latest",
     "esdoc-coverage-plugin": "latest",
     "esdoc-ecmascript-proposal-plugin": "latest"
   },
