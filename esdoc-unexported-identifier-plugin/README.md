@@ -10,12 +10,12 @@ npm install esdoc-unexported-identifier-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-unexported-identifier-plugin", "option": {"enable": true}}
+    {"name": "esdoc-unexported-identifier-plugin", "option": {"enable": false}}
   ]
 }
 ```
 
-`enable` is default `true`.
+`enable` is default `false`.
 
 ## LICENSE
 MIT

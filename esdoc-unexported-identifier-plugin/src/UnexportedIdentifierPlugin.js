@@ -2,14 +2,16 @@ class UnexportedIdentifierPlugin {
   constructor(option = {}) {
     this._option = option;
 
-    if (!('enable' in this._option)) this._option.enable = true;
+    if (!('enable' in this._option)) this._option.enable = false;
   }
 
   exec(tags){
-    if (!this._option.enable) return;
+    const ignore = !this._option.enable;
 
     for (const tag of tags) {
-      if (tag.export === false && tag.ignore === true) tag.ignore = false;
+      if (tag.export === false && !('ignore' in tag))  {
+        tag.ignore = ignore;
+      }
     }
 
     return tags;
