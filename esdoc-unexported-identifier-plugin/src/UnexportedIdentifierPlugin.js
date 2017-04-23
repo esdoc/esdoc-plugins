@@ -9,7 +9,7 @@ class UnexportedIdentifierPlugin {
     const ignore = !this._option.enable;
 
     for (const tag of tags) {
-      if (tag.export === false && !('ignore' in tag))  {
+      if (tag.export === false && ignore && !('ignore' in tag))  {
         tag.ignore = ignore;
       }
     }

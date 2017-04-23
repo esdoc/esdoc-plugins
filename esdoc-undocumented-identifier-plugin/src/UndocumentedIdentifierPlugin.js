@@ -9,7 +9,7 @@ class UndocumentedIdentifierPlugin {
     const ignore = !this._option.enable;
 
     for (const tag of tags) {
-      if (tag.undocument === true && !('ignore' in tag))  {
+      if (tag.undocument === true && ignore && !('ignore' in tag))  {
         tag.ignore = ignore;
       }
     }

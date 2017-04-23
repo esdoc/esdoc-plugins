@@ -19,7 +19,7 @@ describe('test undocumented identifier result:', ()=> {
   it('does not ignore undocumented identifier.', ()=>{
     const tag = tags.find(tag => tag.name === 'TestUndocumentedIdentifier1');
     assert.equal(tag.undocument, true);
-    assert.equal(tag.ignore, false);
+    assert.equal(tag.ignore, undefined);
   });
 
   it('ignores documented identifier with @ignore.', ()=>{
