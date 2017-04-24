@@ -19,7 +19,7 @@
     "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "esdoc": "latest",
+    "esdoc": "alpha",
     "mocha": "2.5.3",
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",

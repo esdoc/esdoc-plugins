@@ -14,7 +14,7 @@
     "fs-extra": "1.0.0"
   },
   "devDependencies": {
-    "esdoc": "latest",
+    "esdoc": "alpha",
     "mocha": "2.5.3"
   },
   "engines": {

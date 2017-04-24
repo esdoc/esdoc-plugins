@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "cheerio": "0.22.0",
-    "esdoc": "latest",
+    "esdoc": "alpha",
     "mocha": "2.5.3"
   },
   "engines": {
