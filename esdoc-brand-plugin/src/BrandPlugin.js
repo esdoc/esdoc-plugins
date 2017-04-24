@@ -68,7 +68,7 @@ class BrandPlugin {
   }
 
   writeIcon(copyFile) {
-    if (this._repository.indexOf('https://github.com/') === 0) {
+    if (this._repository && this._repository.indexOf('https://github.com/') === 0) {
       const srcPath = path.resolve(__dirname, 'github.png');
       copyFile(srcPath, 'image/github.png');
     }
