@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-ineject-script-plugin",
+  "name": "esdoc-inject-script-plugin",
   "version": "0.0.2",
   "description": "A inject script plugin for ESDoc",
   "author": "h13i32maru",
