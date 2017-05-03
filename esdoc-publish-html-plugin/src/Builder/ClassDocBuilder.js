@@ -258,7 +258,7 @@ export default class ClassDocBuilder extends DocBuilder {
       });
 
       const title = `<span class="toggle closed"></span> From ${superDoc.kind} ${this._buildDocLinkHTML(longname, superDoc.name)}`;
-      const result = this._buildSummaryDoc(targetDocs, '----------', false, superDoc.kind);
+      const result = this._buildSummaryDoc(targetDocs, '----------');
       if (result) {
         result.load('title', title, IceCap.MODE_WRITE);
         html.push(result.html);
