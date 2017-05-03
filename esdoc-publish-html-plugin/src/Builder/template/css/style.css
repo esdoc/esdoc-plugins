@@ -65,6 +65,10 @@ h3 {
   font-weight: 300;
 }
 
+details {
+  cursor: pointer;
+}
+
 del {
   text-decoration: line-through;
 }
@@ -834,12 +838,7 @@ table.test-summary .test-target > span:first-child {
   margin-top: 4px;
 }
 
-.navigation .manual-toc {
-  margin-top: -0.25em;
-}
-
 .navigation .manual-toc-root > div {
-  padding-top: 1px;
   padding-left: 0.25em;
   padding-right: 0.75em;
 }
@@ -874,7 +873,7 @@ table.test-summary .test-target > span:first-child {
 
 .manual-toc .indent-h1 {
   display: block;
-  margin: 1em 0 0 0.25em;
+  margin: 0.75em 0 0 0.25em;
   padding: 0.2em 0 0.2em 0.5em;
   border-radius: 0.1em;
 }
@@ -975,7 +974,6 @@ table.test-summary .test-target > span:first-child {
 
 .github-markdown h3 {
   font-size: 1.5em;
-  background-color: transparent;
 }
 
 .github-markdown h4 {
