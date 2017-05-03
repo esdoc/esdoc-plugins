@@ -61,6 +61,23 @@ export default class IdentifiersDocBuilder extends DocBuilder {
       ice.load('dirSummary', summary);
     });
 
+    const dirTree = this._buildDirTree(dirPaths);
+    ice.load('dirTree', dirTree);
+    ice.drop('dirTreeWrap', !dirTree);
+
     return ice;
+  }
+
+  _buildDirTree(dirPaths) {
+    const lines = [];
+    for (const dirPath of dirPaths) {
+      const padding = dirPath.split('/').length - 1;
+      const dirName = path.basename(dirPath);
+      if (dirName === '.') continue;
+      const hash = escapeURLHash(dirPath);
+      lines.push(`<div style="padding-left: ${padding}em"><a href="#${hash}">${dirName}</a></div>`);
+    }
+
+    return lines.join('\n');
   }
 }
