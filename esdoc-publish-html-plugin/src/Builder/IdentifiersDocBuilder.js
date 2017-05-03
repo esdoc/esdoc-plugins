@@ -54,8 +54,9 @@ export default class IdentifiersDocBuilder extends DocBuilder {
         }
       });
 
-      const summary = this._buildSummaryDoc(docs, `${dirPath} summary`, false, true);
-      ice.text('dirPath', dirPath);
+      const dirPathLabel = dirPath === '.' ? '' : dirPath;
+      const summary = this._buildSummaryDoc(docs, `summary`, false, true);
+      ice.text('dirPath', dirPathLabel);
       ice.attr('dirPath', 'id', escapeURLHash(dirPath));
       ice.load('dirSummary', summary);
     });
