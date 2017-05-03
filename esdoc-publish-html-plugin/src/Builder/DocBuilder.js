@@ -213,7 +213,7 @@ export default class DocBuilder {
       ice.load('kind', kindText);
       ice.attr('kind', 'class', kindClass);
       ice.text('dirPath', dirPath);
-      ice.attr('dirPath', 'href', `#${escapeURLHash(dirPath)}`);
+      ice.attr('dirPath', 'href', `identifiers.html#${escapeURLHash(dirPath)}`);
       ice.drop('dirPath', lastDirPath === dirPath);
       lastDirPath = dirPath;
     });
