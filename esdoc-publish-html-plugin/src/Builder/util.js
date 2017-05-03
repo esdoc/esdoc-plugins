@@ -1,5 +1,6 @@
 import marked from 'marked';
 import escape from 'escape-html';
+import {highlight as _highlight} from 'highlight.js';
 
 /**
  * shorten description.
@@ -86,9 +87,8 @@ export function markdown(text, breaks = false) {
 
       return sanitizedTag;
     },
-    highlight: function(code) {
-      // return `<pre class="source-code"><code class="prettyprint">${escape(code)}</code></pre>`;
-      return `<code class="source-code prettyprint">${escape(code)}</code>`;
+    highlight: function(code, lang) {
+      return highlight(code, lang);
     }
   });
 
@@ -145,4 +145,28 @@ export function parseExample(example) {
  */
 export function escapeURLHash(hash) {
   return hash.toLowerCase().replace(/[~!@#$%^&*()_+=\[\]\\{}|;':"<>?,.\/ ]/g, '-');
+}
+
+export function highlight(code, lang, number = false) {
+  code = _highlight(lang, code, true).value;
+
+  if (number) {
+    // let inCommentLine = -1;
+    let inComment = false;
+    return code.split('\n').map((line, index) => {
+      const id = `lineNumber${index + 1}`;
+
+      // hack: comment block
+      if (line.match(/^ *<span class="hljs-comment">/)) inComment = true;
+      let commentOpen = '';
+      let commentClose = '';
+      if (inComment && !line.match(/^ *<span class="hljs-comment">/)) commentOpen = `<span class="hljs-comment">` ;
+      if (inComment && !line.match(/<\/span>$/)) commentClose = `</span>` ;
+      if (inComment && line.match(/<\/span>$/)) inComment = false;
+
+      return `<div class="source-code-line" id="${id}"><span>${index + 1}</span><span>${commentOpen}${line}${commentClose}</span></div>`
+    }).join('');
+  } else {
+    return code;
+  }
 }

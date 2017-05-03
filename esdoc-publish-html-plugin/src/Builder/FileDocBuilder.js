@@ -1,5 +1,6 @@
 import IceCap from 'ice-cap';
 import DocBuilder from './DocBuilder.js';
+import {highlight} from './util';
 
 /**
  * File output builder class.
@@ -29,7 +30,7 @@ export default class FileDocBuilder extends DocBuilder {
   _buildFileDoc(doc) {
     const ice = new IceCap(this._readTemplate('file.html'));
     ice.text('title', doc.name);
-    ice.text('content', doc.content);
+    ice.load('content', highlight(doc.content, 'js', true));
     ice.drop('emptySourceCode', !!doc.content);
     return ice.html;
   }
