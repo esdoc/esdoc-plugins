@@ -1,0 +1,32 @@
+{
+  "name": "esdoc-type-inference-plugin",
+  "version": "0.0.1",
+  "description": "A type inference plugin for ESDoc",
+  "author": "h13i32maru",
+  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esdoc/esdoc-plugins"
+  },
+  "devDependencies": {
+    "esdoc": "latest",
+    "mocha": "2.5.3"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "scripts": {
+    "test": "rm -rf ./test/fixture/out && mocha --require ./test/init.js $(find test/ -regex '.*.test.js$') -R spec"
+  },
+  "keywords": [
+    "esdoc",
+    "inference",
+    "plugin"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "main": "src/index.js"
+}
