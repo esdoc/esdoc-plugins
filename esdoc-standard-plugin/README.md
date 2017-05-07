@@ -20,7 +20,8 @@ npm install esdoc-standard-plugin
         "undocumentIdentifier": true,
         "unexportedIdentifier": false,
         "title": "My Library",
-        "repository": "https://github.com/foo/bar"
+        "repository": "https://github.com/foo/bar",
+        "typeInference": true
       }
     }
   ]
@@ -36,6 +37,7 @@ The `esdoc-standard-plugin` is a glue plugin. The following plugins are used by 
     {"name": "esdoc-lint-plugin"},
     {"name": "esdoc-coverage-plugin"},
     {"name": "esdoc-accessor-plugin"},
+    {"name": "esdoc-type-inference-plugin"},
     {"name": "esdoc-external-ecmascript-plugin"},
     {"name": "esdoc-brand-plugin"},
     {"name": "esdoc-undocumented-identifier-plugin"},

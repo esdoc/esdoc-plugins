@@ -1,6 +1,6 @@
 {
   "name": "esdoc-standard-plugin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A standard plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -17,7 +17,8 @@
     "esdoc-brand-plugin": "latest",
     "esdoc-undocumented-identifier-plugin": "latest",
     "esdoc-unexported-identifier-plugin": "latest",
-    "esdoc-publish-html-plugin": "latest"
+    "esdoc-publish-html-plugin": "latest",
+    "esdoc-type-inference-plugin": "latest"
   },
   "devDependencies": {
     "esdoc": "alpha",
