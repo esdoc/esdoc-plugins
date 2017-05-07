@@ -30,7 +30,7 @@
     "esdoc-unexported-identifier-plugin": "latest",
     "esdoc-coverage-plugin": "latest",
     "esdoc-ecmascript-proposal-plugin": "latest",
-    "esdoc-type-infrence-plugin": "latest"
+    "esdoc-type-inference-plugin": "latest"
   },
   "engines": {
     "node": ">= 6.0.0"
