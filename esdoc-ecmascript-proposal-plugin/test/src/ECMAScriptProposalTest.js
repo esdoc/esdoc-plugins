@@ -77,16 +77,6 @@ describe('test ecmascript proposal result:', ()=> {
     let doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method1');
     assert.deepEqual(doc.params, [
       {
-        name: 'objectPattern',
-        types: ['{"x": *, "y": *, ...z: Object}'],
-        defaultRaw: {x: null, y: null, z: {} },
-        defaultValue: '{"x":null,"y":null,"z":{}}'
-      }
-    ]);
-
-    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method2');
-    assert.deepEqual(doc.params, [
-      {
         "nullable": null,
         "types": [
           "Object"
@@ -138,12 +128,7 @@ describe('test ecmascript proposal result:', ()=> {
       }
     ]);
 
-    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method3');
-    assert.deepEqual(doc.return, {
-      "types": ["{\"a\": *, ...obj: Object}"]
-    });
-
-    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method4');
+    doc = docs.find(doc => doc.longname === 'src/ObjectRestSpread.js~ObjectRestSpread#method2');
     assert.deepEqual(doc.return, {
       "nullable": null,
       "types": [

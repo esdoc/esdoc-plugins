@@ -1,6 +1,4 @@
 export default class ObjectRestSpread {
-  method1({x, y, ...z}){}
-
   /**
    * this is method1.
    * @param {Object} config - this is config.
@@ -9,18 +7,12 @@ export default class ObjectRestSpread {
    * @param {number[]} config.a - thi is number[] a.
    * @param {string[]} config.b - thi is number[] b.
    */
-  method2({x, y, ...z}){}
-
-  method3(){
-    const a = 1;
-    const obj = {};
-    return {a, ...obj};
-  }
+  method1({x, y, ...z}){}
 
   /**
    * @returns {{a: number, b: string, c: boolean}}
    */
-  method4(){
+  method2(){
     const a = 1;
     const obj = {b: 'text', c: true};
     return {a, ...obj};
