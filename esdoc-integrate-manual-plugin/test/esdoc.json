@@ -1,0 +1,24 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "plugins": [
+    {
+      "name": "./src/index.js",
+      "option": {
+        "index": "./test/manual/index.md",
+        "globalIndex": true,
+        "asset": "./test/manual/asset",
+        "overview": ["./test/manual/overview.md"],
+        "design": ["./test/manual/design.md"],
+        "installation": ["./test/manual/installation.md"],
+        "usage": ["./test/manual/usage1.md", "./test/manual/usage2.md"],
+        "tutorial": ["./test/manual/tutorial.md"],
+        "configuration": ["./test/manual/configuration.md"],
+        "example": ["./test/manual/example.md"],
+        "advanced": ["./test/manual/advanced.md"],
+        "faq": ["./test/manual/faq.md"],
+        "changelog": ["./test/CHANGELOG.md"]
+      }
+    }
+  ]
+}

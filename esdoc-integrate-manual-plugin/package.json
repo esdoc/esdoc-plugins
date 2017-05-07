@@ -1,7 +1,7 @@
 {
-  "name": "esdoc-type-inference-plugin",
+  "name": "esdoc-integrate-manual-plugin",
   "version": "0.0.1",
-  "description": "A type inference plugin for ESDoc",
+  "description": "A integrate manual plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
@@ -21,7 +21,7 @@
   },
   "keywords": [
     "esdoc",
-    "inference",
+    "manual",
     "plugin"
   ],
   "files": [
