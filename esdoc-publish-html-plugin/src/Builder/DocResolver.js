@@ -25,9 +25,6 @@ export default class DocResolver {
     console.log('resolve: necessary');
     this._resolveNecessary();
 
-    console.log('resolve: duplication');
-    this._resolveDuplication();
-
     console.log('resolve: ignore');
     this._resolveIgnore();
 
@@ -357,45 +354,5 @@ export default class DocResolver {
     }
 
     this._data.__RESOLVED_TEST_RELATION__ = true;
-  }
-
-  /**
-   * resolve duplication identifier.
-   * member doc is possible duplication.
-   * other doc is not duplication.
-   * @private
-   */
-  _resolveDuplication() {
-    if (this._data.__RESOLVED_DUPLICATION__) return;
-
-    let docs = this._builder._find({kind: 'member'});
-    let ignoreId = [];
-    for (let doc of docs) {
-      // member duplicate with getter/setter/method.
-      // when it, remove member.
-      // getter/setter/method are high priority.
-      const nonMemberDup = this._builder._find({longname: doc.longname, kind: {'!is': 'member'}});
-      if (nonMemberDup.length) {
-        ignoreId.push(doc.___id);
-        continue;
-      }
-
-      let dup = this._builder._find({longname: doc.longname, kind: 'member'});
-      if (dup.length > 1) {
-        let ids = dup.map(v => v.___id);
-        ids.sort((a, b)=> {
-          return a < b ? -1 : 1;
-        });
-        ids.shift();
-        ignoreId.push(...ids);
-      }
-    }
-
-    this._data({___id: ignoreId}).update(function(){
-      this.ignore = true;
-      return this;
-    });
-
-    this._data.__RESOLVED_DUPLICATION__ = true;
   }
 }

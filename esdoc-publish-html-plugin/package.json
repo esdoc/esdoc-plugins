@@ -1,6 +1,6 @@
 {
   "name": "esdoc-publish-html-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -29,7 +29,8 @@
     "esdoc-undocumented-identifier-plugin": "latest",
     "esdoc-unexported-identifier-plugin": "latest",
     "esdoc-coverage-plugin": "latest",
-    "esdoc-ecmascript-proposal-plugin": "latest"
+    "esdoc-ecmascript-proposal-plugin": "latest",
+    "esdoc-type-infrence-plugin": "latest"
   },
   "engines": {
     "node": ">= 6.0.0"

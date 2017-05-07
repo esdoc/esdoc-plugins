@@ -8,6 +8,7 @@
     {"name": "esdoc-ecmascript-proposal-plugin", "option": {"all": true}},
     {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},
     {"name": "esdoc-accessor-plugin", "option": {"access": ["public", "protected", "private"], "autoPrivate": true}},
+    {"name": "esdoc-type-inference-plugin", "option": {"enable": true}},
     {"name": "esdoc-undocumented-identifier-plugin"},
     {"name": "esdoc-unexported-identifier-plugin"},
     {"name": "./src/index.js"}
