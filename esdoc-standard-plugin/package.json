@@ -18,7 +18,8 @@
     "esdoc-undocumented-identifier-plugin": "latest",
     "esdoc-unexported-identifier-plugin": "latest",
     "esdoc-publish-html-plugin": "latest",
-    "esdoc-type-inference-plugin": "latest"
+    "esdoc-type-inference-plugin": "latest",
+    "esdoc-integrate-manual-plugin": "latest"
   },
   "devDependencies": {
     "esdoc": "alpha",

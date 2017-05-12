@@ -16,7 +16,11 @@ describe('test standard plugin:', ()=>{
     const plugins = require('../fixture/spy-plugin.js').testTargetPlugins;
 
     assert.deepEqual(plugins, [
-      {name: './src/index.js', option: {}},
+      {name: './src/index.js', option: {
+        manual: {
+          overview: ['./test/fixture/manual/overview.md']
+        }
+      }},
       {name: './test/fixture/spy-plugin.js'},
       {name: 'esdoc-lint-plugin', option: {enable: true}},
       {name: 'esdoc-coverage-plugin', option: {enable: true}},
@@ -26,6 +30,10 @@ describe('test standard plugin:', ()=>{
       {name: 'esdoc-brand-plugin', option: {}},
       {name: 'esdoc-undocumented-identifier-plugin', option: {enable: true}},
       {name: 'esdoc-unexported-identifier-plugin', option: {enable: false}},
+      {name: 'esdoc-integrate-manual-plugin', option: {
+        coverage: true,
+        overview: ['./test/fixture/manual/overview.md']
+      }},
       {name: 'esdoc-publish-html-plugin'},
     ]);
 
