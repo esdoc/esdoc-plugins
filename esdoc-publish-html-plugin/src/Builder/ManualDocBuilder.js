@@ -133,7 +133,7 @@ export default class ManualDocBuilder extends DocBuilder {
           const html = this._convertMDToHTML(manual.content);
           const $root = cheerio.load(html).root();
           const h1Count = $root.find('h1').length;
-          const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
+          // const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
 
           $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
             const $el = cheerio(el);
@@ -143,7 +143,8 @@ export default class ManualDocBuilder extends DocBuilder {
             let link = `${fileName}#${$el.attr('id')}`;
             if (el.tagName.toLowerCase() === 'h1' && h1Count === 1) link = fileName;
 
-            toc.push({label, link, indent, sectionCount});
+            // toc.push({label, link, indent, sectionCount});
+            toc.push({label, link, indent});
           });
         }
       }
@@ -151,14 +152,7 @@ export default class ManualDocBuilder extends DocBuilder {
       const name = manualKind.replace(/^manual/, '').toLowerCase();
       ice.attr('manual', 'data-toc-name', name);
       ice.loop('manualNav', toc, (i, tocItem, ice)=>{
-        if (tocItem.indent === 'indent-h1') {
-          ice.attr('manualNav', 'class', `${tocItem.indent} manual-color manual-color-${name}`);
-          const sectionCount = Math.min((tocItem.sectionCount / 5) + 1, 5);
-          ice.attr('manualNav', 'data-section-count', '■'.repeat(sectionCount));
-        } else {
-          ice.attr('manualNav', 'class', tocItem.indent);
-        }
-
+        ice.attr('manualNav', 'class', tocItem.indent);
         ice.attr('manualNav', 'data-link', tocItem.link.split('#')[0]);
         ice.text('link', tocItem.label);
         ice.attr('link', 'href', tocItem.link);
@@ -175,10 +169,8 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _buildManual(manual) {
-    const title = manual.kind.replace(/^manual/, '');
     const html = this._convertMDToHTML(manual.content);
     const ice = new IceCap(this._readTemplate('manual.html'));
-    ice.text('title', title);
     ice.load('content', html);
 
     // convert relative src to base url relative src.
@@ -236,7 +228,6 @@ export default class ManualDocBuilder extends DocBuilder {
         const html = this._buildManual(manual);
         const $root = cheerio.load(html).root();
         const h1Count = $root.find('h1').length;
-        const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
 
         $root.find('h1').each((i, el)=>{
           const $el = cheerio(el);
@@ -253,19 +244,13 @@ export default class ManualDocBuilder extends DocBuilder {
             card += `<${tagName}>${$next.html()}</${tagName}>`;
           }
 
-          cards.push({label, link, card, type, sectionCount});
+          cards.push({label, link, card, type});
         });
       }
     }
 
     const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
     ice.loop('cards', cards, (i, card, ice)=>{
-      ice.text('label-inner', card.label);
-      ice.attr('label', 'class', `manual-color manual-color-${card.type}`);
-
-      const sectionCount = Math.min((card.sectionCount / 5) + 1, 5);
-      ice.attr('label', 'data-section-count', '■'.repeat(sectionCount));
-
       ice.attr('link', 'href', card.link);
       ice.load('card', card.card);
     });
