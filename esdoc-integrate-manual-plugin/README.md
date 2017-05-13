@@ -17,16 +17,19 @@ npm install esdoc-integrate-manual-plugin
         "globalIndex": true,
         "coverage": true,
         "asset": "./manual/asset",
-        "overview": ["./manual/overview.md"],
-        "design": ["./manual/design.md"],
-        "installation": ["./manual/installation.md"],
-        "usage": ["./manual/usage1.md", "./manual/usage2.md"],
-        "tutorial": ["./manual/tutorial.md"],
-        "configuration": ["./manual/configuration.md"],
-        "example": ["./manual/example.md"],
-        "advanced": ["./manual/advanced.md"],
-        "faq": ["./manual/faq.md"],
-        "changelog": ["./CHANGELOG.md"]
+        "files": [
+          "./manual/overview.md",
+          "./manual/design.md",
+          "./manual/installation.md",
+          "./manual/usage1.md",
+          "./manual/usage2.md",
+          "./manual/tutorial.md",
+          "./manual/configuration.md",
+          "./manual/example.md",
+          "./manual/advanced.md",
+          "./manual/faq.md",
+          "./CHANGELOG.md"
+        ]
       }
     }
   ]

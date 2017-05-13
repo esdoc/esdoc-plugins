@@ -8,16 +8,19 @@
         "index": "./test/manual/index.md",
         "globalIndex": true,
         "asset": "./test/manual/asset",
-        "overview": ["./test/manual/overview.md"],
-        "design": ["./test/manual/design.md"],
-        "installation": ["./test/manual/installation.md"],
-        "usage": ["./test/manual/usage1.md", "./test/manual/usage2.md"],
-        "tutorial": ["./test/manual/tutorial.md"],
-        "configuration": ["./test/manual/configuration.md"],
-        "example": ["./test/manual/example.md"],
-        "advanced": ["./test/manual/advanced.md"],
-        "faq": ["./test/manual/faq.md"],
-        "changelog": ["./test/CHANGELOG.md"]
+        "files": [
+          "./test/manual/overview.md",
+          "./test/manual/design.md",
+          "./test/manual/installation.md",
+          "./test/manual/usage1.md",
+          "./test/manual/usage2.md",
+          "./test/manual/tutorial.md",
+          "./test/manual/configuration.md",
+          "./test/manual/example.md",
+          "./test/manual/advanced.md",
+          "./test/manual/faq.md",
+          "./test/CHANGELOG.md"
+        ]
       }
     }
   ]

@@ -60,21 +60,15 @@ class IntegrateManualPlugin {
       });
     }
 
-    const names = ['overview', 'design', 'installation', 'usage', 'tutorial', 'configuration', 'example', 'advanced', 'faq', 'changelog'];
-    for (const name of names) {
-      if (!manual[name]) continue;
-
-      const kind = `manual${name.replace(/^./, c => c.toUpperCase())}`;
-      for (const filePath of manual[name]) {
-        results.push({
-          kind: kind,
-          longname: path.resolve(filePath),
-          name: filePath,
-          content: fs.readFileSync(filePath).toString(),
-          static: true,
-          access: 'public'
-        });
-      }
+    for (const filePath of manual.files) {
+      results.push({
+        kind: 'manual',
+        longname: path.resolve(filePath),
+        name: filePath,
+        content: fs.readFileSync(filePath).toString(),
+        static: true,
+        access: 'public'
+      });
     }
 
     return results;
