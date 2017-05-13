@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-integrate-test-plugin",
+  "name": "@esdoc/esdoc-integrate-test-plugin",
   "version": "0.0.1",
   "description": "A integrate test plugin for ESDoc",
   "author": "h13i32maru",
@@ -8,6 +8,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/esdoc/esdoc-plugins"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "esdoc": "alpha",

@@ -1,6 +1,6 @@
-const TemplatePlugin = require('./TemplatePlugin');
+const Plugin = require('./TemplatePlugin');
 
-exports.onHandleTag = function(ev) {
-  const plugin = new TemplatePlugin(ev.data.tag, ev.data.option);
+exports.onHandleDocs = function(ev) {
+  const plugin = new Plugin(ev.data.docs, ev.data.option);
   plugin.exec();
 };
