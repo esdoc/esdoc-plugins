@@ -1,6 +1,6 @@
 {
   "name": "esdoc-external-ecmascript-plugin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A external ECMAScript plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
