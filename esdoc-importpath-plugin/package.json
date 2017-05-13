@@ -1,6 +1,6 @@
 {
   "name": "esdoc-importpath-plugin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A import path plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
