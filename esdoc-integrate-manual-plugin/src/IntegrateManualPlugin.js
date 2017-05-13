@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const assert = require('assert');
 
 class IntegrateManualPlugin {
   constructor(docs, option) {
@@ -17,6 +18,7 @@ class IntegrateManualPlugin {
   _setDefault() {
     if (!this._option) return;
 
+    assert(this._option.files);
     if (!('coverage' in this._option)) this._option.coverage = true;
   }
 

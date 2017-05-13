@@ -13,16 +13,19 @@
     {"name": "esdoc-unexported-identifier-plugin"},
     {"name": "esdoc-integrate-manual-plugin", "option": {
       "index": "./test/fixture/manual/index.md",
-      "overview": ["./test/fixture/manual/overview.md"],
-      "design": ["./test/fixture/manual/design.md"],
-      "installation": ["./test/fixture/manual/installation.md"],
-      "usage": ["./test/fixture/manual/usage1.md", "./test/fixture/manual/usage2.md"],
-      "tutorial": ["./test/fixture/manual/tutorial.md"],
-      "configuration": ["./test/fixture/manual/configuration.md"],
-      "example": ["./test/fixture/manual/example.md"],
-      "advanced": ["./test/fixture/manual/advanced.md"],
-      "faq": ["./test/fixture/manual/faq.md"],
-      "changelog": ["./test/fixture/CHANGELOG.md"]
+      "files": [
+        "./test/fixture/manual/overview.md",
+        "./test/fixture/manual/design.md",
+        "./test/fixture/manual/installation.md",
+        "./test/fixture/manual/tutorial.md",
+        "./test/fixture/manual/usage1.md",
+        "./test/fixture/manual/usage2.md",
+        "./test/fixture/manual/configuration.md",
+        "./test/fixture/manual/example.md",
+        "./test/fixture/manual/advanced.md",
+        "./test/fixture/manual/faq.md",
+        "./test/fixture/CHANGELOG.md"
+      ]
     }},
     {"name": "esdoc-integrate-test-plugin", "option": {
       "type": "mocha",

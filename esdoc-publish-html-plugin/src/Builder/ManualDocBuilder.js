@@ -11,27 +11,11 @@ import {markdown, escapeURLHash} from './util.js';
 export default class ManualDocBuilder extends DocBuilder {
   exec(writeFile, copyDir, readFile) {
 
-    const manualKinds = [
-      'manualOverview',
-      'manualDesign',
-      'manualInstallation',
-      'manualTutorial',
-      'manualUsage',
-      'manualConfiguration',
-      'manualAdvanced',
-      'manualExample',
-      'manualReference',
-      'manualFaq',
-      'manualChangelog'
-    ];
-
-    const manuals = this._tags.filter(tag => manualKinds.includes(tag.kind));
-    if (manuals.length === 0) return;
-
+    const manuals = this._tags.filter(tag => tag.kind === 'manual');
     const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
     const manualAsset = this._tags.find(tag => tag.kind === 'manualAsset');
 
-    manuals.push({kind: 'manualReference'});
+    if (manuals.length === 0) return;
 
     const ice = this._buildLayoutDoc();
     ice.autoDrop = false;
@@ -40,8 +24,9 @@ export default class ManualDocBuilder extends DocBuilder {
     {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);
-      ice.load('content', this._buildManualCardIndex(manuals, manualKinds, manualIndex, readFile('identifiers.html')), IceCap.MODE_WRITE);
-      ice.load('nav', this._buildManualNav(manuals, manualKinds), IceCap.MODE_WRITE);
+      const badge = this._writeBadge(manuals, writeFile);
+      ice.load('content', this._buildManualCardIndex(manuals, manualIndex, badge), IceCap.MODE_WRITE);
+      ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
       ice.text('title', 'Manual', IceCap.MODE_WRITE);
       ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
       ice.attr('rootContainer', 'class', ' manual-index');
@@ -55,102 +40,88 @@ export default class ManualDocBuilder extends DocBuilder {
       ice.attr('rootContainer', 'class', ' manual-index', IceCap.MODE_REMOVE);
     }
 
-    for (const manualKind of manualKinds) {
-      if (manualKind === 'manualReference') continue;
-
-      const title = manualKind.replace(/^manual/, '');
-      const _manuals = manuals.filter(manual => manual.kind === manualKind);
-      for (const manual of _manuals) {
-        const fileName = this._getManualOutputFileName(manualKind, manual.name);
-        const baseUrl = this._getBaseUrl(fileName);
-        ice.load('content', this._buildManual(manual), IceCap.MODE_WRITE);
-        ice.load('nav', this._buildManualNav(manuals, manualKinds), IceCap.MODE_WRITE);
-        ice.text('title', title, IceCap.MODE_WRITE);
-        ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
-        writeFile(fileName, ice.html);
-      }
+    for (const manual of manuals) {
+      const fileName = this._getManualOutputFileName(manual.name);
+      const baseUrl = this._getBaseUrl(fileName);
+      ice.load('content', this._buildManual(manual), IceCap.MODE_WRITE);
+      ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
+      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+      writeFile(fileName, ice.html);
     }
 
     if (manualAsset) {
       copyDir(manualAsset.name, 'manual/asset');
     }
+  }
 
-    // badge
-    {
-      const tmp = {};
-      manuals.forEach(manual => tmp[manual.kind] = true);
-      const kinds = Object.keys(tmp);
-      // const starCount = Math.min(Math.floor((manualConfig.length - 1) / 2), 5);
-      // const star = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
-      const ratio = Math.floor(100 * (kinds.length - 1) / 10);
+  /**
+   * this is
+   * @param {manual[]} manuals
+   * @param {function(filePath:string, content:string)} writeFile
+   * @returns {boolean}
+   * @private
+   */
+  _writeBadge(manuals, writeFile) {
+    const specialFileNamePatterns = [
+      '(overview.*)',
+      '(design.*)',
+      '(installation.*)|(install.*)',
+      '(usage.*)',
+      '(configuration.*)|(config.*)',
+      '(example.*)',
+      '(faq.*)',
+      '(changelog.*)'
+    ];
 
-      let color;
-      if (ratio < 50) {
-        color = '#db654f';
-      } else if (ratio < 90) {
-        color = '#dab226';
-      } else {
-        color = '#4fc921';
+    let count = 0;
+    for (const pattern of specialFileNamePatterns) {
+      const regexp = new RegExp(pattern, 'i');
+      for (const manual of manuals) {
+        const fileName = path.parse(manual.name).name;
+        if (fileName.match(regexp)) {
+          count++;
+          break;
+        }
       }
-
-      let badge = this._readTemplate('image/manual-badge.svg');
-      badge = badge.replace(/@value@/g, `${ratio}%`);
-      badge = badge.replace(/@color@/g, color);
-      writeFile('manual-badge.svg', badge);
     }
+
+    if (count !== specialFileNamePatterns.length) return false;
+
+    let badge = this._readTemplate('image/manual-badge.svg');
+    badge = badge.replace(/@value@/g, 'perfect');
+    badge = badge.replace(/@color@/g, '#4fc921');
+    writeFile('manual-badge.svg', badge);
+
+    return true;
   }
 
   /**
    * build manual navigation.
-   * @param {ManualConfigItem[]} manualConfig - target manual config.
+   * @param {Manual[]} manuals - target manuals.
    * @return {IceCap} built navigation
    * @private
    */
-  _buildManualNav(manuals, manualKinds) {
+  _buildManualNav(manuals) {
     const ice = new IceCap(this._readTemplate('manualIndex.html'));
 
-    ice.loop('manual', manualKinds, (i, manualKind, ice)=>{
+    ice.loop('manual', manuals, (i, manual, ice)=>{
       const toc = [];
-      if (manualKind === 'manualReference') {
-        const identifiers = this._findAllIdentifiersKindGrouping();
-        toc.push({label: 'Reference', link: 'identifiers.html', indent: 'indent-h1'});
-        if (identifiers.class.length) toc.push({label: 'Class', link: 'identifiers.html#class', indent: 'indent-h2'});
-        if (identifiers.interface.length) toc.push({label: 'Interface', link: 'identifiers.html#interface', indent: 'indent-h2'});
-        if (identifiers.function.length) toc.push({label: 'Function', link: 'identifiers.html#function', indent: 'indent-h2'});
-        if (identifiers.variable.length) toc.push({label: 'Variable', link: 'identifiers.html#variable', indent: 'indent-h2'});
-        if (identifiers.typedef.length) toc.push({label: 'Typedef', link: 'identifiers.html#typedef', indent: 'indent-h2'});
-        if (identifiers.external.length) toc.push({label: 'External', link: 'identifiers.html#external', indent: 'indent-h2'});
+      const fileName = this._getManualOutputFileName(manual.name);
+      const html = this._convertMDToHTML(manual.content);
+      const $root = cheerio.load(html).root();
+      const h1Count = $root.find('h1').length;
 
-        toc[0].sectionCount = identifiers.class.length +
-          identifiers.interface.length +
-          identifiers.function.length +
-          identifiers.typedef.length +
-          identifiers.external.length;
-      } else {
-        const _manuals = manuals.filter(manual => manual.kind === manualKind);
-        for (const manual of _manuals) {
-          const fileName = this._getManualOutputFileName(manual.kind, manual.name);
-          const html = this._convertMDToHTML(manual.content);
-          const $root = cheerio.load(html).root();
-          const h1Count = $root.find('h1').length;
-          // const sectionCount = $root.find('h1,h2,h3,h4,h5').length;
+      $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
+        const $el = cheerio(el);
+        const label = $el.text();
+        const indent = `indent-${el.tagName.toLowerCase()}`;
 
-          $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
-            const $el = cheerio(el);
-            const label = $el.text();
-            const indent = `indent-${el.tagName.toLowerCase()}`;
+        let link = `${fileName}#${$el.attr('id')}`;
+        if (el.tagName.toLowerCase() === 'h1' && h1Count === 1) link = fileName;
 
-            let link = `${fileName}#${$el.attr('id')}`;
-            if (el.tagName.toLowerCase() === 'h1' && h1Count === 1) link = fileName;
+        toc.push({label, link, indent});
+      });
 
-            // toc.push({label, link, indent, sectionCount});
-            toc.push({label, link, indent});
-          });
-        }
-      }
-
-      const name = manualKind.replace(/^manual/, '').toLowerCase();
-      ice.attr('manual', 'data-toc-name', name);
       ice.loop('manualNav', toc, (i, tocItem, ice)=>{
         ice.attr('manualNav', 'class', tocItem.indent);
         ice.attr('manualNav', 'data-link', tocItem.link.split('#')[0]);
@@ -202,51 +173,31 @@ export default class ManualDocBuilder extends DocBuilder {
    * @return {IceCap} built index.
    * @private
    */
-  _buildManualCardIndex(manuals, manualKinds, manualIndex, identifierHTML) {
+  _buildManualCardIndex(manuals, manualIndex, badgeFlag) {
     const cards = [];
-    for (const manualKind of manualKinds) {
-      if (manualKind === 'manualReference') {
-        // const filePath = path.resolve(this._config.destination, 'identifiers.html');
-        // const html = fs.readFileSync(filePath).toString();
-        const $ = cheerio.load(identifierHTML);
-        const card = $('.content').html();
-        const identifiers = this._findAllIdentifiersKindGrouping();
-        const sectionCount = identifiers.class.length +
-          identifiers.interface.length +
-          identifiers.function.length +
-          identifiers.typedef.length +
-          identifiers.external.length;
+    for (const manual of manuals) {
+      const fileName = this._getManualOutputFileName(manual.name);
+      const html = this._buildManual(manual);
+      const $root = cheerio.load(html).root();
+      const h1Count = $root.find('h1').length;
 
-        cards.push({label: 'References', link: 'identifiers.html', card: card, type: 'reference', sectionCount: sectionCount});
-        continue;
-      }
+      $root.find('h1').each((i, el)=>{
+        const $el = cheerio(el);
+        const label = $el.text();
+        const link = h1Count === 1 ? fileName : `${fileName}#${$el.attr('id')}`;
+        let card = `<h1>${label}</h1>`;
+        const nextAll = $el.nextAll();
 
-      const _manuals = manuals.filter(manual => manual.kind === manualKind);
-      for (const manual of _manuals) {
-        const type = manual.kind.replace(/^manual/, '').toLowerCase();
-        const fileName = this._getManualOutputFileName(manual.kind, manual.name);
-        const html = this._buildManual(manual);
-        const $root = cheerio.load(html).root();
-        const h1Count = $root.find('h1').length;
+        for (let i = 0; i < nextAll.length; i++) {
+          const next = nextAll.get(i);
+          const tagName = next.tagName.toLowerCase();
+          if (tagName === 'h1') return;
+          const $next = cheerio(next);
+          card += `<${tagName}>${$next.html()}</${tagName}>`;
+        }
 
-        $root.find('h1').each((i, el)=>{
-          const $el = cheerio(el);
-          const label = $el.text();
-          const link = h1Count === 1 ? fileName : `${fileName}#${$el.attr('id')}`;
-          let card = `<h1>${label}</h1>`;
-          const nextAll = $el.nextAll();
-
-          for (let i = 0; i < nextAll.length; i++) {
-            const next = nextAll.get(i);
-            const tagName = next.tagName.toLowerCase();
-            if (tagName === 'h1') return;
-            const $next = cheerio(next);
-            card += `<${tagName}>${$next.html()}</${tagName}>`;
-          }
-
-          cards.push({label, link, card, type});
-        });
-      }
+        cards.push({label, link, card});
+      });
     }
 
     const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
@@ -263,21 +214,20 @@ export default class ManualDocBuilder extends DocBuilder {
     }
 
     // fixme?
-    ice.drop('manualBadge', !manualIndex.coverage);
+    ice.drop('manualBadge', !manualIndex.coverage || !badgeFlag);
 
     return ice;
   }
 
   /**
    * get manual file name.
-   * @param {string} kind - target manual kind.
    * @param {string} filePath - target manual markdown file path.
    * @returns {string} file name.
    * @private
    */
-  _getManualOutputFileName(kind, filePath) {
+  _getManualOutputFileName(filePath) {
     const fileName = path.parse(filePath).name;
-    return `manual/${kind.replace(/^manual/,'').toLowerCase()}/${fileName}.html`;
+    return `manual/${fileName}.html`;
   }
 
   /**
