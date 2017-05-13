@@ -19,7 +19,8 @@
     "esdoc-unexported-identifier-plugin": "latest",
     "esdoc-publish-html-plugin": "latest",
     "esdoc-type-inference-plugin": "latest",
-    "esdoc-integrate-manual-plugin": "latest"
+    "esdoc-integrate-manual-plugin": "latest",
+    "@esdoc/esdoc-integrate-test-plugin": "latest"
   },
   "devDependencies": {
     "esdoc": "alpha",

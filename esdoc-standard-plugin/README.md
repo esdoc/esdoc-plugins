@@ -37,6 +37,12 @@ npm install esdoc-standard-plugin
           "advanced": ["./manual/advanced.md"],
           "faq": ["./manual/faq.md"],
           "changelog": ["./CHANGELOG.md"]
+        },
+        "test": {
+          "type": "mocha",
+          "source": "./test/",
+          "includes": ["(spec|Spec|test|Test)\\.js$"],
+          "excludes": ["\\.config\\.js$"]
         }
       }
     }
@@ -59,6 +65,7 @@ The `esdoc-standard-plugin` is a glue plugin. The following plugins are used by 
     {"name": "esdoc-undocumented-identifier-plugin"},
     {"name": "esdoc-unexported-identifier-plugin"},
     {"name": "esdoc-integrate-manual-plugin"},
+    {"name": "esdoc-integrate-test-plugin"},
     {"name": "esdoc-publish-html-plugin"}
   ]
 }

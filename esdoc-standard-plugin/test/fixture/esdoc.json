@@ -10,19 +10,16 @@
       "option": {
         "manual": {
           "overview": ["./test/fixture/manual/overview.md"]
+        },
+        "test": {
+          "type": "mocha",
+          "source": "./test/fixture/test",
+          "includes": ["Test.js$"]
         }
       }
     },
     {
       "name": "./test/fixture/spy-plugin.js"
     }
-  ],
-  "test": {
-    "type": "mocha",
-    "source": "./test/fixture/test",
-    "includes": ["Test.js$"]
-  },
-  "manual": {
-    "overview": ["./test/fixture/manual/overview.md"]
-  }
+  ]
 }
