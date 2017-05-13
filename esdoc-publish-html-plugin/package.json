@@ -32,7 +32,7 @@
     "esdoc-ecmascript-proposal-plugin": "latest",
     "esdoc-type-inference-plugin": "latest",
     "esdoc-integrate-manual-plugin": "latest",
-    "@esdoc/esdoc-integrate-test-plugin": "latest"
+    "esdoc-integrate-test-plugin": "latest"
   },
   "engines": {
     "node": ">= 6.0.0"

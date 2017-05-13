@@ -39,7 +39,7 @@ describe('test standard plugin:', ()=>{
         coverage: true,
         overview: ['./test/fixture/manual/overview.md']
       }},
-      {name: '@esdoc/esdoc-integrate-test-plugin', option: {
+      {name: 'esdoc-integrate-test-plugin', option: {
         type: "mocha",
         source: "./test/fixture/test",
         includes: ["Test.js$"],

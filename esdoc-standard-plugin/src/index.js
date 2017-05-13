@@ -10,7 +10,7 @@ exports.onHandlePlugins = function(ev) {
     {name: 'esdoc-undocumented-identifier-plugin', option: {enable: option.undocumentIdentifier}},
     {name: 'esdoc-unexported-identifier-plugin', option: {enable: option.unexportedIdentifier}},
     {name: 'esdoc-integrate-manual-plugin', option: option.manual},
-    {name: '@esdoc/esdoc-integrate-test-plugin', option: option.test},
+    {name: 'esdoc-integrate-test-plugin', option: option.test},
     {name: 'esdoc-publish-html-plugin'}
   ];
 
