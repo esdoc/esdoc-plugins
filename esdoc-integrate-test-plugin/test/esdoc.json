@@ -1,0 +1,13 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "plugins": [
+    {
+      "name": "./src/index.js",
+      "option": {
+        "type": "mocha",
+        "source": "./test/test"
+      }
+    }
+  ]
+}
