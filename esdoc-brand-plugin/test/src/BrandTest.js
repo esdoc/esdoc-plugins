@@ -14,6 +14,13 @@ function cli() {
 cli();
 
 describe('test brand result:', ()=> {
+  it('has brand logo', ()=>{
+    const html = fs.readFileSync('./test/fixture/out/index.html').toString();
+    const $ = cheerio.load(html);
+    assert.equal($('header a[href="./index.html"] img[src="./image/brand_logo.png"]').length, 1);
+    assert(fs.readFileSync('./test/fixture/out/image/brand_logo.png'));
+  });
+
   it('has brand title', ()=>{
     const html = fs.readFileSync('./test/fixture/out/index.html').toString();
     const $ = cheerio.load(html);

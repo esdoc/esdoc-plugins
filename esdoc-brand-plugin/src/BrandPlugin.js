@@ -16,6 +16,7 @@ class BrandPlugin {
       // ignore
     }
 
+    this._logo = option.logo;
     this._title = option.title || packageObj.name;
     this._repository = option.repository || this._getRepositoryURL(packageObj);
   }
@@ -47,6 +48,14 @@ class BrandPlugin {
 
     const $ = cheerio.load(content);
 
+    // logo
+    if (this._logo) {
+      const $el = $('header a[href="./index.html"]');
+      $el.text('');
+      $el.css({display: 'flex', 'align-items': 'center'});
+      $el.append('<img src="./image/brand_logo.png" style="width:34px;">');
+    }
+
     // title
     if (this._title) {
       const $title = $('title');
@@ -71,6 +80,13 @@ class BrandPlugin {
     if (this._repository && this._repository.indexOf('https://github.com/') === 0) {
       const srcPath = path.resolve(__dirname, 'github.png');
       copyFile(srcPath, 'image/github.png');
+    }
+  }
+
+  writeLogo(copyFile) {
+    if (this._logo) {
+      const srcPath = path.resolve(this._logo);
+      copyFile(srcPath, 'image/brand_logo.png');
     }
   }
 }

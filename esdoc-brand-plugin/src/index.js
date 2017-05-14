@@ -8,6 +8,7 @@ exports.onHandleConfig = function(ev) {
 
 exports.onPublish = function(ev) {
   plugin.writeIcon(ev.data.copyFile);
+  plugin.writeLogo(ev.data.copyFile);
 };
 
 exports.onHandleContent = function(ev) {
