@@ -4,6 +4,7 @@
   "index": "./test/fixture/README.md",
   "package": "./test/fixture/package.json",
   "plugins": [
+    {"name": "esdoc-brand-plugin", "option": {"logo": "./test/fixture/logo.png", "image": "https://esdoc.org/manual/asset/image/logo.png"}},
     {"name": "esdoc-coverage-plugin"},
     {"name": "esdoc-ecmascript-proposal-plugin", "option": {"all": true}},
     {"name": "esdoc-external-ecmascript-plugin", "option": {"enable": true}},

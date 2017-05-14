@@ -25,6 +25,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",
     "babel-register": "6.11.6",
     "esdoc-accessor-plugin": "latest",
+    "esdoc-brand-plugin": "latest",
     "esdoc-external-ecmascript-plugin": "latest",
     "esdoc-undocumented-identifier-plugin": "latest",
     "esdoc-unexported-identifier-plugin": "latest",
