@@ -13,8 +13,8 @@ npm install esdoc-integrate-test-plugin
     {
       "name": "esdoc-integrate-test-plugin",
       "option": {
-        "type": "mocha",
         "source": "./test/",
+        "interfaces": ["describe", "it", "context", "suite", "test"],
         "includes": ["(spec|Spec|test|Test)\\.js$"],
         "excludes": ["\\.config\\.js$"]
       }
@@ -23,10 +23,10 @@ npm install esdoc-integrate-test-plugin
 }
 ```
 
-- `type` is required. Now, only `mocha`
 - `source` is required
-- `includes` is default `["(spec|Spec|test|Test)\\.js$"]`
-- `excludes` is default `["\\.config\\.js$"]`
+- `interfaces` default is `["describe", "it", "context", "suite", "test"]`
+- `includes` default is `["(spec|Spec|test|Test)\\.js$"]`
+- `excludes` default is `["\\.config\\.js$"]`
 
 ## LICENSE
 MIT

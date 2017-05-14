@@ -26,8 +26,8 @@ class IntegrateTestPlugin {
     if (!this._option) return;
 
     const option = this._option;
-    assert(option.type);
     assert(option.source);
+    if (!option.interfaces) option.interfaces = ['describe', 'it', 'context', 'suite', 'test'];
     if (!option.includes) option.includes = ['(spec|Spec|test|Test)\\.js$'];
     if (!option.excludes) option.excludes = ['\\.config\\.js$'];
   }
@@ -61,7 +61,7 @@ class IntegrateTestPlugin {
       }
 
       console.log(`parse: ${filePath}`);
-      const temp = this._traverse(option.type, option.source, filePath);
+      const temp = this._traverse(option.interfaces, option.source, filePath);
       if (!temp) return;
       results.push(...temp.results);
 
@@ -95,7 +95,7 @@ class IntegrateTestPlugin {
 
   /**
    * traverse doc comment in test code file.
-   * @param {string} type - test code type.
+   * @param {string[]} interfaces - test interface names.
    * @param {string} inDirPath - root directory path.
    * @param {string} filePath - target test code file path.
    * @returns {Object} return document info that is traversed.
@@ -103,7 +103,7 @@ class IntegrateTestPlugin {
    * @property {AST} ast - this is AST of test code.
    * @private
    */
-  _traverse(type, inDirPath, filePath) {
+  _traverse(interfaces, inDirPath, filePath) {
     let ast;
     try {
       ast = ESParser.parse(filePath);
@@ -112,7 +112,7 @@ class IntegrateTestPlugin {
       return null;
     }
     const pathResolver = new PathResolver(inDirPath, filePath);
-    const factory = new TestDocFactory(type, ast, pathResolver);
+    const factory = new TestDocFactory(interfaces, ast, pathResolver);
 
     ASTUtil.traverse(ast, (node, parent)=>{
       try {

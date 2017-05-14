@@ -5,8 +5,8 @@
     {
       "name": "./src/index.js",
       "option": {
-        "type": "mocha",
-        "source": "./test/test"
+        "source": "./test/test",
+        "excludes": ["\\.test\\.js$"]
       }
     }
   ]

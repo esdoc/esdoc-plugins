@@ -34,16 +34,13 @@ class TestDocFactory {
 
   /**
    * create instance.
-   * @param {string} type - test type. now support only 'mocha'.
+   * @param {string[]} interfaces - test interface names.
    * @param {AST} ast - AST of test code.
    * @param {PathResolver} pathResolver - path resolver of test code.
    */
-  constructor(type, ast, pathResolver) {
-    type = type.toLowerCase();
-    assert(type === 'mocha');
-
+  constructor(interfaces, ast, pathResolver) {
     /** @type {string} */
-    this._type = type;
+    this._interfaces = interfaces;
 
     /** @type {AST} */
     this._ast = ast;
@@ -70,7 +67,7 @@ class TestDocFactory {
     node[already] = true;
     Reflect.defineProperty(node, 'parent', {value: parentNode});
 
-    if (this._type === 'mocha') this._pushForMocha(node, parentNode);
+    this._push(node);
   }
 
   /**
@@ -78,13 +75,13 @@ class TestDocFactory {
    * @param {ASTNode} node - target node.
    * @private
    */
-  _pushForMocha(node) {
+  _push(node) {
     if (node.type !== 'ExpressionStatement') return;
 
     const expression = node.expression;
     if (expression.type !== 'CallExpression') return;
 
-    if (!['describe', 'it', 'context', 'suite', 'test'].includes(expression.callee.name)) return;
+    if (!this._interfaces.includes(expression.callee.name)) return;
 
     expression[already] = true;
     Reflect.defineProperty(expression, 'parent', {value: node});

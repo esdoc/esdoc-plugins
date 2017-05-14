@@ -24,19 +24,7 @@ class TestDoc extends AbstractDoc {
   _$kind() {
     super._$kind();
 
-    switch (this._node.callee.name) {
-      case 'suite': // fall
-      case 'context': // fall
-      case 'describe':
-        this._value.kind = 'testDescribe';
-        break;
-      case 'test': // fall
-      case 'it':
-        this._value.kind = 'testIt';
-        break;
-      default:
-        throw new Error(`unknown name. node.callee.name = ${this._node.callee.name}`);
-    }
+    this._value.kind = 'test';
   }
 
   /** set name and testId from special esdoc property. */
