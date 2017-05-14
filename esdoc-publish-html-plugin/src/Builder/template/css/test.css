@@ -32,7 +32,7 @@ table.test-summary td p {
   margin: 0;
 }
 
-table.test-summary tr.test-describe .toggle {
+table.test-summary tr.test-interface .toggle {
   display: inline-block;
   float: left;
   margin-right: 4px;
@@ -41,11 +41,11 @@ table.test-summary tr.test-describe .toggle {
   padding-top: 0.25em;
 }
 
-table.test-summary tr.test-describe .toggle.opened:before {
+table.test-summary tr.test-interface .toggle.opened:before {
   content: '▼';
 }
 
-table.test-summary tr.test-describe .toggle.closed:before {
+table.test-summary tr.test-interface .toggle.closed:before {
   content: '▶';
 }
 
