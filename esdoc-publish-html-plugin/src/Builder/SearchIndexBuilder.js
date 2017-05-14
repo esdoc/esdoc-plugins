@@ -20,7 +20,7 @@ export default class SearchIndexBuilder extends DocBuilder {
         displayText = `<span>${doc.name}</span> <span class="search-result-import-path">${doc.importPath}</span>`;
         indexText = `${doc.importPath}~${doc.name}`.toLowerCase();
         url = this._getURL(doc);
-      } else if (doc.kind === 'testDescribe' || doc.kind === 'testIt') {
+      } else if (doc.kind === 'test') {
         displayText = doc.testFullDescription;
         indexText = [...(doc.testTargets || []), ...(doc._custom_test_targets || [])].join(' ').toLowerCase();
         const filePath = doc.longname.split('~')[0];
@@ -51,10 +51,6 @@ export default class SearchIndexBuilder extends DocBuilder {
         case 'get':
         case 'set':
           kind = 'member';
-          break;
-        case 'testDescribe':
-        case 'testIt':
-          kind = 'test';
           break;
       }
 

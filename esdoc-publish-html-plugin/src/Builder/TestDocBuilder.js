@@ -6,11 +6,11 @@ import DocBuilder from './DocBuilder.js';
  */
 export default class TestDocBuilder extends DocBuilder {
   exec(writeFile, copyDir) {
-    const testDescribeDoc = this._find({kind: 'testDescribe'})[0];
-    if (!testDescribeDoc) return;
+    const testDoc = this._find({kind: 'test'})[0];
+    if (!testDoc) return;
 
     const ice = this._buildLayoutDoc();
-    const fileName = this._getOutputFileName(testDescribeDoc);
+    const fileName = this._getOutputFileName(testDoc);
     const baseUrl = this._getBaseUrl(fileName);
     const title = this._getTitle('Test');
 
@@ -27,8 +27,8 @@ export default class TestDocBuilder extends DocBuilder {
    */
   _buildTestDocHTML() {
     const ice = new IceCap(this._readTemplate('test.html'));
-    const testDescribeHTML = this._buildTestDescribeDocHTML();
-    ice.load('tests', testDescribeHTML);
+    const testDocHTML = this._buildTestInterfaceDocHTML();
+    ice.load('tests', testDocHTML);
     return ice.html;
   }
 
@@ -39,58 +39,40 @@ export default class TestDocBuilder extends DocBuilder {
    * @returns {string} html of describe list.
    * @private
    */
-  _buildTestDescribeDocHTML(depth = 0, memberof = null) {
-    const cond = {kind: 'testDescribe', testDepth: depth};
+  _buildTestInterfaceDocHTML(depth = 0, memberof = null) {
+    const cond = {kind: 'test', testDepth: depth};
     if (memberof) cond.memberof = memberof;
-    const describeDocs = this._orderedFind('testId asec', cond);
-    let padding;
-    let html = '';
+    const docs = this._orderedFind('testId asec', cond);
 
-    for (const describeDoc of describeDocs) {
-      const ice = new IceCap(this._readTemplate('testDescribe.html'));
+    const resultHTMLs = [];
+    for (const doc of docs) {
+      const childHTML = this._buildTestInterfaceDocHTML(depth + 1, doc.longname);
 
-      const testCount = this._find({kind: 'testIt', longname: {regex: new RegExp(`^${describeDoc.longname}\\.`)}}).length;
-      padding = 10 * (depth + 1);
-      ice.attr('testDescribe', 'data-test-depth', depth);
-      /* eslint-disable no-loop-func */
-      ice.into('testDescribe', describeDoc, (describeDoc, ice)=>{
-        const descriptionHTML = this._buildFileDocLinkHTML(describeDoc, describeDoc.description);
+      const ice = new IceCap(this._readTemplate('testInterface.html'));
+      const padding = 10 * (depth + 1);
+      ice.attr('testInterface', 'data-test-depth', depth);
+      ice.into('testInterface', doc, (doc, ice)=>{
+        // description
+        const descriptionHTML = this._buildFileDocLinkHTML(doc, doc.description);
 
+        // identifier
         let testTargetsHTML = [];
-        for (const testTarget of describeDoc._custom_test_targets || []) {
+        for (const testTarget of doc._custom_test_targets || []) {
           testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
         }
         testTargetsHTML = testTargetsHTML.join('\n') || '-';
 
-        ice.load('testDescription', descriptionHTML);
-        ice.attr('testDescription', 'style', `padding-left: ${padding}px`);
-        ice.load('testTarget', testTargetsHTML);
-        ice.text('testCount', testCount);
-      });
-
-      padding = 10 * (depth + 2);
-      const itDocs = this._orderedFind('testId asec', {kind: 'testIt', testDepth: depth + 1, memberof: describeDoc.longname});
-      /* eslint-disable no-loop-func */
-      ice.loop('testIt', itDocs, (i, itDoc, ice)=>{
-        const descriptionHTML = this._buildFileDocLinkHTML(itDoc, itDoc.description);
-
-        let testTargetsHTML = [];
-        for (const testTarget of itDoc._custom_test_targets || []) {
-          testTargetsHTML.push(this._buildDocLinkHTML(testTarget[0], testTarget[1]));
-        }
-        testTargetsHTML = testTargetsHTML.join('\n') || '-';
-
-        ice.attr('testIt', 'data-test-depth', depth + 1);
+        // apply
+        ice.drop('testInterfaceToggle', !childHTML);
         ice.load('testDescription', descriptionHTML);
         ice.attr('testDescription', 'style', `padding-left: ${padding}px`);
         ice.load('testTarget', testTargetsHTML);
       });
 
-      const innerDescribeHTML = this._buildTestDescribeDocHTML(depth + 1, describeDoc.longname);
-
-      html += `\n${ice.html}\n${innerDescribeHTML}`;
+      resultHTMLs.push(ice.html);
+      if(childHTML) resultHTMLs.push(childHTML);
     }
 
-    return html;
+    return resultHTMLs.join('\n');
   }
 }

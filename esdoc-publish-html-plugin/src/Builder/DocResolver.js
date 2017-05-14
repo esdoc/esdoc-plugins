@@ -320,7 +320,7 @@ export default class DocResolver {
   _resolveTestRelation() {
     if (this._data.__RESOLVED_TEST_RELATION__) return;
 
-    let testDocs = this._builder._find({kind: ['testDescribe', 'testIt']});
+    let testDocs = this._builder._find({kind: 'test'});
     for (let testDoc of testDocs) {
       let testTargets = testDoc.testTargets;
       if (!testTargets) continue;
@@ -345,7 +345,7 @@ export default class DocResolver {
       let desc = [];
       let parents = (testDoc.memberof.split('~')[1] || '').split('.');
       for (let parent of parents) {
-        let doc = this._builder._find({kind: ['testDescribe', 'testIt'], name: parent})[0];
+        let doc = this._builder._find({kind: 'test', name: parent})[0];
         if (!doc) continue;
         desc.push(doc.descriptionRaw);
       }
