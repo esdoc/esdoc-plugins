@@ -27,20 +27,23 @@ npm install esdoc-standard-plugin
           "globalIndex": true,
           "coverage": true,
           "asset": "./manual/asset",
-          "overview": ["./manual/overview.md"],
-          "design": ["./manual/design.md"],
-          "installation": ["./manual/installation.md"],
-          "usage": ["./manual/usage1.md", "./manual/usage2.md"],
-          "tutorial": ["./manual/tutorial.md"],
-          "configuration": ["./manual/configuration.md"],
-          "example": ["./manual/example.md"],
-          "advanced": ["./manual/advanced.md"],
-          "faq": ["./manual/faq.md"],
-          "changelog": ["./CHANGELOG.md"]
+          "files": [
+            "./manual/overview.md",
+            "./manual/design.md",
+            "./manual/installation.md",
+            "./manual/usage1.md",
+            "./manual/usage2.md",
+            "./manual/tutorial.md",
+            "./manual/configuration.md",
+            "./manual/example.md",
+            "./manual/advanced.md",
+            "./manual/faq.md",
+            "./CHANGELOG.md"
+          ]
         },
         "test": {
-          "type": "mocha",
           "source": "./test/",
+          "interfaces": ["describe", "it", "context", "suite", "test"],
           "includes": ["(spec|Spec|test|Test)\\.js$"],
           "excludes": ["\\.config\\.js$"]
         }
@@ -51,25 +54,17 @@ npm install esdoc-standard-plugin
 ```
 
 The `esdoc-standard-plugin` is a glue plugin. The following plugins are used by this.
-```json
-{
-  "source": "./src",
-  "destination": "./doc",
-  "plugins": [
-    {"name": "esdoc-lint-plugin"},
-    {"name": "esdoc-coverage-plugin"},
-    {"name": "esdoc-accessor-plugin"},
-    {"name": "esdoc-type-inference-plugin"},
-    {"name": "esdoc-external-ecmascript-plugin"},
-    {"name": "esdoc-brand-plugin"},
-    {"name": "esdoc-undocumented-identifier-plugin"},
-    {"name": "esdoc-unexported-identifier-plugin"},
-    {"name": "esdoc-integrate-manual-plugin"},
-    {"name": "esdoc-integrate-test-plugin"},
-    {"name": "esdoc-publish-html-plugin"}
-  ]
-}
-```
+- [esdoc-lint-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-lint-plugin)
+- [esdoc-coverage-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-coverage-plugin)
+- [esdoc-accessor-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-accessor-plugin)
+- [esdoc-type-inference-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-type-inference-plugin)
+- [esdoc-external-ecmascript-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-external-ecmascript-plugin)
+- [esdoc-brand-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-brand-plugin)
+- [esdoc-undocumented-identifier-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-undocumented-identifier-plugin)
+- [esdoc-unexported-identifier-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-unexported-identifier-plugin)
+- [esdoc-integrate-manual-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-integrate-manual-plugin)
+- [esdoc-integrate-test-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-integrate-test-plugin)
+- [esdoc-publish-html-plugin](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-publish-html-plugin)
 
 ## LICENSE
 MIT

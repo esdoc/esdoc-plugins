@@ -18,10 +18,9 @@ describe('test standard plugin:', ()=>{
     assert.deepEqual(plugins, [
       {name: './src/index.js', option: {
         manual: {
-          overview: ['./test/fixture/manual/overview.md']
+          files: ['./test/fixture/manual/overview.md']
         },
         test: {
-          type: "mocha",
           source: "./test/fixture/test",
           includes: ["Test.js$"]
         }
@@ -37,11 +36,11 @@ describe('test standard plugin:', ()=>{
       {name: 'esdoc-unexported-identifier-plugin', option: {enable: false}},
       {name: 'esdoc-integrate-manual-plugin', option: {
         coverage: true,
-        overview: ['./test/fixture/manual/overview.md']
+        files: ['./test/fixture/manual/overview.md']
       }},
       {name: 'esdoc-integrate-test-plugin', option: {
-        type: "mocha",
         source: "./test/fixture/test",
+        interfaces: ["describe", "it", "context", "suite", "test"],
         includes: ["Test.js$"],
         excludes: ["\\.config\\.js$"]
       }},

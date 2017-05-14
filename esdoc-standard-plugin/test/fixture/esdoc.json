@@ -9,10 +9,9 @@
       "name": "./src/index.js",
       "option": {
         "manual": {
-          "overview": ["./test/fixture/manual/overview.md"]
+          "files": ["./test/fixture/manual/overview.md"]
         },
         "test": {
-          "type": "mocha",
           "source": "./test/fixture/test",
           "includes": ["Test.js$"]
         }
