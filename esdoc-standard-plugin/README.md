@@ -13,12 +13,12 @@ npm install esdoc-standard-plugin
     {
       "name": "esdoc-standard-plugin",
       "option": {
-        "lint": true,
-        "coverage": true,
-        "access": ["public", "protected", "private"],
-        "autoPrivate": true,
-        "undocumentIdentifier": true,
-        "unexportedIdentifier": false,
+        "lint": {"enable": true},
+        "coverage": {"enable": true},
+        "accessor": {"access": ["public", "protected", "private"], "autoPrivate": true},
+        "undocumentIdentifier": {"enable": true},
+        "unexportedIdentifier": {"enable": false},
+        "typeInference": {"enable": true},
         "brand": {
           "logo": "./logo.png",
           "title": "My Library",
@@ -28,7 +28,6 @@ npm install esdoc-standard-plugin
           "author": "https://twitter.com/foo",
           "image": "http://my-library.org/logo.png"
         },
-        "typeInference": true,
         "manual": {
           "index": "./manual/index.md",
           "globalIndex": true,

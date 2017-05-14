@@ -29,14 +29,14 @@ describe('test standard plugin:', ()=>{
         }
       }},
       {name: './test/fixture/spy-plugin.js'},
-      {name: 'esdoc-lint-plugin', option: {enable: true}},
-      {name: 'esdoc-coverage-plugin', option: {enable: true}},
-      {name: 'esdoc-accessor-plugin', option: {access: ['public', 'protected', 'private'], autoPrivate: true}},
-      {name: 'esdoc-type-inference-plugin', option: {enable: true}},
+      {name: 'esdoc-lint-plugin'},
+      {name: 'esdoc-coverage-plugin'},
+      {name: 'esdoc-accessor-plugin'},
+      {name: 'esdoc-type-inference-plugin'},
       {name: 'esdoc-external-ecmascript-plugin'},
       {name: 'esdoc-brand-plugin', option: {title: 'My Library'}},
-      {name: 'esdoc-undocumented-identifier-plugin', option: {enable: true}},
-      {name: 'esdoc-unexported-identifier-plugin', option: {enable: false}},
+      {name: 'esdoc-undocumented-identifier-plugin'},
+      {name: 'esdoc-unexported-identifier-plugin'},
       {name: 'esdoc-integrate-manual-plugin', option: {
         coverage: true,
         files: ['./test/fixture/manual/overview.md']

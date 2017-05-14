@@ -20,5 +20,5 @@ export default class MyClass {
    */
   method3(){}
 
-  _method4(){}
+  _method4(p = 1){}
 }
