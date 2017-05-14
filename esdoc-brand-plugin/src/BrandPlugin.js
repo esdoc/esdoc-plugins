@@ -64,7 +64,7 @@ class BrandPlugin {
 
     // logo
     if (this._logo) {
-      const $el = $('header a[href="./index.html"]');
+      const $el = $('header a[href="./"]');
       $el.text('');
       $el.css({display: 'flex', 'align-items': 'center'});
       $el.append('<img src="./image/brand_logo.png" style="width:34px;">');

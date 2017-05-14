@@ -18,7 +18,7 @@ describe('test brand result:', ()=> {
   const $ = cheerio.load(html);
 
   it('has brand logo', ()=>{
-    assert.equal($('header a[href="./index.html"] img[src="./image/brand_logo.png"]').length, 1);
+    assert.equal($('header a[href="./"] img[src="./image/brand_logo.png"]').length, 1);
     assert(fs.readFileSync('./test/fixture/out/image/brand_logo.png'));
   });
 

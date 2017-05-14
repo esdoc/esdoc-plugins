@@ -7,7 +7,7 @@ exports.onPublish = function(ev) {
 </head>
 <body>
 <header>
-  <a href="./index.html">Home</a>
+  <a href="./">Home</a>
 </header>
 </body>
 </html>
