@@ -6,7 +6,7 @@ exports.onHandlePlugins = function(ev) {
     {name: 'esdoc-accessor-plugin', option: {access: option.access, autoPrivate: option.autoPrivate}},
     {name: 'esdoc-type-inference-plugin', option: {enable: option.typeInference}},
     {name: 'esdoc-external-ecmascript-plugin'},
-    {name: 'esdoc-brand-plugin', option: {title: option.title, repository: option.repository}},
+    {name: 'esdoc-brand-plugin', option: option.brand},
     {name: 'esdoc-undocumented-identifier-plugin', option: {enable: option.undocumentIdentifier}},
     {name: 'esdoc-unexported-identifier-plugin', option: {enable: option.unexportedIdentifier}},
     {name: 'esdoc-integrate-manual-plugin', option: option.manual},

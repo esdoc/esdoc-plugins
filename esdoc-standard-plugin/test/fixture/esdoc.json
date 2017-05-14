@@ -8,6 +8,9 @@
     {
       "name": "./src/index.js",
       "option": {
+        "brand": {
+          "title": "My Library"
+        },
         "manual": {
           "files": ["./test/fixture/manual/overview.md"]
         },

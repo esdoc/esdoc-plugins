@@ -19,8 +19,15 @@ npm install esdoc-standard-plugin
         "autoPrivate": true,
         "undocumentIdentifier": true,
         "unexportedIdentifier": false,
-        "title": "My Library",
-        "repository": "https://github.com/foo/bar",
+        "brand": {
+          "logo": "./logo.png",
+          "title": "My Library",
+          "description": "this is awesome library",
+          "repository": "https://github.com/foo/bar",
+          "site": "http://my-library.org",
+          "author": "https://twitter.com/foo",
+          "image": "http://my-library.org/logo.png"
+        },
         "typeInference": true,
         "manual": {
           "index": "./manual/index.md",

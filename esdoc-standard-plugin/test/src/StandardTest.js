@@ -17,6 +17,9 @@ describe('test standard plugin:', ()=>{
 
     assert.deepEqual(plugins, [
       {name: './src/index.js', option: {
+        brand: {
+          title: 'My Library'
+        },
         manual: {
           files: ['./test/fixture/manual/overview.md']
         },
@@ -31,7 +34,7 @@ describe('test standard plugin:', ()=>{
       {name: 'esdoc-accessor-plugin', option: {access: ['public', 'protected', 'private'], autoPrivate: true}},
       {name: 'esdoc-type-inference-plugin', option: {enable: true}},
       {name: 'esdoc-external-ecmascript-plugin'},
-      {name: 'esdoc-brand-plugin', option: {}},
+      {name: 'esdoc-brand-plugin', option: {title: 'My Library'}},
       {name: 'esdoc-undocumented-identifier-plugin', option: {enable: true}},
       {name: 'esdoc-unexported-identifier-plugin', option: {enable: false}},
       {name: 'esdoc-integrate-manual-plugin', option: {
