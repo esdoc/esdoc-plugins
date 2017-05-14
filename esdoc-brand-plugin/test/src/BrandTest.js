@@ -23,14 +23,10 @@ describe('test brand result:', ()=> {
   });
 
   it('has brand title', ()=>{
-    // const html = fs.readFileSync('./test/fixture/out/index.html').toString();
-    // const $ = cheerio.load(html);
     assert.equal($('title').text(), 'Home | esdoc-brand-plugin-test');
   });
 
   it('has repository link', ()=>{
-    // const html = fs.readFileSync('./test/fixture/out/index.html').toString();
-    // const $ = cheerio.load(html);
     assert.equal($('header a[href="https://github.com/esdoc/esdoc-optional-plugins"]').length, 1);
     assert.equal($('header img[src="./image/github.png"]').length, 1);
     assert(fs.readFileSync('./test/fixture/out/image/github.png'));
