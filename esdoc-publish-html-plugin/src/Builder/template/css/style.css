@@ -589,7 +589,7 @@ pre.source-code li {
 }
 
 pre.source-code.line-number li.active {
-  background: rgb(255, 255, 150);
+  background: rgb(255, 255, 150) !important;
 }
 
 pre.source-code.line-number li.error-line {
@@ -601,4 +601,8 @@ pre.source-code.line-number li.error-line {
   background: #039BE5 !important;
   color: #fff !important;
   padding-left: 0.1em !important;
+}
+
+.inner-link-active a {
+  color: inherit;
 }
