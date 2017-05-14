@@ -17,8 +17,12 @@ class BrandPlugin {
     }
 
     this._logo = option.logo;
+    this._description = option.description || packageObj.description;
     this._title = option.title || packageObj.name;
     this._repository = option.repository || this._getRepositoryURL(packageObj);
+    this._site = option.site || packageObj.homepage;
+    this._image = option.image;
+    this._author = option.author || this._getAuthor(packageObj);
   }
 
   _getRepositoryURL(packageObj) {
@@ -41,6 +45,16 @@ class BrandPlugin {
     }
 
     return null;
+  }
+
+  _getAuthor(packageObj) {
+    if (!packageObj.author) return null;
+
+    if (typeof packageObj.author === 'string') {
+      return packageObj.author;
+    } else {
+      return packageObj.author.url || packageObj.author.name;
+    }
   }
 
   exec(fileName, content){
@@ -73,7 +87,52 @@ class BrandPlugin {
       }
     }
 
+    // meta tag
+    this._addMetaTag($);
+
     return $.html();
+  }
+
+  _addMetaTag($) {
+    const metaProps = [];
+
+    // normal
+    if (this._description){
+      metaProps.push({name: 'description', content: this._description});
+    }
+
+    // og tag http://ogp.me/#metadata
+    if (this._title && this._image && this._site){
+      metaProps.push({property: 'og:type', content: 'website'});
+      metaProps.push({property: 'og:url', content: this._site});
+      metaProps.push({property: 'og:site_name', content: this._title});
+      metaProps.push({property: 'og:title', content: this._title});
+      metaProps.push({property: 'og:image', content: this._image});
+
+      if (this._description) metaProps.push({property: 'og:description', content: this._description});
+      if (this._author) metaProps.push({property: 'og:author', content: this._author});
+    }
+
+    // twitter card https://dev.twitter.com/cards/types/summary
+    if (this._title && this._description){
+      metaProps.push({property: 'twitter:card', content: 'summary'});
+      metaProps.push({property: 'twitter:title', content: this._title});
+      metaProps.push({property: 'twitter:description', content: this._description});
+
+      if (this._image) metaProps.push({property: 'twitter:image', content: this._image});
+      if (this._site && this._site.indexOf('https://twitter.com/') === 0) {
+        const twitterName = this._site.replace('https://twitter.com/', '@');
+        metaProps.push({property: 'twitter:site', content: twitterName});
+        metaProps.push({property: 'twitter:creator', content: twitterName});
+      }
+    }
+
+    const $head = $('head');
+    for (const metaProp of metaProps) {
+      const prop = Object.keys(metaProp).map((key) => `${key}="${metaProp[key]}"`).join(' ');
+      const metaTag = `<meta ${prop}>`;
+      $head.append(metaTag);
+    }
   }
 
   writeIcon(copyFile) {

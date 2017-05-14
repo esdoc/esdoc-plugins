@@ -1,4 +1,10 @@
 {
-  "name": "ESDoc Brand Plugin",
-  "repository": "https://github.com/esdoc/esdoc-optional-plugins"
+  "name": "esdoc-brand-plugin-test",
+  "description": "this is esdoc-brand-plugin test",
+  "repository": "https://github.com/esdoc/esdoc-optional-plugins",
+  "homepage": "https://esdoc.org",
+  "author": {
+    "name": "h13i32maru",
+    "url": "http://h13i32maru.jp"
+  }
 }
