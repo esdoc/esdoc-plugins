@@ -60,10 +60,18 @@ export function shorten(doc, asMarkdown = false) {
  * @return {string} html.
  */
 export function markdown(text, breaks = false) {
+  // original render does not support multi-byte anchor
+  const renderer = new marked.Renderer();
+  renderer.heading = function (text, level) {
+    const id = escapeURLHash(text);
+    return `<h${level} id=${id}>${text}</h${level}>`;
+  };
+
   const availableTags = ['span', 'a', 'p', 'div', 'img', 'h1', 'h2', 'h3', 'h4', 'h5', 'br', 'hr', 'li', 'ul', 'ol', 'code', 'pre', 'details', 'summary', 'kbd'];
   const availableAttributes = ['src', 'href', 'title', 'class', 'id', 'name', 'width', 'height', 'target'];
 
   const compiled = marked(text, {
+    renderer: renderer,
     gfm: true,
     tables: true,
     breaks: breaks,

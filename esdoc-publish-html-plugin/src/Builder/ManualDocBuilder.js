@@ -107,7 +107,7 @@ export default class ManualDocBuilder extends DocBuilder {
     ice.loop('manual', manuals, (i, manual, ice)=>{
       const toc = [];
       const fileName = this._getManualOutputFileName(manual.name);
-      const html = this._convertMDToHTML(manual.content);
+      const html = markdown(manual.content);
       const $root = cheerio.load(html).root();
       const h1Count = $root.find('h1').length;
 
@@ -140,7 +140,7 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _buildManual(manual) {
-    const html = this._convertMDToHTML(manual.content);
+    const html = markdown(manual.content);
     const ice = new IceCap(this._readTemplate('manual.html'));
     ice.load('content', html);
 
@@ -207,7 +207,7 @@ export default class ManualDocBuilder extends DocBuilder {
     });
 
     if (manualIndex && manualIndex.content) {
-      const userIndex = this._convertMDToHTML(manualIndex.content);
+      const userIndex = markdown(manualIndex.content);
       ice.load('manualUserIndex', userIndex);
     } else {
       ice.drop('manualUserIndex', true);
@@ -228,33 +228,5 @@ export default class ManualDocBuilder extends DocBuilder {
   _getManualOutputFileName(filePath) {
     const fileName = path.parse(filePath).name;
     return `manual/${fileName}.html`;
-  }
-
-  /**
-   * convert markdown to html.
-   * if markdown has only one ``h1`` and it's text is ``item.label``, remove the ``h1``.
-   * because duplication ``h1`` in output html.
-   * @param {string} content - target.
-   * @returns {string} converted html.
-   * @private
-   */
-  _convertMDToHTML(content) {
-    // support multi byte: convert multi-byte to base64
-    content = content.replace(/^(#+) *(.*)$/mg, (_, head, text) =>{
-      return `${head} ${Buffer.from(text).toString('base64')}`;
-    });
-
-    const html = markdown(content);
-    const $root = cheerio.load(html).root();
-
-    $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
-      const $el = cheerio(el);
-      const rawText = $el.text();
-      const text = Buffer.from(rawText, 'base64').toString('utf-8');
-      $el.text(text);
-      $el.attr('id', escapeURLHash(text));
-    });
-
-    return $root.html();
   }
 }
