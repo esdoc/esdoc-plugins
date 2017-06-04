@@ -19,6 +19,34 @@ npm install esdoc-flow-type-plugin
 
 - `enable` is default `true`
 
+## Example
+```js
+export class Foo {
+  // without document
+  member: number;
+  
+  // without document
+  method1(n: number): string {
+  }
+  
+  // without @param and @return
+  /**
+   * this is method2.
+   */
+  method2(n: number): string {
+  }
+  
+  // without type in @param and @return
+  /**
+   * this is method3.
+   * @param n - this is param desc.
+   * @return this is return desc. 
+   */
+  method3(n: number): string {
+  }
+}
+```
+
 ## LICENSE
 MIT
 
