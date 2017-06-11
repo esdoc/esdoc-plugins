@@ -1,13 +1,16 @@
 {
-  "name": "esdoc-flow-type-plugin",
+  "name": "esdoc-typescript-plugin",
   "version": "0.0.1",
-  "description": "A flow type plugin for ESDoc",
+  "description": "A TypeScript plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/esdoc/esdoc-plugins"
+  },
+  "dependencies": {
+    "typescript": ""
   },
   "devDependencies": {
     "esdoc": "alpha",
@@ -22,7 +25,7 @@
   },
   "keywords": [
     "esdoc",
-    "flow",
+    "typescript",
     "plugin"
   ],
   "files": [
