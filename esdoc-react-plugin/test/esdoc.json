@@ -1,0 +1,9 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "excludes": ["\\.test\\.js$"],
+  "plugins": [
+    {"name": "esdoc-standard-plugin"},
+    {"name": "./src/Plugin.js"}
+  ]
+}
