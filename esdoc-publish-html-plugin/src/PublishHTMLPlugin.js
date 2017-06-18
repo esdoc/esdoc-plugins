@@ -1,5 +1,6 @@
 import {taffy} from 'taffydb';
 import IceCap from 'ice-cap';
+import DocBuilder from './Builder/DocBuilder';
 import StaticFileBuilder from './Builder/StaticFileBuilder.js';
 import IdentifiersDocBuilder from './Builder/IdentifiersDocBuilder.js';
 import IndexDocBuilder from './Builder/IndexDocBuilder.js';
@@ -21,6 +22,11 @@ export default class PublishHTMLPlugin {
     IceCap.debug = !!this._option.debug;
 
     const data = taffy(tags);
+
+    //bad hack: for other plugin uses builder.
+    DocBuilder.createDefaultBuilder = function() {
+      return new DocBuilder(data, tags);
+    };
 
     let coverage = null;
     try {
