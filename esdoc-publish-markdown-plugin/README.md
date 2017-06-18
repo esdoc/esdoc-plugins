@@ -3,7 +3,7 @@
 **So, the plugin has only minimum features.**
 **We are waiting for your pull request!**
 
-<img src="https://raw.githubusercontent.com/esdoc/esdoc-plugins/master/esdoc-publish-markdown-plugin/misc/ss.png">
+<img src="https://raw.githubusercontent.com/esdoc/esdoc-plugins/master/esdoc-publish-markdown-plugin/misc/ss.png" width="400px">
 
 [example](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-publish-markdown-plugin/misc/index.md)
 
