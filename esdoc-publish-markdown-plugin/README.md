@@ -3,6 +3,10 @@
 **So, the plugin has only minimum features.**
 **We are waiting for your pull request!**
 
+<img src="https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-publish-markdown-plugin/misc/ss.png">
+
+[example](https://github.com/esdoc/esdoc-plugins/tree/master/esdoc-publish-markdown-plugin/misc/index.md)
+
 ## Install
 ```bash
 npm install esdoc-publish-markdown-plugin
