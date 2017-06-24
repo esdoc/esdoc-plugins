@@ -1,4 +1,4 @@
-export default class TestAccessor {
+export default class MyClass {
   /**
    * method1 is default access.
    */

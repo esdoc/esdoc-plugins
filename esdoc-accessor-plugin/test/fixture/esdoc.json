@@ -1,7 +1,0 @@
-{
-  "source": "./test/fixture/src",
-  "destination": "./test/fixture/out",
-  "plugins": [
-    {"name": "./src/index.js", "option": {"access": ["public", "protected"], "autoPrivate": true}}
-  ]
-}
