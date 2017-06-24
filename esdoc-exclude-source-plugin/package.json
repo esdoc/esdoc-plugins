@@ -1,6 +1,6 @@
 {
   "name": "esdoc-exclude-source-plugin",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "A exclude source plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,7 +10,6 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "devDependencies": {
-    "cheerio": "0.22.0",
     "esdoc": "alpha",
     "mocha": "2.5.3"
   },
@@ -18,7 +17,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "test": "rm -rf ./test/fixture/out && mocha --recursive ./test/src -R spec"
+    "test": "rm -rf ./test/out && mocha --require ./test/init.js $(find test/ -regex '.*.test.js$') -R spec"
   },
   "keywords": [
     "esdoc",
@@ -30,5 +29,5 @@
     "src",
     "README.md"
   ],
-  "main": "src/index.js"
+  "main": "src/Plugin.js"
 }
