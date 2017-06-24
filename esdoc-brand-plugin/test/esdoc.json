@@ -1,0 +1,10 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "excludes": ["\\.test\\.js$"],
+  "package": "./test/package.json",
+  "plugins": [
+    {"name": "./test/misc/publish-html-mock-plugin.js"},
+    {"name": "./src/Plugin.js", "option": {"logo": "./test/misc/logo.png", "image": "https://esdoc.org/manual/asset/image/logo.png"}}
+  ]
+}

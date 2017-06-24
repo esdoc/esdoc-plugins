@@ -1,25 +1,13 @@
-const assert = require('assert');
-const path = require('path');
 const fs = require('fs');
+const assert = require('assert');
 const cheerio = require('cheerio');
-const ESDocCLI = require('esdoc/out/src/ESDocCLI.js').default;
 
-function cli() {
-  const cliPath = path.resolve('./node_modules/esdoc/out/ESDocCLI.js');
-  const argv = ['node', cliPath, '-c', './test/fixture/esdoc.json'];
-  const cli = new ESDocCLI(argv);
-  cli.exec();
-}
-
-cli();
-
-describe('test brand result:', ()=> {
-  const html = fs.readFileSync('./test/fixture/out/index.html').toString();
-  const $ = cheerio.load(html);
+describe('test/MyClass.js:', ()=> {
+  const $ = cheerio.load(fs.readFileSync('./test/out/index.html'));
 
   it('has brand logo', ()=>{
     assert.equal($('header a[href="./"] img[src="./image/brand_logo.png"]').length, 1);
-    assert(fs.readFileSync('./test/fixture/out/image/brand_logo.png'));
+    assert(fs.readFileSync('./test/out/image/brand_logo.png'));
   });
 
   it('has brand title', ()=>{
@@ -29,7 +17,7 @@ describe('test brand result:', ()=> {
   it('has repository link', ()=>{
     assert.equal($('header a[href="https://github.com/esdoc/esdoc-optional-plugins"]').length, 1);
     assert.equal($('header img[src="./image/github.png"]').length, 1);
-    assert(fs.readFileSync('./test/fixture/out/image/github.png'));
+    assert(fs.readFileSync('./test/out/image/github.png'));
   });
 
   it('has meta tag', ()=>{
