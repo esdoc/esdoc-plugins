@@ -1,7 +1,7 @@
 /**
- * this is TestCoverage class.
+ * this is MyClass class.
  */
-export default class TestCoverage {
+export default class MyClass {
   /**
    * this is constructor.
    */

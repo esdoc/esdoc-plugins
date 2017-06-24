@@ -1,6 +1,6 @@
 {
   "name": "esdoc-coverage-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A coverage plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -8,9 +8,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/esdoc/esdoc-plugins"
-  },
-  "dependencies": {
-    "fs-extra": "1.0.0"
   },
   "devDependencies": {
     "esdoc": "alpha",
@@ -20,7 +17,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "test": "rm -rf ./test/fixture/out && mocha --recursive ./test/src -R spec"
+    "test": "rm -rf ./test/out && mocha --require ./test/init.js $(find test/ -regex '.*.test.js$') -R spec"
   },
   "keywords": [
     "esdoc",
@@ -31,5 +28,5 @@
     "src",
     "README.md"
   ],
-  "main": "src/index.js"
+  "main": "src/Plugin.js"
 }
