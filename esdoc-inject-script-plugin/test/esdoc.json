@@ -1,0 +1,9 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "excludes": ["\\.test\\.js$"],
+  "plugins": [
+    {"name": "./test/misc/publish-html-mock-plugin.js"},
+    {"name": "./src/Plugin.js", "option": {"scripts": ["./test/misc/inject.js"]}}
+  ]
+}

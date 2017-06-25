@@ -2,18 +2,19 @@ const fs = require('fs-extra');
 const path = require('path');
 const cheerio = require('cheerio');
 
-class InjectScriptPlugin {
-  constructor(option = {}) {
-    this._option = option;
-
+class Plugin {
+  onStart(ev) {
+    this._option = ev.data.option || {};
     if (!('enable' in this._option)) this._option.enable = true;
   }
 
-  exec(fileName, content){
-    if (!this._option.enable) return content;
-    if (path.extname(fileName) !== '.html') return content;
+  onHandleContent(ev) {
+    if (!this._option.enable) return;
 
-    const $ = cheerio.load(content);
+    const fileName = ev.data.fileName;
+    if (path.extname(fileName) !== '.html') return;
+
+    const $ = cheerio.load(ev.data.content);
 
     let i = 0;
     for (const script of this._option.scripts) {
@@ -21,10 +22,10 @@ class InjectScriptPlugin {
       $('header').append(`<script src="${src}"></script>`);
     }
 
-    return $.html();
+    ev.data.content = $.html();
   }
 
-  writeFile(writeFile) {
+  onPublish(ev) {
     if (!this._option.enable) return;
 
     let i = 0;
@@ -32,9 +33,9 @@ class InjectScriptPlugin {
       const outPath = `inject/script/${i}-${path.basename(script)}`;
       const content = fs.readFileSync(script).toString();
       console.log(content);
-      writeFile(outPath, content);
+      ev.data.writeFile(outPath, content);
     }
   }
 }
 
-module.exports = InjectScriptPlugin;
+module.exports = new Plugin();
