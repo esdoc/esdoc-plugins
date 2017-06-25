@@ -1,0 +1,28 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "excludes": ["\\.test\\.js$"],
+  "index": "./test/README.md",
+  "package": "./test/package.json",
+  "title": "ESDoc Test Fixture",
+  "plugins": [
+    {
+      "name": "./src/Plugin.js",
+      "option": {
+        "brand": {
+          "title": "My Library"
+        },
+        "manual": {
+          "files": ["./test/manual/overview.md"]
+        },
+        "test": {
+          "source": "./test/test",
+          "includes": ["Test.js$"]
+        }
+      }
+    },
+    {
+      "name": "./test/spy-plugin.js"
+    }
+  ]
+}
