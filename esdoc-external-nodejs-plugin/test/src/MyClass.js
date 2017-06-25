@@ -1,4 +1,4 @@
-export default class TestExternalNodejs {
+export default class MyClass {
   /**
    * @param {http~ClientRequest} p
    */
