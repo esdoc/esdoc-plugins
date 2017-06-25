@@ -1,15 +1,17 @@
 const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').default;
 const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
 
-class TypeInferencePlugin {
-  constructor(docs, option = {enable: true}) {
-    this._docs = docs;
-    this._option = option;
+class Plugin {
+  onHandleDocs(ev) {
+    this._docs = ev.data.docs;
+    this._option = ev.data.option || {};
 
     if (!('enable' in this._option)) this._option.enable = true;
+
+    this._exec();
   }
 
-  exec() {
+  _exec() {
     if (!this._option.enable) return this._docs;
 
     this._inferenceMethod();
@@ -329,4 +331,4 @@ class TypeInferencePlugin {
   }
 }
 
-module.exports = TypeInferencePlugin;
+module.exports = new Plugin();
