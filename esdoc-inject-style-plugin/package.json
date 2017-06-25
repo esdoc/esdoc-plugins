@@ -1,6 +1,6 @@
 {
   "name": "esdoc-inject-style-plugin",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A inject style plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -21,7 +21,7 @@
     "node": ">= 6.0.0"
   },
   "scripts": {
-    "test": "rm -rf ./test/fixture/out && mocha --recursive ./test/src -R spec"
+    "test": "rm -rf ./test/out && mocha --require ./test/init.js $(find test/ -regex '.*.test.js$') -R spec"
   },
   "keywords": [
     "esdoc",
@@ -33,5 +33,5 @@
     "src",
     "README.md"
   ],
-  "main": "src/index.js"
+  "main": "src/Plugin.js"
 }

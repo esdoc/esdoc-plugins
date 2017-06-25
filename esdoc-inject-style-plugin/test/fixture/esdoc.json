@@ -1,8 +1,0 @@
-{
-  "source": "./test/fixture/src",
-  "destination": "./test/fixture/out",
-  "plugins": [
-    {"name": "./test/fixture/publish-html-mock-plugin.js"},
-    {"name": "./src/index.js", "option": {"styles": ["./test/fixture/inject.css"]}}
-  ]
-}
