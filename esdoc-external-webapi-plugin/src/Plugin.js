@@ -1,15 +1,12 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-class ExternalWebAPIPlugin {
-  constructor(config, option = {}) {
-    this._config = config;
-    this._option = option;
-
+class Plugin {
+  onHandleConfig(ev) {
+    this._config = ev.data.config;
+    this._option = ev.data.option || {};
     if (!('enable' in this._option)) this._option.enable = true;
-  }
 
-  exec(){
     if (!this._option.enable) return;
 
     const srcPath = path.resolve(__dirname, 'external-webapi.js');
@@ -18,21 +15,20 @@ class ExternalWebAPIPlugin {
     fs.copySync(srcPath, outPath);
   }
 
-  cleanup(tags){
+  onHandleDocs(ev) {
     if (!this._option.enable) return;
 
     const outPath = path.resolve(this._config.source, '.external-webapi.js');
     fs.removeSync(outPath);
 
     const name = path.basename(path.resolve(this._config.source)) + '/.external-webapi.js';
-    for (const tag of tags) {
-      if (tag.kind === 'external' && tag.memberof === name) tag.builtinExternal = true;
+    for (const doc of ev.data.docs) {
+      if (doc.kind === 'external' && doc.memberof === name) doc.builtinExternal = true;
     }
 
-    const tagIndex = tags.findIndex(tag => tag.kind === 'file' && tag.name === name);
-    tags.splice(tagIndex, 1);
+    const docIndex = ev.data.docs.findIndex(doc => doc.kind === 'file' && doc.name === name);
+    ev.data.docs.splice(docIndex, 1);
   }
 }
 
-module.exports = ExternalWebAPIPlugin;
-
+module.exports = new Plugin();

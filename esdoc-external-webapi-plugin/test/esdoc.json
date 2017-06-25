@@ -1,0 +1,8 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "excludes": ["\\.test\\.js$"],
+  "plugins": [
+    {"name": "./src/Plugin.js"}
+  ]
+}
