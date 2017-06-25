@@ -1,4 +1,4 @@
-export default class TestJSX {
+export default class MyClass {
   method(){
     return <div>hello</div>;
   }
