@@ -6,23 +6,19 @@ const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').defau
 /**
  * Lint Output Builder class.
  */
-class LintPlugin {
-  constructor(tags, option = {enable: true}) {
-    this._tags = tags;
-    this._option = option;
+class Plugin {
+  onHandleDocs(ev) {
+    this._docs = ev.data.docs;
+    this._option = ev.data.option || {};
     this._results = null;
-
     if (!('enable' in this._option)) this._option.enable = true;
   }
 
-  /**
-   * execute building output.
-   */
-  exec(writeFile) {
+  onPublish(ev) {
     if (!this._option.enable) return;
 
     const tmpResults = [];
-    const docs = this._tags.filter(v => ['method', 'function'].includes(v.kind));
+    const docs = this._docs.filter(v => ['method', 'function'].includes(v.kind));
     for (const doc of docs) {
       if (doc.undocument) continue;
 
@@ -36,9 +32,13 @@ class LintPlugin {
 
     const results = this._formatResult(tmpResults);
 
-    writeFile('lint.json', JSON.stringify(results, null, 2));
+    ev.data.writeFile('lint.json', JSON.stringify(results, null, 2));
 
     this._results = results;
+  }
+
+  onComplete() {
+    this._showResult();
   }
 
   /**
@@ -138,7 +138,7 @@ class LintPlugin {
       const comment = node.leadingComments[node.leadingComments.length - 1];
       const startLineNumber = comment.loc.start.line;
       const endLineNumber = node.loc.start.line;
-      const fileDoc = this._tags.find(tag => tag.kind === 'file' && tag.name === filePath);
+      const fileDoc = this._docs.find(tag => tag.kind === 'file' && tag.name === filePath);
       const lines = fileDoc.content.split('\n');
       const targetLines = [];
 
@@ -158,7 +158,7 @@ class LintPlugin {
     return results;
   }
 
-  showResult() {
+  _showResult() {
     for (const result of this._results) {
       console.log(`[33mwarning: signature mismatch: ${result.name} ${result.filePath}#${result.lines[0].lineNumber}[32m`);
       for (const line of result.lines) {
@@ -169,4 +169,4 @@ class LintPlugin {
   }
 }
 
-module.exports = LintPlugin;
+module.exports = new Plugin();

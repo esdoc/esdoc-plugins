@@ -1,7 +1,7 @@
 /**
- * this is TestLintInvalid.
+ * this is MyClass.
  */
-export default class TestLintInvalid {
+export default class MyClass {
   /**
    * this is method1.
    * @param {number} x
