@@ -1,6 +1,6 @@
 {
   "name": "esdoc-flow-type-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A flow type plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -29,5 +29,5 @@
     "src",
     "README.md"
   ],
-  "main": "src/index.js"
+  "main": "src/Plugin.js"
 }
