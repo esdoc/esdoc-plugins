@@ -1,6 +1,6 @@
 {
   "name": "esdoc-typescript-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A TypeScript plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,7 +10,7 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "typescript": ""
+    "typescript": "2.3.4"
   },
   "devDependencies": {
     "esdoc": "alpha",
@@ -32,5 +32,5 @@
     "src",
     "README.md"
   ],
-  "main": "src/index.js"
+  "main": "src/Plugin.js"
 }

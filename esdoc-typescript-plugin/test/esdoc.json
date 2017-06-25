@@ -3,7 +3,7 @@
   "destination": "./test/out",
   "excludes": ["\\.test\\.js"],
   "plugins": [
-    {"name": "./src/index.js"},
+    {"name": "./src/Plugin.js"},
     {"name": "esdoc-standard-plugin"}
   ]
 }

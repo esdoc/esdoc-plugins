@@ -2,7 +2,7 @@ const path = require('path');
 const ts = require('typescript');
 const CommentParser = require('esdoc/out/src/Parser/CommentParser').default;
 
-class TypeScriptPlugin {
+class Plugin {
   constructor() {
     this._enable = true;
   }
@@ -267,4 +267,4 @@ class TypeScriptPlugin {
   }
 }
 
-module.exports = new TypeScriptPlugin();
+module.exports = new Plugin();
