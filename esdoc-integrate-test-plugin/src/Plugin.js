@@ -9,13 +9,15 @@ const InvalidCodeLogger = require('esdoc/out/src/Util/InvalidCodeLogger').defaul
 const PathResolver = require('esdoc/out/src/Util/PathResolver').default;
 const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
 
-class IntegrateTestPlugin {
-  constructor(docs, option) {
-    this._docs = docs;
-    this._option = option;
+class Plugin {
+  onHandleDocs(ev) {
+    this._docs = ev.data.docs;
+    this._option = ev.data.option;
+
+    this._exec();
   }
 
-  exec() {
+  _exec() {
     this._setDefault();
 
     const docs = this._generateDocs();
@@ -127,4 +129,4 @@ class IntegrateTestPlugin {
   }
 }
 
-module.exports = IntegrateTestPlugin;
+module.exports = new Plugin();
