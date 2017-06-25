@@ -1,0 +1,16 @@
+{
+  "source": "./test/src",
+  "destination": "./test/out",
+  "package": "./test/package.json",
+  "plugins": [
+    {
+      "name": "./src/Plugin.js",
+      "option": {
+        "replaces": [
+          {"from": "^src/", "to": "lib/"},
+          {"from": "^lib/MyClass2.js", "to": "lib/foo"}
+        ]
+      }
+    }
+  ]
+}

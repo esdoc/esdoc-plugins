@@ -1,16 +1,14 @@
 const fs = require('fs');
 
-class ImportPathPlugin {
-  constructor(config, tags, option) {
-    this._config = config;
-    this._tags = tags;
-    this._option = option;
+class Plugin {
+  onHandleConfig(ev) {
+    this._config = ev.data.config;
   }
 
-  exec() {
+  onHandleDocs(ev) {
     const packagePath = this._config.package || './package.json';
+    const option = ev.data.option;
 
-    const option = this._option;
     for (let item of option.replaces) {
       item.from = new RegExp(item.from);
     }
@@ -27,10 +25,10 @@ class ImportPathPlugin {
       // ignore
     }
 
-    for (const tag of this._tags) {
-      if (!tag.importPath) continue;
+    for (const doc of ev.data.docs) {
+      if (!doc.importPath) continue;
 
-      let importPath = tag.importPath;
+      let importPath = doc.importPath;
       if (packageName) importPath = importPath.replace(new RegExp(`^${packageName}/`), '');
 
       for (let item of option.replaces) {
@@ -38,14 +36,14 @@ class ImportPathPlugin {
       }
 
       if (importPath === mainPath) {
-        tag.importPath = packageName;
+        doc.importPath = packageName;
       } else if (packageName) {
-        tag.importPath = `${packageName}/${importPath}`;
+        doc.importPath = `${packageName}/${importPath}`;
       } else {
-        tag.importPath = importPath;
+        doc.importPath = importPath;
       }
     }
   }
 }
 
-module.exports = ImportPathPlugin;
+module.exports = new Plugin();
