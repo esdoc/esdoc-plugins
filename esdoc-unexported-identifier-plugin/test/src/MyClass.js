@@ -1,11 +1,11 @@
-class TestUnexportedIdentifier1 {
+class MyClass1 {
 }
 
 /**
  * @ignore
  */
-export class TestUnexportedIdentifier2 {
+export class MyClass2 {
 }
 
-export class TestUnexportedIdentifier3 {
+export class MyClass3 {
 }
