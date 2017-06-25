@@ -2,13 +2,15 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 
-class IntegrateManualPlugin {
-  constructor(docs, option) {
-    this._docs = docs;
-    this._option = option;
+class Plugin {
+  onHandleDocs(ev) {
+    this._docs = ev.data.docs;
+    this._option = ev.data.option;
+
+    this._exec();
   }
 
-  exec(){
+  _exec(){
     this._setDefault();
 
     const docs = this._generateDocs();
@@ -77,4 +79,4 @@ class IntegrateManualPlugin {
   }
 }
 
-module.exports = IntegrateManualPlugin;
+module.exports = new Plugin();
