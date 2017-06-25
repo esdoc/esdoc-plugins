@@ -13,12 +13,17 @@ import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 import ManualDocBuilder from './Builder/ManualDocBuilder.js';
 
-export default class PublishHTMLPlugin {
-  constructor(option = {}) {
-    this._option = option;
+class Plugin {
+  onHandleDocs(ev) {
+    this._docs = ev.data.docs;
   }
 
-  exec(tags, writeFile, copyDir, readFile) {
+  onPublish(ev) {
+    this._option = ev.data.option || {};
+    this._exec(this._docs, ev.data.writeFile, ev.data.copyDir, ev.data.readFile);
+  }
+
+  _exec(tags, writeFile, copyDir, readFile) {
     IceCap.debug = !!this._option.debug;
 
     const data = taffy(tags);
@@ -52,3 +57,5 @@ export default class PublishHTMLPlugin {
     }
   }
 }
+
+module.exports = new Plugin();

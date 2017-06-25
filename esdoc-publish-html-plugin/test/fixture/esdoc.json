@@ -33,6 +33,6 @@
       "source": "./test/fixture/test",
       "includes": ["Test.js$"]
     }},
-    {"name": "./src/index.js"}
+    {"name": "./src/Plugin.js"}
   ]
 }
