@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-publish-html-plugin",
+  "name": "esdoc-publish-module-html-plugin",
   "version": "0.0.12",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",

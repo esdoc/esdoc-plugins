@@ -188,24 +188,21 @@ export default class DocBuilder {
     allDocs.sort((a, b)=>{
       const filePathA = a.longname.split('~')[0];
       const filePathB = b.longname.split('~')[0];
-      const dirPathA = path.dirname(filePathA);
-      const dirPathB = path.dirname(filePathB);
       const kindA = a.interface ? 'interface' : a.kind;
       const kindB = b.interface ? 'interface' : b.kind;
-      if (dirPathA === dirPathB) {
+      if (filePathA === filePathB) {
         if (kindA === kindB) {
           return a.longname > b.longname ? 1 : -1;
         } else {
           return kindOrder[kindA] > kindOrder[kindB] ? 1 : -1;
         }
       } else {
-        return dirPathA > dirPathB ? 1 : -1;
+        return filePathA > filePathB ? 1 : -1;
       }
     });
     let lastDirPath = '.';
     ice.loop('doc', allDocs, (i, doc, ice)=>{
-      const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
-      const dirPath = path.dirname(filePath);
+      const dirPath = doc.longname.replace(/\.[^/.]+$/, '');
       const kind = doc.interface ? 'interface' : doc.kind;
       const kindText = kind.charAt(0).toUpperCase();
       const kindClass = `kind-${kind}`;
@@ -559,9 +556,9 @@ export default class DocBuilder {
   _getOutputFileName(doc) {
     switch (doc.kind) {
       case 'variable':
-        return 'variable/index.html';
+        return `variable/${doc.memberof}.html`;
       case 'function':
-        return 'function/index.html';
+        return `function/${doc.memberof}.html`;
       case 'member': // fall
       case 'method': // fall
       case 'constructor': // fall
