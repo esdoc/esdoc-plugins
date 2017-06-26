@@ -38,6 +38,8 @@ class Plugin {
   }
 
   onComplete() {
+    if (!this._option.enable) return;
+
     this._showResult();
   }
 
