@@ -17,7 +17,7 @@ class Plugin {
     let i = 0;
     for (const style of this._option.styles) {
       const src = `./inject/css/${i}-${path.basename(style)}`;
-      $('header').append(`<link rel="stylesheet" href="${src}"/>`);
+      $('head').append(`<link rel="stylesheet" href="${src}"/>`);
     }
 
     ev.data.content = $.html();
