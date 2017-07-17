@@ -19,7 +19,7 @@ class Plugin {
     let i = 0;
     for (const script of this._option.scripts) {
       const src = `./inject/script/${i}-${path.basename(script)}`;
-      $('header').append(`<script src="${src}"></script>`);
+      $('head').append(`<script src="${src}"></script>`);
     }
 
     ev.data.content = $.html();
@@ -32,7 +32,6 @@ class Plugin {
     for (const script of this._option.scripts) {
       const outPath = `inject/script/${i}-${path.basename(script)}`;
       const content = fs.readFileSync(script).toString();
-      console.log(content);
       ev.data.writeFile(outPath, content);
     }
   }
