@@ -31,7 +31,6 @@ npm install esdoc-standard-plugin
         "manual": {
           "index": "./manual/index.md",
           "globalIndex": true,
-          "coverage": true,
           "asset": "./manual/asset",
           "files": [
             "./manual/overview.md",
