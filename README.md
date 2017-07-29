@@ -36,7 +36,7 @@ This repository is official plugins for ESDoc.
 - [esdoc-external-webapi-plugin](./esdoc-external-webapi-plugin)
 
 **Language**
-- [esdoc-ecmascript-proposal-plugin](./esdoc--plugin)
+- [esdoc-ecmascript-proposal-plugin](./esdoc-ecmascript-proposal-plugin)
 - [esdoc-flow-type-plugin](./esdoc-flow-type-plugin) [PoC]
 - [esdoc-typescript-plugin](./esdoc-typescript-plugin) [PoC]
 
