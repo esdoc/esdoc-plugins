@@ -34,7 +34,6 @@ class Plugin {
       results.push({
         kind: 'manualIndex',
         globalIndex: manual.globalIndex,
-        coverage: manual.coverage,
         content: fs.readFileSync(manual.index).toString(),
         longname: path.resolve(manual.index),
         name: manual.index,
@@ -45,7 +44,6 @@ class Plugin {
       results.push({
         kind: 'manualIndex',
         globalIndex: false,
-        coverage: manual.coverage,
         content: null,
         longname: '', // longname does not must be null.
         name: manual.index,

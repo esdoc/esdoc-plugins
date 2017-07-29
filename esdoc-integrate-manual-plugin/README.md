@@ -15,7 +15,6 @@ npm install esdoc-integrate-manual-plugin
       "option": {
         "index": "./manual/index.md",
         "globalIndex": true,
-        "coverage": true,
         "asset": "./manual/asset",
         "files": [
           "./manual/overview.md",
