@@ -4,7 +4,6 @@
   "excludes": ["\\.test\\.js$"],
   "index": "./test/README.md",
   "package": "./test/package.json",
-  "title": "ESDoc Test Fixture",
   "plugins": [
     {
       "name": "./src/Plugin.js",
