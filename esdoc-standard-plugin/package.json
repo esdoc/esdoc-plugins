@@ -10,17 +10,17 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "esdoc-lint-plugin": "latest",
-    "esdoc-coverage-plugin": "latest",
-    "esdoc-accessor-plugin": "latest",
-    "esdoc-external-ecmascript-plugin": "latest",
-    "esdoc-brand-plugin": "latest",
-    "esdoc-undocumented-identifier-plugin": "latest",
-    "esdoc-unexported-identifier-plugin": "latest",
-    "esdoc-publish-html-plugin": "latest",
-    "esdoc-type-inference-plugin": "latest",
-    "esdoc-integrate-manual-plugin": "latest",
-    "esdoc-integrate-test-plugin": "latest"
+    "esdoc-lint-plugin": "^1.0.0",
+    "esdoc-coverage-plugin": "^1.0.0",
+    "esdoc-accessor-plugin": "^1.0.0",
+    "esdoc-external-ecmascript-plugin": "^1.0.0",
+    "esdoc-brand-plugin": "^1.0.0",
+    "esdoc-undocumented-identifier-plugin": "^1.0.0",
+    "esdoc-unexported-identifier-plugin": "^1.0.0",
+    "esdoc-publish-html-plugin": "^1.0.0",
+    "esdoc-type-inference-plugin": "^1.0.0",
+    "esdoc-integrate-manual-plugin": "^1.0.0",
+    "esdoc-integrate-test-plugin": "^1.0.0"
   },
   "devDependencies": {
     "esdoc": "latest",
