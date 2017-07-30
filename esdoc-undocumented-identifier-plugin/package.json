@@ -1,6 +1,6 @@
 {
   "name": "esdoc-undocumented-identifier-plugin",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "A undocumented identifier plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,7 +10,7 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "alpha",
+    "esdoc": "latest",
     "mocha": "2.5.3"
   },
   "engines": {

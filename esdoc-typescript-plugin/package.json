@@ -1,7 +1,7 @@
 {
   "name": "esdoc-typescript-plugin",
-  "version": "0.0.2",
-  "description": "A TypeScript plugin for ESDoc",
+  "version": "1.0.0",
+  "description": "A TypeScript plugin for ESDoc [PoC]",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
@@ -13,9 +13,9 @@
     "typescript": "2.3.4"
   },
   "devDependencies": {
-    "esdoc": "alpha",
+    "esdoc": "latest",
     "mocha": "2.5.3",
-    "esdoc-standard-plugin": ""
+    "esdoc-standard-plugin": "latest"
   },
   "engines": {
     "node": ">= 6.0.0"

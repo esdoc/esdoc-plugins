@@ -1,7 +1,7 @@
 {
   "name": "esdoc-flow-type-plugin",
-  "version": "0.0.2",
-  "description": "A flow type plugin for ESDoc",
+  "version": "1.0.0",
+  "description": "A flow type plugin for ESDoc [PoC]",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
@@ -10,9 +10,9 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "alpha",
+    "esdoc": "latest",
     "mocha": "2.5.3",
-    "esdoc-standard-plugin": ""
+    "esdoc-standard-plugin": "latest"
   },
   "engines": {
     "node": ">= 6.0.0"

@@ -1,6 +1,6 @@
 {
   "name": "esdoc-publish-html-plugin",
-  "version": "0.0.12",
+  "version": "1.0.0",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -19,7 +19,7 @@
     "taffydb": "2.7.2"
   },
   "devDependencies": {
-    "esdoc": "alpha",
+    "esdoc": "latest",
     "mocha": "2.5.3",
     "babel-cli": "6.11.4",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.5",

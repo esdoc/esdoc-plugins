@@ -1,6 +1,6 @@
 {
   "name": "esdoc-standard-plugin",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "A standard plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -23,7 +23,7 @@
     "esdoc-integrate-test-plugin": "latest"
   },
   "devDependencies": {
-    "esdoc": "alpha",
+    "esdoc": "latest",
     "mocha": "2.5.3"
   },
   "engines": {
