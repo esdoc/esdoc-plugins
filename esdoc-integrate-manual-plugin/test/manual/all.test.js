@@ -6,7 +6,6 @@ describe('test/manual:', ()=>{
     const doc = find('longname', /manual\/index.md$/);
     assert.equal(doc.content, file(doc.name));
     assert.equal(doc.globalIndex, true);
-    assert.equal(doc.coverage, true)
   });
 
   it('has manual asset', ()=>{
