@@ -10,8 +10,9 @@ class Plugin {
     const option = ev.data.option || {};
     if (!('enable' in option)) option.enable = true;
     if (!option.enable) return;
-
-    const docs = this._docs.filter(v => ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable'].includes(v.kind));
+    if (!('kind' in option)) option.kind = ['class', 'method', 'member', 'get', 'set', 'constructor', 'function', 'variable'];
+    if (!option.kind) return;
+    const docs = this._docs.filter(v => option.kind.includes(v.kind));
     const expectCount = docs.length;
     let actualCount = 0;
     const files = {};
