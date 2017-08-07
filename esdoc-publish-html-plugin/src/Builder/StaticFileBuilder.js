@@ -6,8 +6,8 @@ import DocBuilder from './DocBuilder.js';
  */
 export default class StaticFileBuilder extends DocBuilder {
   exec(writeFile, copyDir) {
-    copyDir(path.resolve(__dirname, './template/css'), './css');
-    copyDir(path.resolve(__dirname, './template/script'), './script');
-    copyDir(path.resolve(__dirname, './template/image'), './image');
+    copyDir(path.resolve(this._template, 'css'), './css');
+    copyDir(path.resolve(this._template, 'script'), './script');
+    copyDir(path.resolve(this._template, 'image'), './image');
   }
 }
