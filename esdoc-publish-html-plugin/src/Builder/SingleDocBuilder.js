@@ -37,9 +37,9 @@ export default class SingleDocBuilder extends DocBuilder {
         let title = paths.join(' / ').replace(/\b(\w)/g, c => c.toUpperCase());
         title = this._getTitle(title);
 
-        ice.load('content', this._buildSingleDoc(docs, kind, title), IceCap.default.MODE_WRITE);
-        ice.attr('baseUrl', 'href', this._getBaseUrl(docPath), IceCap.default.MODE_WRITE);
-        ice.text('title', title, IceCap.default.MODE_WRITE);
+        ice.load('content', this._buildSingleDoc(docs, kind, title), IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', this._getBaseUrl(docPath), IceCap.MODE_WRITE);
+        ice.text('title', title, IceCap.MODE_WRITE);
         writeFile(docPath, ice.html);
       }
     }
@@ -54,7 +54,7 @@ export default class SingleDocBuilder extends DocBuilder {
    * @private
    */
   _buildSingleDoc(docs, kind, title) {
-    const ice = new IceCap.default(this._readTemplate('single.html'));
+    const ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
 
     docs.forEach((doc) => {

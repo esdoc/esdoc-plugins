@@ -567,7 +567,7 @@ export default class DocBuilder {
     if (!doc) return '';
 
     const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
-    return _path2.default.dirname(filePath);
+    return path.dirname(filePath);
   }
 
   /**
