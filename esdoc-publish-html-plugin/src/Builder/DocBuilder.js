@@ -204,8 +204,7 @@ export default class DocBuilder {
     });
     let lastDirPath = '.';
     ice.loop('doc', allDocs, (i, doc, ice)=>{
-      const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
-      const dirPath = path.dirname(filePath);
+      const dirPath = this._getPath(doc);
       const kind = doc.interface ? 'interface' : doc.kind;
       const kindText = kind.charAt(0).toUpperCase();
       const kindClass = `kind-${kind}`;
@@ -226,16 +225,17 @@ export default class DocBuilder {
    * @param {DocObject} doc - parent doc object.
    * @param {string} kind - kind property condition.
    * @param {boolean} isStatic - static property condition
+   * @param {string} [matchPath] - Match the doc path rather than its members?
    * @returns {Array[]} found doc objects.
    * @property {Array[]} 0 - ['Public', DocObject[]]
    * @property {Array[]} 1 - ['Protected', DocObject[]]
    * @property {Array[]} 2 - ['Private', DocObject[]]
    * @private
    */
-  _findAccessDocs(doc, kind, isStatic = true) {
+  _findAccessDocs(doc, kind, isStatic = true, matchPath) {
     const cond = {kind: kind, static: isStatic};
 
-    if (doc) cond.memberof = doc.longname;
+    if (doc && !matchPath) cond.memberof = doc.longname;
 
     /* eslint-disable default-case */
     switch (kind) {
@@ -251,9 +251,15 @@ export default class DocBuilder {
         break;
     }
 
-    const publicDocs = this._find(cond, {access: 'public'}).filter(v => !v.builtinExternal);
-    const protectedDocs = this._find(cond, {access: 'protected'}).filter(v => !v.builtinExternal);
-    const privateDocs = this._find(cond, {access: 'private'}).filter(v => !v.builtinExternal);
+    //Filter
+    const filterDocs = (doc) => {
+      const path = this._getPath(doc);
+      return (!matchPath) ? !doc.builtinExternal : (!doc.builtinExternal && matchPath === path);
+    };
+
+    const publicDocs = this._find(cond, {access: 'public'}).filter(filterDocs);
+    const protectedDocs = this._find(cond, {access: 'protected'}).filter(filterDocs);
+    const privateDocs = this._find(cond, {access: 'private'}).filter(filterDocs);
     const accessDocs = [['Public', publicDocs], ['Protected', protectedDocs], ['Private', privateDocs]];
 
     return accessDocs;
@@ -265,11 +271,12 @@ export default class DocBuilder {
    * @param {string} kind - target kind property.
    * @param {string} title - summary title.
    * @param {boolean} [isStatic=true] - target static property.
+   * @param {string} [matchPath] - Match the doc path rather than its members?
    * @returns {string} html of summary.
    * @private
    */
-  _buildSummaryHTML(doc, kind, title, isStatic = true) {
-    const accessDocs = this._findAccessDocs(doc, kind, isStatic);
+  _buildSummaryHTML(doc, kind, title, isStatic = true, matchPath) {
+    const accessDocs = this._findAccessDocs(doc, kind, isStatic, matchPath);
     let html = '';
     for (const accessDoc of accessDocs) {
       const docs = accessDoc[1];
@@ -346,11 +353,12 @@ export default class DocBuilder {
    * @param {string} kind - target kind property.
    * @param {string} title - detail title.
    * @param {boolean} [isStatic=true] - target static property.
+   * @param {string} [matchPath] - Match the doc path rather than its members?
    * @returns {string} html of detail.
    * @private
    */
-  _buildDetailHTML(doc, kind, title, isStatic = true) {
-    const accessDocs = this._findAccessDocs(doc, kind, isStatic);
+  _buildDetailHTML(doc, kind, title, isStatic = true, matchPath) {
+    const accessDocs = this._findAccessDocs(doc, kind, isStatic, matchPath);
     let html = '';
     for (const accessDoc of accessDocs) {
       const docs = accessDoc[1];
@@ -551,6 +559,18 @@ export default class DocBuilder {
   }
 
   /**
+   * Get the directory path for a doc
+   * @param {DocObject} doc - target doc object
+   * @returns {string} file path
+   */
+  _getPath(doc) {
+    if (!doc) return '';
+
+    const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
+    return _path2.default.dirname(filePath);
+  }
+
+  /**
    * get file name of output html page.
    * @param {DocObject} doc - target doc object.
    * @returns {string} file name.
@@ -558,10 +578,11 @@ export default class DocBuilder {
    */
   _getOutputFileName(doc) {
     switch (doc.kind) {
-      case 'variable':
-        return 'variable/index.html';
+      case 'variable': //Fall
       case 'function':
-        return 'function/index.html';
+        let path = this._getPath(doc);
+        path = (path === '.') ? '' : `${path}/`;
+        return `${path}${doc.kind}/index.html`;
       case 'member': // fall
       case 'method': // fall
       case 'constructor': // fall
