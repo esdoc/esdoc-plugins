@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@see} */
 describe('testSeeFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('See/function/index.html');
 
   it('has see.', ()=>{
     findParent(doc, '[id="static-function-testSeeFunction"]', '[data-ice="detail"]', (doc)=>{

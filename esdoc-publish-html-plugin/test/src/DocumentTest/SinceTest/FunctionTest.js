@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@since} */
 describe('testSinceFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('Since/function/index.html');
 
   describe('in summary', ()=>{
     it('has since.', ()=>{

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@throws} */
 describe('testThrowsFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('Throws/function/index.html');
 
   it('has throws.', ()=>{
     findParent(doc, '[id="static-function-testThrowsFunction"]', '[data-ice="detail"]', (doc)=>{

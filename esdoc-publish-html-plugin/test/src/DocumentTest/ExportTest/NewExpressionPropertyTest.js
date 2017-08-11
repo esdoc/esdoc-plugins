@@ -24,7 +24,7 @@ describe('test default export with new expression and property.', ()=> {
   });
 
   it('has class description', ()=>{
-    const doc = readDoc('variable/index.html');
+    const doc = readDoc('Export/variable/index.html');
 
     findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpressionProperty"]', '[data-ice="target"]', (doc)=>{
       assert.includes(doc, null, 'public testExportNewExpressionProperty: TestExportNewExpressionProperty');

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {FunctionDoc#@param} */
 describe('testParamFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('Param/function/index.html');
 
   describe('in summary', ()=> {
     it('has param.', ()=> {

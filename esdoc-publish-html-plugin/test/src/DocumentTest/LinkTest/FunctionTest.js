@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {DocResolver#_resolveLink} */
 describe('testLinkFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('Link/function/index.html');
 
   it('has link.', ()=>{
     findParent(doc, '[id="static-function-testLinkFunction"]', '[data-ice="detail"]', (doc)=> {

@@ -18,50 +18,45 @@ export default class SingleDocBuilder extends DocBuilder {
       //Organize by paths
       let docPaths = {};
 
-      //Filter each doc by its path
+      //Get the doc path and file output path
       docs.forEach((doc) => {
-        const fileName = this._getOutputFileName(doc);
+        const docPath = this._getPath(doc);
+        const outPath = this._getOutputFileName(doc);
 
-        if (!docPaths[fileName]) docPaths[fileName] = [doc];
-        else docPaths[fileName].push(doc);
+        if (!docPaths[docPath]) docPaths[docPath] = outPath;
       });
 
       //Build each output file
       for (const docPath in docPaths) {
-        const docs = docPaths[docPath];
+        const outPath = docPaths[docPath];
 
-        //Build the title from path
-        let paths = docPath.split('/').filter(function(path){
-          return !path.match(/(^\.$)|(index\.html$)/gi);
-        });
-        let title = paths.join(' / ').replace(/\b(\w)/g, c => c.toUpperCase());
-        title = this._getTitle(title);
+        // Build the title from the path
+        const pathTitle = [...docPath.split('/'), kind]
+          .map((p) => p.replace(/\b(\w)/g, p => p.toUpperCase()))
+          .join(' / ');
+        let title = this._getTitle(pathTitle);
 
-        ice.load('content', this._buildSingleDoc(docs, kind, title), IceCap.MODE_WRITE);
-        ice.attr('baseUrl', 'href', this._getBaseUrl(docPath), IceCap.MODE_WRITE);
+        ice.load('content', this._buildSingleDoc(docPath, kind, title), IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', this._getBaseUrl(outPath), IceCap.MODE_WRITE);
         ice.text('title', title, IceCap.MODE_WRITE);
-        writeFile(docPath, ice.html);
+        writeFile(outPath, ice.html);
       }
     }
   }
 
   /**
    * build single output.
-   * @param {DocObject[]} docs - target docs.
+   * @param {string} docPath - doc path.
    * @param {string} kind - target kind property.
    * @param {string} title - output title
    * @returns {string} html of single output
    * @private
    */
-  _buildSingleDoc(docs, kind, title) {
+  _buildSingleDoc(docPath, kind, title) {
     const ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
-
-    docs.forEach((doc) => {
-      ice.load('summaries', this._buildSummaryHTML(doc, kind, 'Summary', true, this._getPath(doc)), 'append');
-      ice.load('details', this._buildDetailHTML(doc, kind, '', true, this._getPath(doc)), 'append');
-    });
-
+    ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary', true, docPath), 'append');
+    ice.load('details', this._buildDetailHTML(null, kind, '', true, docPath));
     return ice.html;
   }
 }

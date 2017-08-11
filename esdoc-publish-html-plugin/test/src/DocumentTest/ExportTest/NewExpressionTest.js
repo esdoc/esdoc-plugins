@@ -25,7 +25,7 @@ describe('test default export with new expression.', ()=> {
     });
 
     it('has class description', ()=>{
-      const doc = readDoc('variable/index.html');
+      const doc = readDoc('Export/variable/index.html');
 
       findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpression"]', '[data-ice="target"]', (doc)=>{
         assert.includes(doc, null, 'public testExportNewExpression: TestExportNewExpression');
@@ -58,7 +58,7 @@ describe('test default export with new expression.', ()=> {
     });
 
     it('has class description', ()=>{
-      const doc = readDoc('variable/index.html');
+      const doc = readDoc('Export/variable/index.html');
 
       findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpression2"]', '[data-ice="target"]', (doc)=>{
         assert.includes(doc, null, 'public testExportNewExpression2: TestExportNewExpression2');

@@ -17,13 +17,13 @@ describe('test navigation:', ()=> {
   });
 
   it('has function.', ()=>{
-    findParent(doc, '[data-ice="nav"] a[href="function/index.html#static-function-testDescFunction"]', '[data-ice="doc"]', (doc)=>{
+    findParent(doc, '[data-ice="nav"] a[href="Desc/function/index.html#static-function-testDescFunction"]', '[data-ice="doc"]', (doc)=>{
       assert.includes(doc, null, 'testDescFunction');
     });
   });
 
   it('has variable.', ()=>{
-    findParent(doc, '[data-ice="nav"] a[href="variable/index.html#static-variable-testDescVariable"]', '[data-ice="doc"]', (doc)=>{
+    findParent(doc, '[data-ice="nav"] a[href="Desc/variable/index.html#static-variable-testDescVariable"]', '[data-ice="doc"]', (doc)=>{
       assert.includes(doc, null, 'testDescVariable');
     });
   });

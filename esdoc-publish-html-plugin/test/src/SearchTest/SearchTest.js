@@ -54,18 +54,18 @@ describe('test search', ()=>{
   });
 
   it('has function index', ()=>{
-    assert.deepEqual(find(searchIndex, 'function/index.html#static-function-testDescFunction'), [
+    assert.deepEqual(find(searchIndex, 'Desc/function/index.html#static-function-testDescFunction'), [
       'esdoc-test-fixture/src/desc/function.js~testdescfunction',
-      'function/index.html#static-function-testDescFunction',
+      'Desc/function/index.html#static-function-testDescFunction',
       '<span>testDescFunction</span> <span class="search-result-import-path">esdoc-test-fixture/src/Desc/Function.js</span>',
       'function'
     ]);
   });
 
   it('has variable index', ()=>{
-    assert.deepEqual(find(searchIndex, 'variable/index.html#static-variable-testDescVariable'), [
+    assert.deepEqual(find(searchIndex, 'Desc/variable/index.html#static-variable-testDescVariable'), [
       'esdoc-test-fixture/src/desc/variable.js~testdescvariable',
-      'variable/index.html#static-variable-testDescVariable',
+      'Desc/variable/index.html#static-variable-testDescVariable',
       '<span>testDescVariable</span> <span class="search-result-import-path">esdoc-test-fixture/src/Desc/Variable.js</span>',
       'variable'
     ]);
