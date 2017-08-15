@@ -530,9 +530,13 @@ export default class DocBuilder {
         name = doc.kind;
       }
 
-      name = [...this._getPath(doc).split('/'), name]
-      .map((p) => p.replace(/\b(\w)/g, p => p.toUpperCase()))
-      .join(' / ');
+      //Capitalize?
+      if (!['file', 'testFile', 'test'].includes(doc.kind))
+      {
+        name = [...this._getPath(doc).split('/'), name]
+        .map((p) => p.replace(/\b(\w)/g, p => p.toUpperCase()))
+        .join(' / ');
+      }
     }
 
     if (name) {
