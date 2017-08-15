@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeGenerics', ()=> {
-  const doc = readDoc('class/src/Type/Generics.js~TestTypeGenerics.html');
+  const doc = readDoc('class/src/Type/Generics.js~TestTypeGenerics.html', 'Type');
 
   it('has generics type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

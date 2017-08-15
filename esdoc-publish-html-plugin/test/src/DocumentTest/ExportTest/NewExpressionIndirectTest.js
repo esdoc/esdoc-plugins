@@ -6,7 +6,7 @@ import {readDoc, assert, find, findParent} from './../../util.js';
  */
 describe('test default export with new expression and indirect.', ()=> {
   it('has instance description', ()=> {
-    const doc = readDoc('class/src/Export/NewExpressionIndirect.js~TestExportNewExpressionIndirect.html');
+    const doc = readDoc('class/src/Export/NewExpressionIndirect.js~TestExportNewExpressionIndirect.html', 'Export');
 
     find(doc, '[data-ice="instanceDocs"]', (doc)=>{
       assert.includes(doc, null, 'You can directly use an instance of this class. testExportNewExpressionIndirect');
@@ -24,7 +24,7 @@ describe('test default export with new expression and indirect.', ()=> {
   });
 
   it('has class description', ()=>{
-    const doc = readDoc('Export/variable/index.html');
+    const doc = readDoc('variable/index.html', 'Export');
 
     findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpressionIndirect"]', '[data-ice="target"]', (doc)=>{
       assert.includes(doc, null, 'public testExportNewExpressionIndirect: TestExportNewExpressionIndirect');

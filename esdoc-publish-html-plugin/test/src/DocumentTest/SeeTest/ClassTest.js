@@ -2,7 +2,7 @@ import {readDoc, assert, find, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@see} */
 describe('TestSeeClass', ()=> {
-  const doc = readDoc('class/src/See/Class.js~TestSeeClass.html');
+  const doc = readDoc('class/src/See/Class.js~TestSeeClass.html', 'See');
 
   it('has see from class.', ()=> {
     find(doc, '.self-detail [data-ice="see"]', (doc)=>{

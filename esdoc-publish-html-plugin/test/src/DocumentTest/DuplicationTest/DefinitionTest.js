@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {DocResolver#_resolveDuplication} */
 describe('TestDuplicationDefinition', ()=> {
-  const doc = readDoc('class/src/Duplication/Definition.js~TestDuplicationDefinition.html');
+  const doc = readDoc('class/src/Duplication/Definition.js~TestDuplicationDefinition.html', 'Duplication');
 
   describe('in summary', ()=> {
     it('has setter/getter/method.', ()=> {

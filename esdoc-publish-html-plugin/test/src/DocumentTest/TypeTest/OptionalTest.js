@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeOptional', ()=> {
-  const doc = readDoc('class/src/Type/Optional.js~TestTypeOptional.html');
+  const doc = readDoc('class/src/Type/Optional.js~TestTypeOptional.html', 'Type');
 
   it('has optional attribute.', ()=>{
     findParent(doc, '[id="instance-method-method1"]', '[data-ice="detail"]', (doc)=>{

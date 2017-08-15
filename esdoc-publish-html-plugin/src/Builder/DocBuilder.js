@@ -14,10 +14,13 @@ export default class DocBuilder {
   /**
    * create instance.
    * @param {Taffy} data - doc object database.
+   * @param {Object[]} tags - tags database
+   * @param {Object} options - plugin options
    */
-  constructor(data, tags) {
+  constructor(data, tags, options) {
     this._data = data;
     this._tags = tags;
+    this._options = options;
     new DocResolver(this).resolve();
   }
 
@@ -235,6 +238,8 @@ export default class DocBuilder {
   _findAccessDocs(doc, kind, isStatic = true, matchPath) {
     const cond = {kind: kind, static: isStatic};
 
+    //Match by paths?
+    matchPath = (this._options.organizePaths) ? matchPath : false;
     if (doc && !matchPath) cond.memberof = doc.longname;
 
     /* eslint-disable default-case */
@@ -516,7 +521,19 @@ export default class DocBuilder {
    * @private
    */
   _getTitle(doc = '') {
-    const name = doc.name || doc.toString();
+    let name = doc.name || doc.toString();
+
+    //Prepend paths?
+    if (this._options.organizePaths && doc && doc.kind) {
+      //Use the doc kind for the name?
+      if (['variable', 'function', 'external', 'typedef'].includes(doc.kind)) {
+        name = doc.kind;
+      }
+
+      name = [...this._getPath(doc).split('/'), name]
+      .map((p) => p.replace(/\b(\w)/g, p => p.toUpperCase()))
+      .join(' / ');
+    }
 
     if (name) {
       return `${name}`;
@@ -564,7 +581,7 @@ export default class DocBuilder {
    * @returns {string} file path
    */
   _getPath(doc) {
-    if (!doc) return '';
+    if (!doc || !doc.longname) return '';
 
     const filePath = doc.longname.split('~')[0].replace(/^.*?[/]/, '');
     return path.dirname(filePath);
@@ -577,12 +594,22 @@ export default class DocBuilder {
    * @private
    */
   _getOutputFileName(doc) {
+    let path = this._getPath(doc);
+    path = (!this._options.organizePaths || path === '.') ? '' : `${path}/`;
     switch (doc.kind) {
-      case 'variable': //Fall
-      case 'function':
-        let path = this._getPath(doc);
-        path = (path === '.') ? '' : `${path}/`;
+      case 'variable': // Fall
+      case 'function': // Fall
+      case 'external': // Fall
+      case 'typedef': // Fall
         return `${path}${doc.kind}/index.html`;
+      case 'class':
+        return `${path}class/${doc.longname}.html`;
+      case 'file':
+        return `file/${doc.name}.html`;
+      case 'testFile':
+        return `test-file/${doc.name}.html`;
+      case 'test':
+        return `test.html`;
       case 'member': // fall
       case 'method': // fall
       case 'constructor': // fall
@@ -591,18 +618,6 @@ export default class DocBuilder {
         const parentDoc = this._find({longname: doc.memberof})[0];
         return this._getOutputFileName(parentDoc);
       }
-      case 'external':
-        return 'external/index.html';
-      case 'typedef':
-        return 'typedef/index.html';
-      case 'class':
-        return `class/${doc.longname}.html`;
-      case 'file':
-        return `file/${doc.name}.html`;
-      case 'testFile':
-        return `test-file/${doc.name}.html`;
-      case 'test':
-        return 'test.html';
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }

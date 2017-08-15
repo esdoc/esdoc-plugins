@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {AbstractDoc#@desc} */
 describe('TestDescMarkdown:', ()=> {
-  const doc = readDoc('class/src/Desc/Markdown.js~TestDescMarkdown.html');
+  const doc = readDoc('class/src/Desc/Markdown.js~TestDescMarkdown.html', 'Desc');
 
   describe('in self detail', ()=> {
     it('has markdown desc.', ()=> {

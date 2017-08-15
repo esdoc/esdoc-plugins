@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@_generator} */
 describe('TestGeneratorMethod', ()=> {
-  const doc = readDoc('class/src/Generator/Method.js~TestGeneratorMethod.html');
+  const doc = readDoc('class/src/Generator/Method.js~TestGeneratorMethod.html', 'Generator');
 
   describe('in summary', ()=> {
     it('has generator mark.', ()=> {

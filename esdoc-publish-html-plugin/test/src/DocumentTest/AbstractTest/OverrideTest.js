@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {DocBuilder} */
 describe('TestAbstractOverrideDefinition:', ()=> {
-  const doc = readDoc('class/src/Abstract/Override.js~TestAbstractOverride.html');
+  const doc = readDoc('class/src/Abstract/Override.js~TestAbstractOverride.html', 'Abstract');
 
   /** @test {DocBuilder#_buildOverrideMethod} */
   it('has override description in summary.', ()=> {

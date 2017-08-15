@@ -2,11 +2,11 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {AbstractDoc#@deprecated} */
 describe('testDeprecatedVariable:', ()=> {
-  const doc = readDoc('Deprecated/variable/index.html');
+  const doc = readDoc('variable/index.html', 'Deprecated');
 
   describe('in summary', ()=> {
     it('has deprecated message.', ()=> {
-      find(doc, '[data-ice="summary"] [href="Deprecated/variable/index.html#static-variable-testDeprecatedVariable"]', (doc)=>{
+      find(doc, '[data-ice="summary"] [href$="variable/index.html#static-variable-testDeprecatedVariable"]', (doc)=>{
         doc = doc.parents('[data-ice="target"]');
         assert.includes(doc, '[data-ice="deprecated"]', 'this variable was deprecated.');
       });

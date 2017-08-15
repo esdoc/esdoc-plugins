@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../util.js';
 
 /** @test {ClassDocBuilder} */
 describe('test link of test', ()=>{
-  const doc = readDoc('class/src/Desc/Class.js~TestDescClass.html');
+  const doc = readDoc('class/src/Desc/Class.js~TestDescClass.html', 'Desc');
 
   it('has link of test at class', ()=>{
     assert.multiIncludes(doc, '.self-detail [data-ice="test"] a', [

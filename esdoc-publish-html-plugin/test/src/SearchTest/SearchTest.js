@@ -1,15 +1,20 @@
 import fs from 'fs';
 import assert from 'assert';
+import { pluginOptions } from './../util';
 
 describe('test search', ()=>{
   const searchIndexJS = fs.readFileSync('./test/fixture/out/script/search_index.js', {encoding: 'utf8'}).toString();
   const searchIndexJSON = searchIndexJS.replace('window.esdocSearchIndex = ', '');
   const searchIndex = JSON.parse(searchIndexJSON);
 
-  function find(searchIndex, url) {
+  function find(searchIndex, url, path) {
+    url = (pluginOptions.organizePaths && path) ? `${path}/${url}` : url;
     const results = [];
     for (const item of searchIndex) {
-      if (item[1] === url) results.push(item);
+      if (item[1] === url) {
+        item[1] = (pluginOptions.organizePaths && path) ? item[1].replace(new RegExp(`^${path}/`), '') : item[1];
+        results.push(item);
+      }
     }
 
     if (results.length > 1) assert(false, `some ${url} found. results = ${results}`);
@@ -18,7 +23,7 @@ describe('test search', ()=>{
   }
 
   it('has class index', ()=>{
-    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html'), [
+    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html', 'Desc'), [
       'esdoc-test-fixture/src/desc/class.js~testdescclass',
       'class/src/Desc/Class.js~TestDescClass.html',
       '<span>TestDescClass</span> <span class="search-result-import-path">esdoc-test-fixture/src/Desc/Class.js</span>',
@@ -27,7 +32,7 @@ describe('test search', ()=>{
   });
 
   it('has member index', ()=>{
-    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html#instance-member-p1'), [
+    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html#instance-member-p1', 'Desc'), [
       'src/desc/class.js~testdescclass#p1',
       'class/src/Desc/Class.js~TestDescClass.html#instance-member-p1',
       'src/Desc/Class.js~TestDescClass#p1',
@@ -36,7 +41,7 @@ describe('test search', ()=>{
   });
 
   it('has method index', ()=>{
-    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html#instance-method-method1'), [
+    assert.deepEqual(find(searchIndex, 'class/src/Desc/Class.js~TestDescClass.html#instance-method-method1', 'Desc'), [
       'src/desc/class.js~testdescclass#method1',
       'class/src/Desc/Class.js~TestDescClass.html#instance-method-method1',
       'src/Desc/Class.js~TestDescClass#method1',
@@ -45,7 +50,7 @@ describe('test search', ()=>{
   });
 
   it('has interface index', ()=>{
-    assert.deepEqual(find(searchIndex, 'class/src/Interface/Definition.js~TestInterfaceDefinition.html'), [
+    assert.deepEqual(find(searchIndex, 'class/src/Interface/Definition.js~TestInterfaceDefinition.html', 'Interface'), [
       'esdoc-test-fixture/src/interface/definition.js~testinterfacedefinition',
       'class/src/Interface/Definition.js~TestInterfaceDefinition.html',
       '<span>TestInterfaceDefinition</span> <span class="search-result-import-path">esdoc-test-fixture/src/Interface/Definition.js</span>',
@@ -54,25 +59,25 @@ describe('test search', ()=>{
   });
 
   it('has function index', ()=>{
-    assert.deepEqual(find(searchIndex, 'Desc/function/index.html#static-function-testDescFunction'), [
+    assert.deepEqual(find(searchIndex, 'function/index.html#static-function-testDescFunction', 'Desc'), [
       'esdoc-test-fixture/src/desc/function.js~testdescfunction',
-      'Desc/function/index.html#static-function-testDescFunction',
+      'function/index.html#static-function-testDescFunction',
       '<span>testDescFunction</span> <span class="search-result-import-path">esdoc-test-fixture/src/Desc/Function.js</span>',
       'function'
     ]);
   });
 
   it('has variable index', ()=>{
-    assert.deepEqual(find(searchIndex, 'Desc/variable/index.html#static-variable-testDescVariable'), [
+    assert.deepEqual(find(searchIndex, 'variable/index.html#static-variable-testDescVariable', 'Desc'), [
       'esdoc-test-fixture/src/desc/variable.js~testdescvariable',
-      'Desc/variable/index.html#static-variable-testDescVariable',
+      'variable/index.html#static-variable-testDescVariable',
       '<span>testDescVariable</span> <span class="search-result-import-path">esdoc-test-fixture/src/Desc/Variable.js</span>',
       'variable'
     ]);
   });
 
   it('has typedef index', ()=>{
-    assert.deepEqual(find(searchIndex, 'typedef/index.html#static-typedef-TestTypedefDefinition'), [
+    assert.deepEqual(find(searchIndex, 'typedef/index.html#static-typedef-TestTypedefDefinition', 'Typedef'), [
       'src/typedef/definition.js~testtypedefdefinition',
       'typedef/index.html#static-typedef-TestTypedefDefinition',
       'src/Typedef/Definition.js~TestTypedefDefinition',

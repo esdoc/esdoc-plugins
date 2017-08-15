@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeDefault', ()=> {
-  const doc = readDoc('class/src/Type/Default.js~TestTypeDefault.html');
+  const doc = readDoc('class/src/Type/Default.js~TestTypeDefault.html', 'Type');
 
   it('has default value.', ()=>{
     findParent(doc, '[id="instance-method-method1"]', '[data-ice="detail"]', (doc)=>{

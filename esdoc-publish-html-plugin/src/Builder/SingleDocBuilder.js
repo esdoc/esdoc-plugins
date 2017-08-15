@@ -22,24 +22,22 @@ export default class SingleDocBuilder extends DocBuilder {
       docs.forEach((doc) => {
         const docPath = this._getPath(doc);
         const outPath = this._getOutputFileName(doc);
+        const docTitle = this._getTitle(doc);
 
-        if (!docPaths[docPath]) docPaths[docPath] = outPath;
+        if (!docPaths[docPath]) docPaths[docPath] = {
+          outPath,
+          docTitle
+        };
       });
 
       //Build each output file
       for (const docPath in docPaths) {
-        const outPath = docPaths[docPath];
+        const docObj = docPaths[docPath];
 
-        // Build the title from the path
-        const pathTitle = [...docPath.split('/'), kind]
-          .map((p) => p.replace(/\b(\w)/g, p => p.toUpperCase()))
-          .join(' / ');
-        let title = this._getTitle(pathTitle);
-
-        ice.load('content', this._buildSingleDoc(docPath, kind, title), IceCap.MODE_WRITE);
-        ice.attr('baseUrl', 'href', this._getBaseUrl(outPath), IceCap.MODE_WRITE);
-        ice.text('title', title, IceCap.MODE_WRITE);
-        writeFile(outPath, ice.html);
+        ice.load('content', this._buildSingleDoc(docPath, kind, docObj.docTitle), IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', this._getBaseUrl(docObj.outPath), IceCap.MODE_WRITE);
+        ice.text('title', docObj.docTitle, IceCap.MODE_WRITE);
+        writeFile(docObj.outPath, ice.html);
       }
     }
   }

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@desc} */
 describe('TestDescMultiLine:', ()=> {
-  const doc = readDoc('class/src/Desc/MultiLine.js~TestDescMultiLine.html');
+  const doc = readDoc('class/src/Desc/MultiLine.js~TestDescMultiLine.html', 'Desc');
 
   describe('in summary', ()=> {
     it('has first sentence desc', ()=> {

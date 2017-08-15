@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeArray', ()=> {
-  const doc = readDoc('class/src/Type/Array.js~TestTypeArray.html');
+  const doc = readDoc('class/src/Type/Array.js~TestTypeArray.html', 'Type');
 
   it('has array type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {TypedefDoc} */
 describe('TestTypedefDefinition', ()=> {
-  const doc = readDoc('typedef/index.html');
+  const doc = readDoc('typedef/index.html', 'Typedef');
 
   describe('in summary', ()=> {
     it('has desc', ()=> {

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {VariableDoc} */
 describe('testVariableDefinition', ()=> {
-  const doc = readDoc('Variable/variable/index.html');
+  const doc = readDoc('variable/index.html', 'Variable');
 
   describe('in summary', ()=> {
     it('has desc', ()=> {

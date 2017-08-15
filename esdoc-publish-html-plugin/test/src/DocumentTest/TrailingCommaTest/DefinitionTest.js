@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {ESParser} */
 describe('TestTrailingCommaDefinition', ()=> {
-  const doc = readDoc('class/src/TrailingComma/Definition.js~TestTrailingCommaDefinition.html');
+  const doc = readDoc('class/src/TrailingComma/Definition.js~TestTrailingCommaDefinition.html', 'TrailingComma');
 
   describe('in self detail', ()=> {
     it('has desc.', ()=> {

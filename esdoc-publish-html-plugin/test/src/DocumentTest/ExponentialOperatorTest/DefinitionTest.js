@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {ESParser} */
 describe('TestExponentiationOperatorDefinition', ()=> {
-  const doc = readDoc('class/src/ExponentiationOperator/Definition.js~TestExponentiationOperatorDefinition.html');
+  const doc = readDoc('class/src/ExponentiationOperator/Definition.js~TestExponentiationOperatorDefinition.html', 'ExponentiationOperator');
 
   describe('in self detail', ()=> {
     it('has desc.', ()=> {

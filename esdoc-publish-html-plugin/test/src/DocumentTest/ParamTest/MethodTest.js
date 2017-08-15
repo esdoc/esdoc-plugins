@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@desc} */
 describe('TestParamMethod', ()=> {
-  const doc = readDoc('class/src/Param/Method.js~TestParamMethod.html');
+  const doc = readDoc('class/src/Param/Method.js~TestParamMethod.html', 'Param');
 
   describe('in summary', ()=> {
     it('has desc', ()=> {

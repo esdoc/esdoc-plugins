@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@property} */
 describe('TestPropertyReturn', ()=> {
-  const doc = readDoc('class/src/Property/Return.js~TestPropertyReturn.html');
+  const doc = readDoc('class/src/Property/Return.js~TestPropertyReturn.html', 'Property');
 
   describe('in details', ()=>{
     it('has desc.', ()=>{

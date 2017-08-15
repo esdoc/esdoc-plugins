@@ -2,7 +2,7 @@ import {readDoc, assert} from './../../util.js';
 
 /** @test {AbstractDoc#@example} */
 describe('TestExampleCaption', ()=> {
-  const doc = readDoc('class/src/Example/Caption.js~TestExampleCaption.html');
+  const doc = readDoc('class/src/Example/Caption.js~TestExampleCaption.html', 'Example');
 
   describe('in self detail', ()=> {
     it('has caption of example.', ()=> {

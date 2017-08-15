@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@see} */
 describe('testSeeVariable', ()=> {
-  const doc = readDoc('See/variable/index.html');
+  const doc = readDoc('variable/index.html', 'See');
 
   it('has see.', ()=>{
     findParent(doc, '[id="static-variable-testSeeVariable"]', '[data-ice="detail"]', (doc)=>{

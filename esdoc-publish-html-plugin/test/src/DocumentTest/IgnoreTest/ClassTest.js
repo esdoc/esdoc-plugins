@@ -4,12 +4,12 @@ import {readDoc, assert, find} from './../../util.js';
 describe('test ignore class', ()=>{
   describe('TestIgnoreClass1', ()=> {
     it('is not documented.', ()=> {
-      assert.throws(()=> readDoc('class/src/Ignore/Class.js~TestIgnoreClass1.html'));
+      assert.throws(()=> readDoc('class/src/Ignore/Class.js~TestIgnoreClass1.html', 'Ignore'));
     });
   });
 
   describe('TestIgnoreClass2', ()=>{
-    const doc = readDoc('class/src/Ignore/Class.js~TestIgnoreClass2.html');
+    const doc = readDoc('class/src/Ignore/Class.js~TestIgnoreClass2.html', 'Ignore');
 
     it('does not have ignored member.', ()=>{
       assert.throws(()=> find(doc, '[data-ice="summary"] [href$="#instance-member-p1"]', ()=>{}));

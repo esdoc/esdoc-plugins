@@ -2,7 +2,7 @@ import {readDoc, assert} from './../../util.js';
 
 /** @test {ClassDoc#@_name} */
 describe('TestExportAnonymousClass', ()=> {
-  const doc = readDoc('class/src/Export/AnonymousClass.js~AnonymousClass.html');
+  const doc = readDoc('class/src/Export/AnonymousClass.js~AnonymousClass.html', 'Export');
 
   describe('in self detail', ()=> {
     it('is named with anonymous.', ()=> {

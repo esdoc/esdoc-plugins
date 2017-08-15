@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@example} */
 describe('testExampleFunction', ()=> {
-  const doc = readDoc('Example/function/index.html');
+  const doc = readDoc('function/index.html', 'Example');
 
   describe('in details', ()=>{
     it('has desc.', ()=>{

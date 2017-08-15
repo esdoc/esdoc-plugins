@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {MethodDoc#_$async} */
 describe('TestAsyncMethod', ()=> {
-  const doc = readDoc('class/src/Async/Method.js~TestAsyncMethod.html');
+  const doc = readDoc('class/src/Async/Method.js~TestAsyncMethod.html', 'Async');
 
   describe('in summary', ()=> {
     it('has async mark.', ()=> {

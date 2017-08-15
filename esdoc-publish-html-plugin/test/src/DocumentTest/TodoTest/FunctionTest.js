@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@todo} */
 describe('testTodoFunction', ()=> {
-  const doc = readDoc('Todo/function/index.html');
+  const doc = readDoc('function/index.html', 'Todo');
 
   it('has todo.', ()=>{
     findParent(doc, '[id="static-function-testTodoFunction"]', '[data-ice="detail"]', (doc)=>{

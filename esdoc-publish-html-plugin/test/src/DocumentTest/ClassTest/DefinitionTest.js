@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {ClassDocBuilder} */
 describe('TestClassDefinition:', ()=> {
-  const doc = readDoc('class/src/Class/Definition.js~TestClassDefinition.html');
+  const doc = readDoc('class/src/Class/Definition.js~TestClassDefinition.html', 'Class');
 
   /** @test {DocBuilder#_getTitle} */
   describe('in title:', ()=>{

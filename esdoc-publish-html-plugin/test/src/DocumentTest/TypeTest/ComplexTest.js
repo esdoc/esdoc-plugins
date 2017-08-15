@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeComplex', ()=> {
-  const doc = readDoc('class/src/Type/Complex.js~TestTypeComplex.html');
+  const doc = readDoc('class/src/Type/Complex.js~TestTypeComplex.html', 'Type');
 
   it('has function complex type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {
