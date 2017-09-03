@@ -17,6 +17,7 @@ Therefore, convert the import path by using following setting.
     {
       "name": "esdoc-importpath-plugin",
       "option": {
+        "stripPackageName": false,
         "replaces": [
           {"from": "^src/", "to": "lib/"}
         ]
@@ -32,6 +33,10 @@ When writing multi rules, it will also be carried out transformation many times.
 For example, ``[{from: "^src/", to: "lib/"}, {from: "MyFooClass", to: "my-foo"}]`` converted as follows:
 
 - `` my-module/src/MyFooClass.js`` => `` my-module/lib/MyFooClass.js`` => ``my-module/lib/my-foo``
+
+``stripPackageName`` is a boolean that when set to ``true`` will strip the package name from the import path.
+
+This is useful for projects that have custom module resolvers where you want to be able to replace the whole path.
 
 ## Install
 ```sh
