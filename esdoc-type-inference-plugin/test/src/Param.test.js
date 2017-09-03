@@ -98,6 +98,23 @@ describe('test/Param.js:', ()=> {
     ]);
   });
 
+  it('infer array sparse destructuring param', ()=>{
+    const doc = find('longname', 'src/Param.js~TestParam#methodArraySparseDestructuring');
+    assert.deepEqual(doc.params, [
+      {
+        "name": "arrayPattern",
+        "types": [
+          "*[]"
+        ],
+        "defaultRaw": [
+          'undefined',
+          'null'
+        ],
+        "defaultValue": "[undefined, null]"
+      }
+    ]);
+  });
+
   it('infer object param', ()=>{
     const doc = find('longname', 'src/Param.js~TestParam#methodObject');
     assert.deepEqual(doc.params, [

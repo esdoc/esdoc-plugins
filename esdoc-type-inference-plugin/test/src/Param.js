@@ -17,6 +17,9 @@ export default class TestParam {
   // array default and destructuring
   methodArrayAndDestructuring([p1, p2] = [123, 456]){}
 
+  // sparse array destructuring
+  methodArraySparseDestructuring([, p2]) {}
+
   // object default
   methodObject(p1 = {x1: "text", x2: true}){}
 

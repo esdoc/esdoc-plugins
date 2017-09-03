@@ -213,7 +213,9 @@ class Plugin {
           const raw = [];
 
           for (const element of param.elements) {
-            if (element.type === 'Identifier') {
+            if (!element) { // case `function([, v]){}
+              raw.push('undefined');
+            } else if (element.type === 'Identifier') {
               raw.push('null');
             } else if (element.type === 'AssignmentPattern') {
               if ('value' in element.right) {
