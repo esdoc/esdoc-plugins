@@ -115,8 +115,11 @@ class FlowTypePlugin {
     const returnTag = tags.find(tag => tag.tagName === '@return' || tag.tagName === '@returns');
 
     // merge
-    if (returnTag && returnTag.tagValue.charAt(0) !== '{') { // return with comment but does not have tpe
-      returnTag.tagValue = `{${type}} ${returnTag.tagValue}`;
+    if (returnTag) {
+      if (returnTag.tagValue.charAt(0) !== '{') { // return with comment but does not have tpe
+        returnTag.tagValue = `{${type}} ${returnTag.tagValue}`;
+      }
+      // otherwise @return already has type annotation, leave as is
     } else {
       tags.push({tagName: '@return', tagValue: `{${type}}`});
     }
