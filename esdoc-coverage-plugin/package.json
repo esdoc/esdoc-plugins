@@ -1,6 +1,6 @@
 {
   "name": "esdoc-coverage-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A coverage plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
