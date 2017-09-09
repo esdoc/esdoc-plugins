@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {ClassDoc#@extends} */
 describe('TestExtendsExpression', ()=> {
-  const doc = readDoc('class/src/Extends/Expression.js~TestExtendsExpression.html');
+  const doc = readDoc('class/src/Extends/Expression.js~TestExtendsExpression.html', 'Extends');
 
   it('has expression extends.', ()=> {
     find(doc, '.self-detail [data-ice="expressionExtends"]', (doc)=>{

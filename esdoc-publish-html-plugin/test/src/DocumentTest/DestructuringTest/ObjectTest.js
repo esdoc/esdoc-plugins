@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@param} */
 describe('TestDestructuringObject', ()=> {
-  const doc = readDoc('class/src/Destructuring/Object.js~TestDestructuringObject.html');
+  const doc = readDoc('class/src/Destructuring/Object.js~TestDestructuringObject.html', 'Destructuring');
 
   describe('in summary', ()=> {
     it('has object destructuring', ()=> {

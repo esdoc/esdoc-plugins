@@ -6,7 +6,7 @@ import {readDoc, assert, find} from './../../util.js';
  */
 describe('TestExtendsInner', ()=> {
   it('has extends chain.', ()=>{
-    const doc = readDoc('class/src/Extends/Inner.js~TestExtendsInner.html');
+    const doc = readDoc('class/src/Extends/Inner.js~TestExtendsInner.html', 'Extends');
     find(doc, '.self-detail [data-ice="extendsChain"]', (doc)=>{
       assert.includes(doc, null, '_TestExtendsInner → TestExtendsInner');
       assert.includes(doc, 'a[href$="_TestExtendsInner.html"]', '_TestExtendsInner');
@@ -14,9 +14,9 @@ describe('TestExtendsInner', ()=> {
   });
 
   it('has direct subclass.', ()=>{
-    const doc = readDoc('class/src/Extends/Inner.js~_TestExtendsInner.html');
+    const doc = readDoc('class/src/Extends/Inner.js~_TestExtendsInner.html', 'Extends');
     find(doc, '.self-detail [data-ice="directSubclass"]', (doc)=>{
-      assert.includes(doc, 'a[href="class/src/Extends/Inner.js~TestExtendsInner.html"]', 'TestExtendsInner');
+      assert.includes(doc, 'a[href$="class/src/Extends/Inner.js~TestExtendsInner.html"]', 'TestExtendsInner');
     });
   });
 });

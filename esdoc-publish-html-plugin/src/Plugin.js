@@ -12,6 +12,7 @@ import SourceDocBuilder from './Builder/SourceDocBuilder.js';
 import TestDocBuilder from './Builder/TestDocBuilder.js';
 import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 import ManualDocBuilder from './Builder/ManualDocBuilder.js';
+import PluginOptions from './PluginOptions';
 
 class Plugin {
   onHandleDocs(ev) {
@@ -19,18 +20,26 @@ class Plugin {
   }
 
   onPublish(ev) {
-    this._option = ev.data.option || {};
+    this._options = ev.data.option || {};
     this._exec(this._docs, ev.data.writeFile, ev.data.copyDir, ev.data.readFile);
   }
 
   _exec(tags, writeFile, copyDir, readFile) {
-    IceCap.debug = !!this._option.debug;
+    //Copy options
+    for (var key in PluginOptions) {
+      //Mismatch?
+      if (typeof this._options[key] !== typeof PluginOptions[key]) {
+        this._options[key] = PluginOptions[key];
+      }
+    }
+
+    IceCap.debug = !!this._options.debug;
 
     const data = taffy(tags);
 
     //bad hack: for other plugin uses builder.
     DocBuilder.createDefaultBuilder = function() {
-      return new DocBuilder(data, tags);
+      return new DocBuilder(data, tags, this._options);
     };
 
     let coverage = null;
@@ -40,20 +49,20 @@ class Plugin {
       // nothing
     }
 
-    new IdentifiersDocBuilder(data, tags).exec(writeFile, copyDir);
-    new IndexDocBuilder(data, tags).exec(writeFile, copyDir);
-    new ClassDocBuilder(data, tags).exec(writeFile, copyDir);
-    new SingleDocBuilder(data, tags).exec(writeFile, copyDir);
-    new FileDocBuilder(data, tags).exec(writeFile, copyDir);
-    new StaticFileBuilder(data, tags).exec(writeFile, copyDir);
-    new SearchIndexBuilder(data, tags).exec(writeFile, copyDir);
-    new SourceDocBuilder(data, tags).exec(writeFile, copyDir, coverage);
-    new ManualDocBuilder(data, tags).exec(writeFile, copyDir, readFile);
+    new IdentifiersDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new IndexDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new ClassDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new SingleDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new FileDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new StaticFileBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new SearchIndexBuilder(data, tags, this._options).exec(writeFile, copyDir);
+    new SourceDocBuilder(data, tags, this._options).exec(writeFile, copyDir, coverage);
+    new ManualDocBuilder(data, tags, this._options).exec(writeFile, copyDir, readFile);
 
     const existTest = tags.find(tag => tag.kind.indexOf('test') === 0);
     if (existTest) {
-      new TestDocBuilder(data, tags).exec(writeFile, copyDir);
-      new TestFileDocBuilder(data, tags).exec(writeFile, copyDir);
+      new TestDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
+      new TestFileDocBuilder(data, tags, this._options).exec(writeFile, copyDir);
     }
   }
 }

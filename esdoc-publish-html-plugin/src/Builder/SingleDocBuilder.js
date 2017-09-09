@@ -14,30 +14,47 @@ export default class SingleDocBuilder extends DocBuilder {
     for (const kind of kinds) {
       const docs = this._find({kind: kind});
       if (!docs.length) continue;
-      const fileName = this._getOutputFileName(docs[0]);
-      const baseUrl = this._getBaseUrl(fileName);
-      let title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
-      title = this._getTitle(title);
 
-      ice.load('content', this._buildSingleDoc(kind), IceCap.MODE_WRITE);
-      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
-      ice.text('title', title, IceCap.MODE_WRITE);
-      writeFile(fileName, ice.html);
+      //Organize by paths
+      let docPaths = {};
+
+      //Get the doc path and file output path
+      docs.forEach((doc) => {
+        const docPath = this._getPath(doc);
+        const outPath = this._getOutputFileName(doc);
+        const docTitle = this._getTitle(doc);
+
+        if (!docPaths[docPath]) docPaths[docPath] = {
+          outPath,
+          docTitle
+        };
+      });
+
+      //Build each output file
+      for (const docPath in docPaths) {
+        const docObj = docPaths[docPath];
+
+        ice.load('content', this._buildSingleDoc(docPath, kind, docObj.docTitle), IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', this._getBaseUrl(docObj.outPath), IceCap.MODE_WRITE);
+        ice.text('title', docObj.docTitle, IceCap.MODE_WRITE);
+        writeFile(docObj.outPath, ice.html);
+      }
     }
   }
 
   /**
    * build single output.
+   * @param {string} docPath - doc path.
    * @param {string} kind - target kind property.
+   * @param {string} title - output title
    * @returns {string} html of single output
    * @private
    */
-  _buildSingleDoc(kind) {
-    const title = kind.replace(/^(\w)/, (c)=> c.toUpperCase());
+  _buildSingleDoc(docPath, kind, title) {
     const ice = new IceCap(this._readTemplate('single.html'));
     ice.text('title', title);
-    ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary'), 'append');
-    ice.load('details', this._buildDetailHTML(null, kind, ''));
+    ice.load('summaries', this._buildSummaryHTML(null, kind, 'Summary', true, docPath), 'append');
+    ice.load('details', this._buildDetailHTML(null, kind, '', true, docPath));
     return ice.html;
   }
 }

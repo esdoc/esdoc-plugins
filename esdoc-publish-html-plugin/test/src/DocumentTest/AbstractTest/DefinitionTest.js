@@ -2,7 +2,7 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {DocBuilder} */
 describe('TestAbstractDefinition:', ()=> {
-  const doc = readDoc('class/src/Abstract/Definition.js~TestAbstractDefinition.html');
+  const doc = readDoc('class/src/Abstract/Definition.js~TestAbstractDefinition.html', 'Abstract');
 
   /** @test {DocBuilder#_buildSummaryDoc} */
   it('has abstract method in summary.', ()=> {

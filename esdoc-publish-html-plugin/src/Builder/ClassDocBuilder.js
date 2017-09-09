@@ -64,7 +64,7 @@ export default class ClassDocBuilder extends DocBuilder {
     ice.load('indirectImplemented', this._buildDocsLinkHTML(doc._custom_indirect_implemented, null, false, ', '), 'append');
 
     // self
-    ice.text('name', doc.name);
+    ice.text('name', this._getTitle(doc));
     ice.load('description', doc.description);
     ice.load('deprecated', this._buildDeprecatedHTML(doc));
     ice.load('experimental', this._buildExperimentalHTML(doc));

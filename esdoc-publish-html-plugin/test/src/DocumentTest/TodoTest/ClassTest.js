@@ -2,7 +2,7 @@ import {readDoc, assert, find, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@todo} */
 describe('TestTodoClass', ()=> {
-  const doc = readDoc('class/src/Todo/Class.js~TestTodoClass.html');
+  const doc = readDoc('class/src/Todo/Class.js~TestTodoClass.html', 'Todo');
 
   it('has todo at class.', ()=> {
     find(doc, '.self-detail [data-ice="todo"]', (doc)=>{

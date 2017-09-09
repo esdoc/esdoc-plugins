@@ -5,7 +5,7 @@ import {readDoc, assert, find, findParent} from './../../util.js';
  * @test {DocBuilder#_buildDetailDocs}
  */
 describe('TestDecoratorDefinition:', ()=> {
-  const doc = readDoc('class/src/Decorator/Definition.js~TestDecoratorDefinition.html');
+  const doc = readDoc('class/src/Decorator/Definition.js~TestDecoratorDefinition.html', 'Decorator');
 
   it('has decorator at class.', ()=>{
     find(doc, '[data-ice="content"] .self-detail', (doc)=>{

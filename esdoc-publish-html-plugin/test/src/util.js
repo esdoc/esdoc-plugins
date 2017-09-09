@@ -1,6 +1,8 @@
 import _assert from 'assert';
 import fs from 'fs';
 import cheerio from 'cheerio';
+import path from 'path';
+import PluginOptions from './../../src/PluginOptions';
 // import path from 'path';
 // import ESDocCLI from '../../src/ESDocCLI.js';
 
@@ -20,8 +22,25 @@ import cheerio from 'cheerio';
 //   consoleLogSwitch(true);
 // }
 
-export function readDoc(fileName, dirName = './test/fixture/out') {
-  const html = fs.readFileSync(`${dirName}/${fileName}`, {encoding: 'utf-8'});
+//Get our options
+const esdocJSON = path.join(__dirname, '../fixture/esdoc.json');
+let _pluginOptions = PluginOptions;
+try {
+  const parsed = JSON.parse(fs.readFileSync(esdocJSON).toString());
+  parsed.plugins.some((plugin) => {
+    if (plugin.name === './src/Plugin.js') {
+      _pluginOptions = plugin.option || PluginOptions;
+      return true;
+    }
+  });
+} catch (e) {
+  _pluginOptions = PluginOptions;
+}
+export const pluginOptions = _pluginOptions;
+
+export function readDoc(fileName, filePath = '', dirName = './test/fixture/out') {
+  filePath = (_pluginOptions.organizePaths && filePath.length) ? `${filePath}/` : '';
+  const html = fs.readFileSync(`${dirName}/${filePath}${fileName}`, {encoding: 'utf-8'});
   const $ = cheerio.load(html);
   return $('html').first();
 }

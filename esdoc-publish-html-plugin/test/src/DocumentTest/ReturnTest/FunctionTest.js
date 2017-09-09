@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {FunctionDoc#@return} */
 describe('test return', ()=>{
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('function/index.html', 'Return');
 
   describe('testReturnFunction1', ()=> {
     describe('in summary', ()=> {

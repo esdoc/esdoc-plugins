@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {FunctionDoc#@_name} */
 describe('testExportAnonymousFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('function/index.html', 'Export');
 
   describe('in summary', ()=> {
     it('has desc', ()=> {

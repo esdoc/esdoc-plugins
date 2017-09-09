@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeSpread', ()=> {
-  const doc = readDoc('class/src/Type/Spread.js~TestTypeSpread.html');
+  const doc = readDoc('class/src/Type/Spread.js~TestTypeSpread.html', 'Type');
 
   it('has spread type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@since} */
 describe('TestSinceClass', ()=> {
-  const doc = readDoc('class/src/Since/Class.js~TestSinceClass.html');
+  const doc = readDoc('class/src/Since/Class.js~TestSinceClass.html', 'Since');
 
   it('has since at class.', ()=> {
     assert.includes(doc, '.header-notice [data-ice="since"]', 'since 1.2.3');

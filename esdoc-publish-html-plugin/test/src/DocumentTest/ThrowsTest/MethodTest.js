@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@throws} */
 describe('TestThrowsMethod', ()=> {
-  const doc = readDoc('class/src/Throws/Method.js~TestThrowsMethod.html');
+  const doc = readDoc('class/src/Throws/Method.js~TestThrowsMethod.html', 'Throws');
 
   it('has throws.', ()=>{
     findParent(doc, '[id="instance-method-method1"]', '[data-ice="detail"]', (doc)=>{

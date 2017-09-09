@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeUnion', ()=> {
-  const doc = readDoc('class/src/Type/Union.js~TestTypeUnion.html');
+  const doc = readDoc('class/src/Type/Union.js~TestTypeUnion.html', 'Type');
 
   it('has union type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

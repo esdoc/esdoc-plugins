@@ -6,7 +6,7 @@ import {readDoc, assert} from './../../util.js';
  */
 describe('TestExportNamed', ()=> {
   it('has named import path.', ()=>{
-    const doc = readDoc('class/src/Export/Named.js~TestExportNamed.html');
+    const doc = readDoc('class/src/Export/Named.js~TestExportNamed.html', 'Export');
     assert.includes(doc, '.header-notice [data-ice="importPath"]', `import {TestExportNamed} from 'esdoc-test-fixture/src/Export/Named.js'`);
   });
 });

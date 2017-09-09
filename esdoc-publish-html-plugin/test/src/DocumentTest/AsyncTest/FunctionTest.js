@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {FunctionDoc#_$async} */
 describe('testAsyncFunction', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('function/index.html', 'Async');
 
   describe('in summary', ()=> {
     it('has async mark', ()=> {

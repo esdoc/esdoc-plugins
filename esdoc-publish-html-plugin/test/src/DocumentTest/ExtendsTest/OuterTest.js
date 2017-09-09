@@ -2,13 +2,13 @@ import {readDoc, assert, find, findParent} from './../../util.js';
 
 /** @test {ClassDoc#@extends} */
 describe('TestExtendsOuter', ()=> {
-  const doc = readDoc('class/src/Extends/Outer.js~TestExtendsOuter.html');
+  const doc = readDoc('class/src/Extends/Outer.js~TestExtendsOuter.html', 'Extends');
 
   it('has extends chain.', ()=> {
     find(doc, '.self-detail [data-ice="extendsChain"]', (doc)=>{
       assert.includes(doc, null, 'Array → TestExtendsBuiltin → TestExtendsOuter');
       assert.includes(doc, 'a[href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"]', 'Array');
-      assert.includes(doc, 'a[href="class/src/Extends/Builtin.js~TestExtendsBuiltin.html"]', 'TestExtendsBuiltin');
+      assert.includes(doc, 'a[href$="class/src/Extends/Builtin.js~TestExtendsBuiltin.html"]', 'TestExtendsBuiltin');
     });
   });
 

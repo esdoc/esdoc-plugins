@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeNullable', ()=> {
-  const doc = readDoc('class/src/Type/Nullable.js~TypeTestNullable.html');
+  const doc = readDoc('class/src/Type/Nullable.js~TypeTestNullable.html', 'Type');
 
   it('has nullable value.', ()=>{
     findParent(doc, '[id="instance-method-method1"]', '[data-ice="detail"]', (doc)=>{

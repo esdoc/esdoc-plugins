@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeLiteral', ()=> {
-  const doc = readDoc('class/src/Type/Literal.js~TestTypeLiteral.html');
+  const doc = readDoc('class/src/Type/Literal.js~TestTypeLiteral.html', 'Type');
 
   it('has literal type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

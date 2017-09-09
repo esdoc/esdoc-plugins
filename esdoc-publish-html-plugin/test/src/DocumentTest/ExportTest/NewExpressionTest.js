@@ -7,7 +7,7 @@ import {readDoc, assert, find, findParent} from './../../util.js';
 describe('test default export with new expression.', ()=> {
   describe('default export', ()=>{
     it('has instance description', ()=> {
-      const doc = readDoc('class/src/Export/NewExpression.js~TestExportNewExpression.html');
+      const doc = readDoc('class/src/Export/NewExpression.js~TestExportNewExpression.html', 'Export');
 
       find(doc, '[data-ice="instanceDocs"]', (doc)=>{
         assert.includes(doc, null, 'You can directly use an instance of this class. testExportNewExpression');
@@ -25,7 +25,7 @@ describe('test default export with new expression.', ()=> {
     });
 
     it('has class description', ()=>{
-      const doc = readDoc('variable/index.html');
+      const doc = readDoc('variable/index.html', 'Export');
 
       findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpression"]', '[data-ice="target"]', (doc)=>{
         assert.includes(doc, null, 'public testExportNewExpression: TestExportNewExpression');
@@ -40,7 +40,7 @@ describe('test default export with new expression.', ()=> {
 
   describe('named export', ()=>{
     it('has instance description', ()=> {
-      const doc = readDoc('class/src/Export/NewExpression.js~TestExportNewExpression2.html');
+      const doc = readDoc('class/src/Export/NewExpression.js~TestExportNewExpression2.html', 'Export');
 
       find(doc, '[data-ice="instanceDocs"]', (doc)=>{
         assert.includes(doc, null, 'You can directly use an instance of this class. testExportNewExpression2');
@@ -58,7 +58,7 @@ describe('test default export with new expression.', ()=> {
     });
 
     it('has class description', ()=>{
-      const doc = readDoc('variable/index.html');
+      const doc = readDoc('variable/index.html', 'Export');
 
       findParent(doc, '[data-ice="summary"] [href$="#static-variable-testExportNewExpression2"]', '[data-ice="target"]', (doc)=>{
         assert.includes(doc, null, 'public testExportNewExpression2: TestExportNewExpression2');

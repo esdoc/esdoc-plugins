@@ -3,21 +3,21 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {MemberDoc#@_name} */
 describe('TestComputedProperty:', ()=> {
-  const doc = readDoc('class/src/Computed/Property.js~TestComputedProperty.html');
+  const doc = readDoc('class/src/Computed/Property.js~TestComputedProperty.html', 'Computed');
 
   describe('in summary:', ()=>{
     it('has computed properties.', ()=> {
       find(doc, '[data-ice="memberSummary"]', (doc)=>{
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-['foo']"]`,             `['foo']`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[Symbol.iterator]"]`,  `[Symbol.iterator]`);
-        assert.includes(doc, '[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[`${ foo }`]"]',       '[`${ foo }`]');
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo + bar]"]`,        `[foo + bar]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo()]"]`,            `[foo()]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar()]"]`,        `[foo.bar()]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar.baz]"]`,      `[foo.bar.baz]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar]"]`,          `[foo.bar]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.p + bar]"]`,      `[foo.p + bar]`);
-        assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo]"]`,              `[foo]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-['foo']"]`,             `['foo']`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[Symbol.iterator]"]`,  `[Symbol.iterator]`);
+        assert.includes(doc, '[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[`${ foo }`]"]',       '[`${ foo }`]');
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo + bar]"]`,        `[foo + bar]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo()]"]`,            `[foo()]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar()]"]`,        `[foo.bar()]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar.baz]"]`,      `[foo.bar.baz]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar]"]`,          `[foo.bar]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.p + bar]"]`,      `[foo.p + bar]`);
+        assert.includes(doc, `[href$="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo]"]`,              `[foo]`);
       });
     });
   });

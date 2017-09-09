@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {MethodDoc#@return} */
 describe('TestReturnMethod', ()=> {
-  const doc = readDoc('class/src/Return/Method.js~TestReturnMethod.html');
+  const doc = readDoc('class/src/Return/Method.js~TestReturnMethod.html', 'Return');
 
   describe('in summary', ()=> {
     it('has return', ()=> {

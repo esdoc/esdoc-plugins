@@ -2,11 +2,11 @@ import {readDoc, assert, find} from './../../util.js';
 
 /** @test {AbstractDoc#@deprecated} */
 describe('testDeprecatedFunction:', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('function/index.html', 'Deprecated');
 
   describe('in summary', ()=> {
     it('has deprecated message.', ()=> {
-      find(doc, '[data-ice="summary"] [href="function/index.html#static-function-testDeprecatedFunction"]', (doc)=>{
+      find(doc, '[data-ice="summary"] [href$="function/index.html#static-function-testDeprecatedFunction"]', (doc)=>{
         doc = doc.parents('[data-ice="target"]');
         assert.includes(doc, '[data-ice="deprecated"]', 'this function was deprecated.');
       });

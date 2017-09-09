@@ -5,7 +5,7 @@ import {readDoc, assert, findParent} from './../../util.js';
  * @test {ParamParser#parseParam}
  */
 describe('TestTypeRecord', ()=> {
-  const doc = readDoc('class/src/Type/Record.js~TestTypeRecord.html');
+  const doc = readDoc('class/src/Type/Record.js~TestTypeRecord.html', 'Type');
 
   it('has record type.', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {

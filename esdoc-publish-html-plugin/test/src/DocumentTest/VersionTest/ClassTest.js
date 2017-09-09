@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {AbstractDoc#@version} */
 describe('TestVersionClass', ()=> {
-  const doc = readDoc('class/src/Version/Class.js~TestVersionClass.html');
+  const doc = readDoc('class/src/Version/Class.js~TestVersionClass.html', 'Version');
 
   describe('in self detail', ()=> {
     it('has version.', ()=> {

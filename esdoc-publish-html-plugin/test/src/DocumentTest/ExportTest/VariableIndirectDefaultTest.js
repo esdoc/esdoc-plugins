@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {VariableDoc#@_name} */
 describe('test export variable indirect default', ()=> {
-  const doc = readDoc('variable/index.html');
+  const doc = readDoc('variable/index.html', 'Export');
 
   it('has default import path with indirect variable definition.', ()=> {
     findParent(doc, '[id="static-variable-testExportVariableIndirectDefault"]', '[data-ice="detail"]', (doc)=>{

@@ -2,7 +2,7 @@ import {readDoc, assert, findParent} from './../../util.js';
 
 /** @test {FunctionDoc#@_name} */
 describe('test export arrow function', ()=> {
-  const doc = readDoc('function/index.html');
+  const doc = readDoc('function/index.html', 'Export');
 
   it('has default import path with direct arrow function definition.', ()=> {
     findParent(doc, '[id="static-function-ArrowFunction"]', '[data-ice="detail"]', (doc)=>{
