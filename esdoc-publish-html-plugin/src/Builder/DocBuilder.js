@@ -13,9 +13,11 @@ import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
 export default class DocBuilder {
   /**
    * create instance.
+   * @param {String} template - template absolute path
    * @param {Taffy} data - doc object database.
    */
-  constructor(data, tags) {
+  constructor(template, data, tags) {
+    this._template = template;
     this._data = data;
     this._tags = tags;
     new DocResolver(this).resolve();
@@ -136,7 +138,7 @@ export default class DocBuilder {
    * @protected
    */
   _readTemplate(fileName) {
-    const filePath = path.resolve(__dirname, `./template/${fileName}`);
+    const filePath = path.resolve(this._template, `./${fileName}`);
     return fs.readFileSync(filePath, {encoding: 'utf-8'});
   }
 
