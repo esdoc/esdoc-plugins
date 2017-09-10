@@ -1,6 +1,6 @@
 {
   "name": "esdoc-publish-html-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
