@@ -51,7 +51,7 @@ class Plugin {
     });
 
     // hack: create html
-    const docBuilder = new DocBuilder.createDefaultBuilder();
+    const docBuilder = DocBuilder.createDefaultBuilder();
     const html = docBuilder._buildProperties(properties, 'React Props:').html;
 
     // append html
