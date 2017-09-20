@@ -12,6 +12,10 @@ export default class Decorators {
   @annotation1
   @annotation2(true)
   method1(){}
+
+  @annotation1.bar
+  @annotation1.foo(1, 2)
+  method2() {}
 }
 
 export function annotation1(){}

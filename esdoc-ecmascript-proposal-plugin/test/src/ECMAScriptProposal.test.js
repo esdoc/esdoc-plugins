@@ -32,6 +32,9 @@ describe('test ecmascript proposal result:', ()=> {
 
     doc = find('longname', 'src/Decorators.js~Decorators#method1');
     assert.deepEqual(doc.decorators, [{name: 'annotation1', arguments: null}, {name: 'annotation2', arguments: '(true)'}]);
+
+    doc = find('longname', 'src/Decorators.js~Decorators#method2');
+    assert.deepEqual(doc.decorators, [{name: 'annotation1.bar', arguments: null}, {name: 'annotation1.foo', arguments: '(1, 2)'}]);
   });
 
   it('parses DoExpressions', ()=>{
