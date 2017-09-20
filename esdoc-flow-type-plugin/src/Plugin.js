@@ -190,17 +190,26 @@ class FlowTypePlugin {
   _getTypeFromAnnotation(typeAnnotation) {
     if (!typeAnnotation) return '*';
 
-    let type;
-    switch (typeAnnotation.typeAnnotation.type) {
-      case 'GenericTypeAnnotation':
-        type = typeAnnotation.typeAnnotation.id.name;
-        break;
-      default:
-        type = typeAnnotation.typeAnnotation.type.replace('TypeAnnotation', '').toLowerCase();
-        break;
+    function formatTypeAnnotations(types, sep) {
+      return types.map(formatTypeAnnotation).join(sep);
     }
-
-    return type;
+    function formatTypeAnnotation(type) {
+      switch (type.type) {
+        case 'GenericTypeAnnotation':
+          return type.typeParameters ?
+            `${type.id.name}<${formatTypeAnnotations(type.typeParameters.params, ', ')}>` :
+            type.id.name;
+        case 'TupleTypeAnnotation':
+          return `[${formatTypeAnnotations(type.types, ', ')}]`;
+        case 'NullableTypeAnnotation':
+          return `?${formatTypeAnnotation(type.typeAnnotation)}`;
+        case 'UnionTypeAnnotation':
+          return formatTypeAnnotations(type.types, '|');
+        default:
+          return type.type.replace('TypeAnnotation', '').toLowerCase();
+      }
+    }
+    return formatTypeAnnotation(typeAnnotation.typeAnnotation);
   }
 }
 
