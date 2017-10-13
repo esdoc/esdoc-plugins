@@ -35,7 +35,7 @@ class Plugin {
         importPath = importPath.replace(item.from, item.to);
       }
 
-      if (importPath === mainPath) {
+      if (importPath === mainPath || importPath.trim().length === 0) {
         doc.importPath = packageName;
       } else if (packageName && option.stripPackageName !== true) {
         doc.importPath = `${packageName}/${importPath}`;
