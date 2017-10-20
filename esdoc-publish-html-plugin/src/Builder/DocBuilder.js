@@ -98,7 +98,7 @@ export default class DocBuilder {
     if (docs.length) return docs;
 
     // inherited method?
-    const matched = name.match(/(.*)[.#](.*)$/); // instance method(Foo#bar) or static method(Foo.baz)
+    const matched = name.match(/(.*)[.#](?=.*\()(.*)$/); // instance method(Foo#bar) or static method(Foo.baz)
     if (matched) {
       const parent = matched[1];
       const childName = matched[2];
