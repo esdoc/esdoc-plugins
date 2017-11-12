@@ -10,7 +10,7 @@ describe('TestComputedMethod:', ()=> {
       find(doc, '[data-ice="summary"]', (doc)=>{
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-['foo']"]`,            `['foo']`);
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[Symbol.iterator]"]`,  `[Symbol.iterator]`);
-        assert.includes(doc, '[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[`${ foo }`]"]',       '[`${ foo }`]');
+        assert.includes(doc, '[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[`${foo}`]"]',       '[`${foo}`]');
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[foo + bar]"]`,        `[foo + bar]`);
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[foo()]"]`,            `[foo()]`);
         assert.includes(doc, `[href="class/src/Computed/Method.js~TestComputedMethod.html#instance-method-[foo.bar()]"]`,        `[foo.bar()]`);
@@ -26,7 +26,7 @@ describe('TestComputedMethod:', ()=> {
     it('has computed method.', ()=>{
       assert.includes(doc, `[id="instance-method-['foo']"] [data-ice="name"]`,            `['foo']`);
       assert.includes(doc, `[id="instance-method-[Symbol.iterator]"] [data-ice="name"]`,  `[Symbol.iterator]`);
-      assert.includes(doc, '[id="instance-method-[`${ foo }`]"] [data-ice="name"]',       '[`${ foo }`]');
+      assert.includes(doc, '[id="instance-method-[`${foo}`]"] [data-ice="name"]',       '[`${foo}`]');
       assert.includes(doc, `[id="instance-method-[foo + bar]"] [data-ice="name"]`,        `[foo + bar]`);
       assert.includes(doc, `[id="instance-method-[foo()]"] [data-ice="name"]`,            `[foo()]`);
       assert.includes(doc, `[id="instance-method-[foo.bar()]"] [data-ice="name"]`,        `[foo.bar()]`);

@@ -10,7 +10,7 @@ describe('TestComputedProperty:', ()=> {
       find(doc, '[data-ice="memberSummary"]', (doc)=>{
         assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-['foo']"]`,             `['foo']`);
         assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[Symbol.iterator]"]`,  `[Symbol.iterator]`);
-        assert.includes(doc, '[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[`${ foo }`]"]',       '[`${ foo }`]');
+        assert.includes(doc, '[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[`${foo}`]"]',         '[`${foo}`]');
         assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo + bar]"]`,        `[foo + bar]`);
         assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo()]"]`,            `[foo()]`);
         assert.includes(doc, `[href="class/src/Computed/Property.js~TestComputedProperty.html#instance-member-[foo.bar()]"]`,        `[foo.bar()]`);
@@ -26,7 +26,7 @@ describe('TestComputedProperty:', ()=> {
     it('has computed properties.', ()=>{
       assert.includes(doc, `[id="instance-member-['foo']"] [data-ice="name"]`,            `['foo']`);
       assert.includes(doc, `[id="instance-member-[Symbol.iterator]"] [data-ice="name"]`,  `[Symbol.iterator]`);
-      assert.includes(doc, '[id="instance-member-[`${ foo }`]"] [data-ice="name"]',       '[`${ foo }`]');
+      assert.includes(doc, '[id="instance-member-[`${foo}`]"] [data-ice="name"]',         '[`${foo}`]');
       assert.includes(doc, `[id="instance-member-[foo + bar]"] [data-ice="name"]`,        `[foo + bar]`);
       assert.includes(doc, `[id="instance-member-[foo()]"] [data-ice="name"]`,            `[foo()]`);
       assert.includes(doc, `[id="instance-member-[foo.bar()]"] [data-ice="name"]`,        `[foo.bar()]`);
