@@ -139,8 +139,11 @@ class FlowTypePlugin {
     const {tags, commentNode} = CommentParser.parseFromNode(classMethodNode);
     const typeComment = tags.find(tag => tag.tagName === '@type');
 
-    if (typeComment && typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
-      typeComment.tagValue = `{${type}}`;
+    if (typeComment) {
+      if (typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
+        typeComment.tagValue = `{${type}}`;
+      }
+      // otherwise getter already has type annotation, leave as is
     } else {
       tags.push({tagName: '@type', tagValue: `{${type}}`});
     }
@@ -178,8 +181,11 @@ class FlowTypePlugin {
     const {tags, commentNode} = CommentParser.parseFromNode(classPropertyNode);
     const typeComment = tags.find(tag => tag.tagName === '@type');
 
-    if (typeComment && typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
-      typeComment.tagValue = `{${type}}`;
+    if (typeComment) {
+      if (typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
+        typeComment.tagValue = `{${type}}`;
+      }
+      // otherwise property already has type annotation, leave as is
     } else {
       tags.push({tagName: '@type', tagValue: `{${type}}`});
     }
