@@ -240,6 +240,10 @@ class Plugin {
   }
 
   _getTypeFromAnnotation(typeNode) {
+    if (!typeNode) {
+      return 'undefined';
+    }
+
     switch(typeNode.kind) {
       case ts.SyntaxKind.NumberKeyword: return 'number';
       case ts.SyntaxKind.StringKeyword: return 'string';
