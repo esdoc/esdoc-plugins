@@ -2,6 +2,54 @@ const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
 const CommentParser = require('esdoc/out/src/Parser/CommentParser').default;
 const InvalidCodeLogger = require('esdoc/out/src/Util/InvalidCodeLogger').default;
 
+function formatExpression(expr) {
+  switch (expr.type) {
+  case 'ObjectExpression':
+    return `{${expr.properties.map(formatExpression)}}`;
+  default: // XLiteral
+    return expr.value ? String(expr.value) : undefined;
+  }
+}
+
+function formatTypeId(id) {
+  switch (id.type) {
+  case 'QualifiedTypeIdentifier':
+    return `${formatTypeId(id.qualification)}.${formatTypeId(id.id)}`;
+  case 'Identifier':
+    return id.name;
+  default:
+    return id.type;
+  }
+}
+
+function isOptional(type) {
+  // TODO: should detect 'foo | void' here as well...
+  return type.type === 'NullableTypeAnnotation';
+}
+
+function formatTypeAnnotation(type) {
+  switch (type.type) {
+  case 'GenericTypeAnnotation':
+    return type.typeParameters ?
+      `${formatTypeId(type.id)}<${formatTypeAnnotations(type.typeParameters.params, ', ')}>` :
+      formatTypeId(type.id);
+  case 'TupleTypeAnnotation':
+    return `[${formatTypeAnnotations(type.types, ', ')}]`;
+  case 'NullableTypeAnnotation':
+    return `?${formatTypeAnnotation(type.typeAnnotation)}`;
+  case 'UnionTypeAnnotation':
+    return formatTypeAnnotations(type.types, '|');
+  case 'ArrayTypeAnnotation':
+    return `${formatTypeAnnotation(type.elementType)}[]`;
+  default:
+    return type.type.replace('TypeAnnotation', '').toLowerCase();
+  }
+}
+
+function formatTypeAnnotations(types, sep) {
+  return types.map(formatTypeAnnotation).join(sep);
+}
+
 class FlowTypePlugin {
   constructor() {
     this._enable = true;
@@ -33,6 +81,9 @@ class FlowTypePlugin {
     switch (node.type) {
       case 'ClassMethod':
         switch (node.kind) {
+          case 'constructor':
+            this._applyCallableParam(node);
+            break;
           case 'method':
             this._applyCallableParam(node);
             this._applyCallableReturn(node);
@@ -42,6 +93,9 @@ class FlowTypePlugin {
             break;
           case 'set':
             this._applyClassMethodSetter(node);
+            break;
+          default:
+            console.warn(`Unknown ClassMethod kind: ${node.kind}`);
             break;
         }
         break;
@@ -63,9 +117,34 @@ class FlowTypePlugin {
 
     // get types
     const types = node.params.map(param => {
-      return {
-        type: this._getTypeFromAnnotation(param.typeAnnotation),
-        name: param.name
+      switch (param.type) {
+      case 'Identifier':
+        return {
+          type: this._getTypeFromAnnotation(param.typeAnnotation),
+          name: param.name,
+          tagName: param.typeAnnotation && isOptional(param.typeAnnotation) ?
+            `[${param.name}]` : param.name,
+        };
+      case 'AssignmentPattern':
+        return {
+          type: this._getTypeFromAnnotation(param.left.typeAnnotation),
+          name: param.name,
+          tagName: `[${param.left.name}=${formatExpression(param.right)}]`,
+        };
+      case 'RestElement':
+        return {
+          type: `...${this._getTypeFromAnnotation(param.typeAnnotation)}`,
+          name: param.argument.name,
+          tagName: param.argument.name,
+        };
+      default:
+        console.warn(`Unhandled method parameter type: ${param.type}`);
+        console.dir(param);
+        return {
+          type: '*',
+          name: param.name,
+          tagName: param.name,
+        };
       }
     });
     const paramTags = tags.filter(tag => tag.tagName === '@param');
@@ -73,10 +152,10 @@ class FlowTypePlugin {
     // merge
     // case: params without comments
     if (paramTags.length === 0 && types.length) {
-      const tmp = types.map(({type, name}) => {
+      const tmp = types.map(({type, tagName}) => {
         return {
           tagName: '@param',
-          tagValue: `{${type}} ${name}`
+          tagValue: `{${type}} ${tagName}`
         };
       });
       tags.push(...tmp);
@@ -90,8 +169,12 @@ class FlowTypePlugin {
       for (let i = 0; i < paramTags.length; i++) {
         const paramTag = paramTags[i];
         const type = types[i];
-        if (paramTag.tagValue.charAt(0) !== '{') { // does not have type
-          paramTag.tagValue = `{${type.type}} ${paramTag.tagValue}`;
+        let text = paramTag.tagValue;
+        if (text.charAt(0) !== '{') { // does not have type
+          if (text.charAt(0) !== '[') { // does not have attrs
+            text = `${type.tagName} ${text.substring(text.indexOf(' ')+1)}`;
+          }
+          paramTag.tagValue = `{${type.type}} ${text}`;
         }
       }
 
@@ -139,8 +222,11 @@ class FlowTypePlugin {
     const {tags, commentNode} = CommentParser.parseFromNode(classMethodNode);
     const typeComment = tags.find(tag => tag.tagName === '@type');
 
-    if (typeComment && typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
-      typeComment.tagValue = `{${type}}`;
+    if (typeComment) {
+      if (typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
+        typeComment.tagValue = `{${type}}`;
+      }
+      // otherwise getter already has type annotation, leave as is
     } else {
       tags.push({tagName: '@type', tagValue: `{${type}}`});
     }
@@ -178,8 +264,11 @@ class FlowTypePlugin {
     const {tags, commentNode} = CommentParser.parseFromNode(classPropertyNode);
     const typeComment = tags.find(tag => tag.tagName === '@type');
 
-    if (typeComment && typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
-      typeComment.tagValue = `{${type}}`;
+    if (typeComment) {
+      if (typeComment.tagValue.charAt(0) !== '{') { // type with comment but does not have tpe
+        typeComment.tagValue = `{${type}}`;
+      }
+      // otherwise property already has type annotation, leave as is
     } else {
       tags.push({tagName: '@type', tagValue: `{${type}}`});
     }
@@ -190,35 +279,6 @@ class FlowTypePlugin {
   _getTypeFromAnnotation(typeAnnotation) {
     if (!typeAnnotation) return '*';
 
-    function formatTypeId(id) {
-      switch (id.type) {
-        case 'QualifiedTypeIdentifier':
-          return `${formatTypeId(id.qualification)}.${formatTypeId(id.id)}`;
-        case 'Identifier':
-          return id.name;
-        default:
-          return id.type;
-      }
-    }
-    function formatTypeAnnotations(types, sep) {
-      return types.map(formatTypeAnnotation).join(sep);
-    }
-    function formatTypeAnnotation(type) {
-      switch (type.type) {
-        case 'GenericTypeAnnotation':
-          return type.typeParameters ?
-            `${formatTypeId(type.id)}<${formatTypeAnnotations(type.typeParameters.params, ', ')}>` :
-            formatTypeId(type.id);
-        case 'TupleTypeAnnotation':
-          return `[${formatTypeAnnotations(type.types, ', ')}]`;
-        case 'NullableTypeAnnotation':
-          return `?${formatTypeAnnotation(type.typeAnnotation)}`;
-        case 'UnionTypeAnnotation':
-          return formatTypeAnnotations(type.types, '|');
-        default:
-          return type.type.replace('TypeAnnotation', '').toLowerCase();
-      }
-    }
     return formatTypeAnnotation(typeAnnotation.typeAnnotation);
   }
 }
