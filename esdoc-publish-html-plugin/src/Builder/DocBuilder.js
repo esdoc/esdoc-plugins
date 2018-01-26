@@ -676,9 +676,15 @@ export default class DocBuilder {
         .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
         .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
       const innerTypes = inner.split(',').map((v)=>{
-        const tmp = v.split(':').map((v)=> v.trim());
-        const paramName = tmp[0];
-        let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+        let tmp, paramName, typeName = '';
+        try {
+          tmp = v.split(':').map((v)=> v.trim());
+          paramName = tmp[0];
+          typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
+        } catch (e) {
+          // no-op, fail gracefully
+        }
+
         if (typeName.includes('|')) {
           typeName = typeName.replace(/^\(/, '').replace(/\)$/, '');
           const typeNames = typeName.split('|').map(v => v.trim());
