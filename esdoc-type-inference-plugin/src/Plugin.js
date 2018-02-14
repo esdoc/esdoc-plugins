@@ -77,6 +77,8 @@ class Plugin {
       if (doc.type) continue;
 
       const node = ASTNodeContainer.getNode(doc.__docId__);
+      if (!node.declarations) continue;
+
       if (node.declarations[0].init.type === 'NewExpression') {
         const className = node.declarations[0].init.callee.name;
 
