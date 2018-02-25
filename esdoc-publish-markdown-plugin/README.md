@@ -19,7 +19,12 @@ npm install esdoc-publish-markdown-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-publish-markdown-plugin"}
+    {
+      "name": "esdoc-publish-markdown-plugin",
+      "option": {
+        "filename":"README.md"
+      }
+    }
   ]
 }
 ```
