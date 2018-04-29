@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1 (2018-04-29)
+- **Chore**
+  - Update `marked`
+
 ## 1.1.0 (2017-09-10)
 - **Feat**
   - Support custom template ([#12](https://github.com/esdoc/esdoc-plugins/pull/12)) Thanks [@andersevenrud](https://github.com/andersevenrud)
