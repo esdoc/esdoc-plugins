@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 1.0.2 (2018-04-29)
 - **Fix**
   - Broken `@type {type} desc` ([#30](https://github.com/esdoc/esdoc-plugins/pull/30)) Thanks [@samskivert](https://github.com/samskivert)
 
