@@ -77,17 +77,36 @@ class Plugin {
       if (doc.type) continue;
 
       const node = ASTNodeContainer.getNode(doc.__docId__);
-      if (!node.declarations) continue;
 
-      if (node.declarations[0].init.type === 'NewExpression') {
-        const className = node.declarations[0].init.callee.name;
+      let className;
 
-        // does not infer from not identifier
-        if (!className) {
-          doc.type = {types: ['*']};
+      // e.g. `export default foo = new Foo();`
+      if (node.type === 'AssignmentExpression') {
+        if (node.right && node.right.type === 'NewExpression') {
+          className = node.right.callee.name;
+        } else {
+          doc.type = this._inferenceType(node.right);
           continue;
         }
+      }
 
+      // e.g. `let foo = new Foo();`
+      if (node.type === 'VariableDeclaration') {
+        if (node.declarations[0].init.type === 'NewExpression') {
+          className = node.declarations[0].init.callee.name;
+        } else {
+          doc.type = this._inferenceType(node.declarations[0].init);
+          continue;
+        }
+      }
+
+      // can not infer className
+      if (!className) {
+        doc.type = {types: ['*']};
+        continue;
+      }
+
+      if (className) {
         // infer from same file.
         const classDoc = this._docs.find((_doc) =>{
           if (_doc.kind === 'class' && _doc.memberof === doc.memberof && _doc.name === className) {
@@ -113,7 +132,7 @@ class Plugin {
         // can not infer
         doc.type = {types: ['*']};
       } else {
-        doc.type = this._inferenceType(node.declarations[0].init);
+        doc.type = {types: ['*']};
       }
     }
   }
