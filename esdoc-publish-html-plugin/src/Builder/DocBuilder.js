@@ -675,8 +675,20 @@ export default class DocBuilder {
       const inner = matched[1]
         .replace(/<.*?>/g, (a)=> a.replace(/,/g, '\\Z'))
         .replace(/{.*?}/g, (a)=> a.replace(/,/g, '\\Z').replace(/:/g, '\\Y'));
+
+      let broken = false;
+
       const innerTypes = inner.split(',').map((v)=>{
         const tmp = v.split(':').map((v)=> v.trim());
+
+        // edge case: if object key includes comma, this parsing is broken.
+        // e.g. {"a,b": 10}
+        // https://github.com/esdoc/esdoc-plugins/pull/49
+        if (!tmp[0] || !tmp[1]) {
+          broken = true;
+          return;
+        }
+
         const paramName = tmp[0];
         let typeName = tmp[1].replace(/\\Z/g, ',').replace(/\\Y/g, ':');
         if (typeName.includes('|')) {
@@ -691,6 +703,8 @@ export default class DocBuilder {
           return `${paramName}: ${this._buildTypeDocLinkHTML(typeName)}`;
         }
       });
+
+      if (broken) return `*`;
 
       return `{${innerTypes.join(', ')}}`;
     }
