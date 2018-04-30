@@ -8,6 +8,7 @@ class Plugin {
   }
 
   onPublish(ev) {
+
     // create builder
     const classBuilder = new ClassBuilder(this._docs);
     const functionBuilder = new FunctionBuilder(this._docs);
@@ -21,7 +22,8 @@ class Plugin {
     const markdown = this._toMarkdown(html);
 
     // write file
-    ev.data.writeFile('index.md', markdown);
+    const filename = ev.data.option && ev.data.option.filename ? ev.data.option.filename : 'index.md';
+    ev.data.writeFile(filename, markdown);
   }
 
   _toMarkdown(html) {
