@@ -30,6 +30,18 @@ describe('test/FlowType.js:', ()=> {
     assert.deepEqual(doc.return.types, ['string']);
   });
 
+  it('has type of method, extracting proper argument types', ()=>{
+    const doc = find('longname', 'src/FlowType.js~TestFlowTypeClass#method4');
+    assert.equal(doc.params.length, 4);
+    assert.deepEqual(doc.params[0].types, ['[number, number]']);
+    assert.deepEqual(doc.params[1].types, ['Foo<string>']);
+    assert.deepEqual(doc.params[2].types, ['string' , 'void']);
+    assert.deepEqual(doc.params[3].types, ['THREE.Vector3']);
+
+    assert.deepEqual(doc.return.types, ['string']);
+    assert.equal(doc.return.nullable, true);
+  });
+
   it('has type of getter, without comment', ()=>{
     const doc = find('longname', 'src/FlowType.js~TestFlowTypeClass#getter1');
     assert.deepEqual(doc.type.types, ['string']);
