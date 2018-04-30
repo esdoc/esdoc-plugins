@@ -39,7 +39,7 @@ class Plugin {
 
   onComplete() {
     if (!this._option.enable) return;
-    
+
     this._showResult();
   }
 
@@ -137,10 +137,20 @@ class Plugin {
       const node = result.node;
       const filePath = doc.longname.split('~')[0];
       const name = doc.longname.split('~')[1];
-      const comment = node.leadingComments ? node.leadingComments[node.leadingComments.length - 1] : null;
 
-      // Missing leadingComments fallback: will report the node start line instead of the comment one
-      const startLineNumber = comment ? comment.loc.start.line : node.loc.start.line;
+      let startLineNumber;
+
+      if (node.leadingComments) {
+        const comment = node.leadingComments[node.leadingComments.length - 1];
+        startLineNumber = comment.loc.start.line;
+      } else if (node.parent.leadingComments) {
+        const comment = node.parent.leadingComments[node.parent.leadingComments.length - 1];
+        startLineNumber = comment.loc.start.line;
+      } else {
+        // Missing leadingComments fallback: will report the node start line instead of the comment one
+        startLineNumber = node.loc.start.line;
+      }
+
       const endLineNumber = node.loc.start.line;
       const fileDoc = this._docs.find(tag => tag.kind === 'file' && tag.name === filePath);
       const lines = fileDoc.content.split('\n');
