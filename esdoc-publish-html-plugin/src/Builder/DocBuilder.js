@@ -584,6 +584,8 @@ export default class DocBuilder {
         return `test-file/${doc.name}.html`;
       case 'test':
         return 'test.html';
+      case 'index':
+        return 'index.html';
       default:
         throw new Error('DocBuilder: can not resolve file name.');
     }
