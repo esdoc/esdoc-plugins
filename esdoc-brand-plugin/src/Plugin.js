@@ -34,7 +34,7 @@ class Plugin {
 
     if (this._logo) {
       const srcPath = path.resolve(this._logo);
-      ev.data.copyFile(srcPath, 'image/brand_logo.png');
+      ev.data.copyFile(srcPath, 'image/brand_logo' + path.extname(this._logo));
     }
   }
 
@@ -51,7 +51,7 @@ class Plugin {
       const $el = $('header a[href="./"]');
       $el.text('');
       $el.css({display: 'flex', 'align-items': 'center'});
-      $el.append('<img src="./image/brand_logo.png" style="width:34px;">');
+      $el.append('<img src="./image/brand_logo' + path.extname(this._logo) + '" style="width:34px;">');
     }
 
     // title
