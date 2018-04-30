@@ -22,3 +22,14 @@ export default class TestLinkClass {
    */
   method1(){}
 }
+
+export class TestLinkClass2 extends TestLinkClass {
+}
+
+export class TestLinkClass3 extends TestLinkClass2 {
+  /**
+   * {@link TestLinkClass2#method1}
+   */
+  method1FooBar() {
+  }
+}
