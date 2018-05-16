@@ -577,7 +577,7 @@ export default class DocBuilder {
       case 'typedef':
         return 'typedef/index.html';
       case 'class':
-        return `class/${doc.longname}.html`;
+        return `cls/${doc.longname}.html`;
       case 'file':
         return `file/${doc.name}.html`;
       case 'testFile':
