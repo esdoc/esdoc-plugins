@@ -40,13 +40,13 @@ class Plugin {
     // find target doc
     const doc = this._reactPropsDocs.find(doc => {
       const regexp = new RegExp(`${doc.fileName}$`);
-      if (fileName.match(regexp)) return true;
+      if (fileName.replace(/\\/g, '/').match(regexp)) return true;
     });
     if (!doc) return;
 
     // create esdoc properties from react props
     const properties = doc.reactProps.map(reactProp => {
-      const {typeText, paramName, paramDesc} = ParamParser.parseParamValue(reactProp.tagValue);
+      const { typeText, paramName, paramDesc } = ParamParser.parseParamValue(reactProp.tagValue);
       return ParamParser.parseParam(typeText, paramName, paramDesc);
     });
 
