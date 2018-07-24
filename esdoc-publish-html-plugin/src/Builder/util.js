@@ -80,7 +80,7 @@ export function markdown(text, breaks = false) {
       if (tag.match(/<!--.*-->/)) {
         return tag;
       }
-      const tagName = tag.match(/^<\/?(\w+)/)[1];
+      const tagName = (tag.match(/^<\/?(\w+)/)||[])[1];
       if (!availableTags.includes(tagName)) {
         return escape(tag);
       }
