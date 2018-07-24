@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-publish-html-plugin",
+  "name": "@axtell/esdoc-publish-html-plugin",
   "version": "1.1.1",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
