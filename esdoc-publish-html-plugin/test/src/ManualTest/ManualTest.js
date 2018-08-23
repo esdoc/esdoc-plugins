@@ -5,8 +5,8 @@ describe('test manual', ()=>{
   describe('test navigation', ()=>{
     it('has manual link in header', ()=>{
       const doc = readDoc('index.html');
-      assert.includes(doc, '[data-ice="manualHeaderLink"]', 'Manual');
-      assert.includes(doc, '[data-ice="manualHeaderLink"]', './manual/index.html', 'href');
+      assert.includes(doc, '.header-manual-link[data-ice="headerLink"]', 'Manual');
+      assert.includes(doc, '.header-manual-link[data-ice="headerLink"]', 'manual/index.html', 'href');
     });
 
     /** @test {ManualDocBuilder#_buildManualNav} */
