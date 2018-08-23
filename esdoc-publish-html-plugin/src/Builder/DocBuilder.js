@@ -19,7 +19,7 @@ export default class DocBuilder extends Builder {
    * @param globalOptions {object} - options/data available to each builder.
    */
   constructor(template, data, tags, builderOptions, globalOptions) {
-    super(template, data, tags, builderOpts, globalOpts);
+    super(template, data, tags, builderOptions, globalOptions);
     new DocResolver(this).resolve();
   }
 

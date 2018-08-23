@@ -79,6 +79,8 @@ export default class HtmlBasePlugin {
         let builderSet = this.defaultBuilderSet;
         if (this._option.builders) builderSet = Object.keys(this._option.builders);
 
+        const globalOpts = this._option.globalOptions || {};
+
         // Get the options for all builders, may be null.
         const buildersOptions = this._option.builders || {};
 
@@ -90,7 +92,8 @@ export default class HtmlBasePlugin {
                 console.log(`Warning: esdoc-publish-html-plugin does not recognize a builder: ${builderName}.`)
             } else {
                 // Get a new instance of the builder.
-                const builder = builderCreator(this._template, data, tags, buildersOptions[builderName] || {});
+                const builder = builderCreator(this._template, data, tags,
+                    buildersOptions[builderName] || {}, globalOpts);
                 // Run the builder, it will build using the util
                 builder.exec(builderUtil);
             }

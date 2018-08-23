@@ -33,6 +33,12 @@ The defaults are listed in the example below.
   "name": "esdoc-publish-html-plugin",
   "option": {
     "template": "my-template",
+    "globalOptions": { // optional
+      "headerLinks": [ // optional
+         { "text": "Example link", "href": "local-example-page.html#some-header", "cssClass": "my-example" },
+         { "text": "Foo Bar", "href": "https://xkcd.com", "cssClass": "external-link" }
+      ]
+    },
     "builders": {
       "indetifiersDoc": {},
       "indexDoc": {},

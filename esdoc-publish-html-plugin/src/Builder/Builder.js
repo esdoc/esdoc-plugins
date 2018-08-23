@@ -109,6 +109,8 @@ export default class Builder {
         //  insert default headerLinks based on available data.
         if (!headerLinks) {
 
+            headerLinks = [];
+
             headerLinks.push({
                 text: "Home",
                 href: "./"
@@ -144,9 +146,9 @@ export default class Builder {
 
         // Insert all headerLinks into the template
         ice.loop('headerLink', headerLinks, (i, link, ice)=>{
-            ice.text('headerLinkInner', link.text);
-            ice.attr('headerLinkInner', 'href', link.href);
-            if (link.cssClass) ice.attr('headerLinkInner', 'class', link.cssClass);
+            ice.text('headerLink', link.text);
+            ice.attr('headerLink', 'href', link.href);
+            if (link.cssClass) ice.attr('headerLink', 'class', link.cssClass);
         });
 
         return ice;
