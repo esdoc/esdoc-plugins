@@ -49,7 +49,7 @@ export default class Builder {
      * get output html page title.
      * @param {DocObject} doc - target doc object.
      * @returns {string} page title.
-     * @private
+     * @protected
      */
     _getTitle(doc = '') {
         const name = doc.name || doc.toString();
@@ -68,14 +68,13 @@ export default class Builder {
      * @protected
      */
     _getBaseUrl(fileName) {
-        const baseUrl = '../'.repeat(fileName.split('/').length - 1);
-        return baseUrl;
+        return '../'.repeat(fileName.split('/').length - 1);
     }
 
     /**
      * build common layout output.
      * @return {IceCap} layout output.
-     * @private
+     * @protected
      */
     _buildLayoutDoc() {
         const ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
@@ -86,6 +85,19 @@ export default class Builder {
         } else {
             ice.drop('esdocVersion');
         }
+
+        ice.load('pageHeader', this._buildPageHeader());
+        ice.load('nav', this._buildNavDoc());
+        return ice;
+    }
+
+    /**
+     * build common page header output.
+     * @return {IceCap} layout output for page header.
+     * @protected
+     */
+    _buildPageHeader() {
+        const ice = new IceCap(this._readTemplate('header.html'), {autoClose: false});
 
         const existTest = this._tags.find(tag => tag.kind.indexOf('test') === 0);
         ice.drop('testLink', !existTest);
@@ -98,10 +110,14 @@ export default class Builder {
             ice.drop('manualHeaderLink');
         }
 
-        ice.load('nav', this._buildNavDoc());
         return ice;
     }
 
+    /**
+     * build common page side-nave output.
+     * @return {IceCap} layout output for side-nav.
+     * @protected
+     */
     _buildNavDoc() {
         const html = this._readTemplate('nav.html');
         return new IceCap(html);

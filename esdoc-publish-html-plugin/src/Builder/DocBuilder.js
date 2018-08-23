@@ -122,12 +122,10 @@ export default class DocBuilder extends Builder {
   }
 
 
-
-
   /**
    * build common navigation output.
    * @return {IceCap} navigation output.
-   * @private
+   * @protected
    */
   _buildNavDoc() {
     const html = this._readTemplate('nav.html');

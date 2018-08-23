@@ -1,4 +1,4 @@
-.github-markdown .manual-toc {
+.manual-toc {
   padding-left: 0;
 }
 
@@ -73,7 +73,7 @@
   padding-right: 0.75em;
 }
 
-.github-markdown .manual-toc-title a {
+.manual-toc-title a {
   color: inherit;
 }
 
