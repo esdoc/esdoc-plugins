@@ -5,8 +5,11 @@ import DocBuilder from './DocBuilder.js';
  * File output html builder class.
  */
 export default class TestFileDocBuilder extends DocBuilder {
-  exec(writeFile, copyDir) {
-    const ice = this._buildLayoutDoc();
+  exec({writeFile, copyDir}) {
+      const testDoc = this._find({kind: 'test'})[0];
+      if (!testDoc) return;
+
+      const ice = this._buildLayoutDoc();
 
     const docs = this._find({kind: 'testFile'});
     for (const doc of docs) {

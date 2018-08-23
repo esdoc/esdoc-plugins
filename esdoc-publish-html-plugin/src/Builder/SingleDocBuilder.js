@@ -6,7 +6,7 @@ import DocBuilder from './DocBuilder.js';
  * "single" means function, variable, typedef, external, etc...
  */
 export default class SingleDocBuilder extends DocBuilder {
-  exec(writeFile, copyDir) {
+  exec({writeFile, copyDir}) {
     const ice = this._buildLayoutDoc();
     ice.autoClose = false;
 

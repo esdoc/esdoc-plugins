@@ -7,8 +7,8 @@ import {dateForUTC} from './util.js';
  * Source output html builder class.
  */
 export default class SourceDocBuilder extends DocBuilder {
-  exec(writeFile, copyDir, coverage) {
-    this._coverage = coverage;
+  exec({writeFile, copyDir}) {
+    this._loadCoverage(this._builderOptions.coverageFilePath || "coverage.json");
     const ice = this._buildLayoutDoc();
     const fileName = 'source.html';
     const baseUrl = this._getBaseUrl(fileName);
@@ -19,6 +19,22 @@ export default class SourceDocBuilder extends DocBuilder {
     ice.text('title', title, IceCap.MODE_WRITE);
 
     writeFile(fileName, ice.html);
+  }
+
+  /**
+   * Load the coverage json file.
+   * Exits quietly if none could be loaded, coverage is set to null and will be ignored.
+   * @param coverageFilePath The file path to load.
+   * @private
+   */
+  _loadCoverage(coverageFilePath) {
+      let coverage = null;
+      try {
+          coverage = JSON.parse(readFile(coverageFilePath));
+      } catch (e) {
+          // nothing, coverage is optional.
+      }
+      this._coverage = coverage;
   }
 
   /**
