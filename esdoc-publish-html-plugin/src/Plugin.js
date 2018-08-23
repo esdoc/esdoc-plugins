@@ -15,6 +15,36 @@ import TestFileDocBuilder from './Builder/TestFileDocBuilder.js';
 import ManualDocBuilder from './Builder/ManualDocBuilder.js';
 
 class Plugin {
+
+    defaultBuilderSet = [
+        "indetifiersDoc",
+        "indexDoc",
+        "classDoc",
+        "singleDoc",
+        "fileDoc",
+        "staticFile",
+        "searchIndex",
+        "sourceDoc",
+        "manual",
+        "testDoc",
+        "testFileDoc"
+    ];
+
+    // Plugins can extend this Plugin and add custom builders.
+    builders = {
+        indetifiersDoc: (template, data, tags) => new IdentifiersDocBuilder(template, data, tags),
+        indexDoc: (template, data, tags) => new IndexDocBuilder(template, data, tags),
+        classDoc: (template, data, tags) => new ClassDocBuilder(template, data, tags),
+        singleDoc: (template, data, tags) => new SingleDocBuilder(template, data, tags),
+        fileDoc: (template, data, tags) => new FileDocBuilder(template, data, tags),
+        staticFile: (template, data, tags) => new StaticFileBuilder(template, data, tags),
+        searchIndex: (template, data, tags) => new SearchIndexBuilder(template, data, tags),
+        sourceDoc: (template, data, tags) => new SourceDocBuilder(template, data, tags),
+        manual: (template, data, tags) => new ManualDocBuilder(template, data, tags),
+        testDoc: (template, data, tags) => new TestDocBuilder(template, data, tags),
+        testFileDoc: (template, data, tags) => new TestFileDocBuilder(template, data, tags)
+    };
+
   onHandleDocs(ev) {
     this._docs = ev.data.docs;
   }
@@ -37,27 +67,27 @@ class Plugin {
       return new DocBuilder(this._template, data, tags);
     };
 
-    let coverage = null;
-    try {
-      coverage = JSON.parse(readFile('coverage.json'));
-    } catch (e) {
-      // nothing
-    }
+    const builderUtil = {writeFile, copyDir, readFile};
 
-    new IdentifiersDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new IndexDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new ClassDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new SingleDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new FileDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new StaticFileBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new SearchIndexBuilder(this._template, data, tags).exec(writeFile, copyDir);
-    new SourceDocBuilder(this._template, data, tags).exec(writeFile, copyDir, coverage);
-    new ManualDocBuilder(this._template, data, tags).exec(writeFile, copyDir, readFile);
+    // An object, keys: builder names, values: builder options, if any.
+    const builderSet = Object.keys(this._option.builders) || this.defaultBuilderSet;
 
-    const existTest = tags.find(tag => tag.kind.indexOf('test') === 0);
-    if (existTest) {
-      new TestDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
-      new TestFileDocBuilder(this._template, data, tags).exec(writeFile, copyDir);
+    // Get the options for all builders, may be null.
+    const buildersOptions = this._option.builders || {};
+
+    // Iterate over every configured builder
+    // Note: test-only builders will check for a "test" tag themselves, and exit immediately if it cannot be found.
+    for (const builderName of builderSet) {
+      const builderCreator = this.builders[builderName];
+      if (!builderCreator) {
+        console.log(`Warning: esdoc-publish-html-plugin does not recognize a builder: ${builderName}.`)
+      } else {
+        // Get a new instance of the builder.
+        const builder = builderCreator(this._template, data, tags);
+        // Run the builder, it will build using the util,
+        // and with the options as configured by the user (may be undefined/null)
+        builder.exec(builderUtil, buildersOptions[builderName]);
+      }
     }
   }
 }

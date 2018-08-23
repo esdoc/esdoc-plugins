@@ -1,15 +1,26 @@
 import IceCap from 'ice-cap';
 import path from 'path';
-import {Buffer} from 'buffer';
 import cheerio from 'cheerio';
 import DocBuilder from './DocBuilder.js';
-import {markdown, escapeURLHash} from './util.js';
+import {markdown} from './util.js';
+
+const defaultManualRequirements = [
+    '(overview.*)',
+    '(design.*)',
+    '(installation.*)|(install.*)',
+    '(usage.*)',
+    '(configuration.*)|(config.*)',
+    '(example.*)',
+    '(faq.*)',
+    '(changelog.*)'
+];
 
 /**
  * Manual Output Builder class.
  */
 export default class ManualDocBuilder extends DocBuilder {
-  exec(writeFile, copyDir, readFile) {
+
+  exec({writeFile, copyDir, readFile}, {badgeFileNamePatterns=defaultManualRequirements}) {
 
     const manuals = this._tags.filter(tag => tag.kind === 'manual');
     const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
@@ -24,7 +35,7 @@ export default class ManualDocBuilder extends DocBuilder {
     {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);
-      const badge = this._writeBadge(manuals, writeFile);
+      const badge = this._writeBadge(manuals, writeFile, badgeFileNamePatterns);
       ice.load('content', this._buildManualCardIndex(manuals, manualIndex, badge), IceCap.MODE_WRITE);
       ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
       ice.text('title', 'Manual', IceCap.MODE_WRITE);
@@ -55,26 +66,17 @@ export default class ManualDocBuilder extends DocBuilder {
   }
 
   /**
-   * this is
+   * This creates a badge indicating the completeness of the manual.
    * @param {manual[]} manuals
    * @param {function(filePath:string, content:string)} writeFile
+   * @param badgeFileNamePatterns The patterns to look for when checking for documentation.
    * @returns {boolean}
    * @private
    */
-  _writeBadge(manuals, writeFile) {
-    const specialFileNamePatterns = [
-      '(overview.*)',
-      '(design.*)',
-      '(installation.*)|(install.*)',
-      '(usage.*)',
-      '(configuration.*)|(config.*)',
-      '(example.*)',
-      '(faq.*)',
-      '(changelog.*)'
-    ];
+  _writeBadge(manuals, writeFile, badgeFileNamePatterns) {
 
     let count = 0;
-    for (const pattern of specialFileNamePatterns) {
+    for (const pattern of badgeFileNamePatterns) {
       const regexp = new RegExp(pattern, 'i');
       for (const manual of manuals) {
         const fileName = path.parse(manual.name).name;
@@ -85,7 +87,9 @@ export default class ManualDocBuilder extends DocBuilder {
       }
     }
 
-    if (count !== specialFileNamePatterns.length) return false;
+    // TODO: instead of all-or-nothing, we could "grade" the documentation based
+    // on a percentage of matching file-name patterns.
+    if (count !== badgeFileNamePatterns.length) return false;
 
     let badge = this._readTemplate('image/manual-badge.svg');
     badge = badge.replace(/@value@/g, 'perfect');

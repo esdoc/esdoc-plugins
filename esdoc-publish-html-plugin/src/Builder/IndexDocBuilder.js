@@ -7,7 +7,7 @@ import {markdown} from './util.js';
  * Index output builder class.
  */
 export default class IndexDocBuilder extends DocBuilder {
-  exec(writeFile, copyDir) {
+  exec({writeFile, copyDir}, _) {
     const ice = this._buildLayoutDoc();
     const title = this._getTitle('Home');
     ice.load('content', this._buildIndexDoc());

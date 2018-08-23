@@ -6,32 +6,22 @@ import IceCap from 'ice-cap';
 import {shorten, parseExample, escapeURLHash} from './util.js';
 import DocResolver from './DocResolver.js';
 import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
+import Builder from './Builder';
 
 /**
- * Builder base class.
+ * Class for building docs.
  */
-export default class DocBuilder {
+export default class DocBuilder extends Builder {
   /**
    * create instance.
    * @param {String} template - template absolute path
    * @param {Taffy} data - doc object database.
    */
   constructor(template, data, tags) {
-    this._template = template;
-    this._data = data;
-    this._tags = tags;
+    super(template, data, tags);
     new DocResolver(this).resolve();
   }
 
-  /* eslint-disable no-unused-vars */
-  /**
-   * execute building output.
-   * @abstract
-   * @param {function(html: string, filePath: string)} writeFile - is called each manual.
-   * @param {function(src: string, dest: string)} copyDir - is called asset.
-   */
-  exec(writeFile, copyDir) {
-  }
 
   /**
    * find doc object.
@@ -131,47 +121,8 @@ export default class DocBuilder {
     }
   }
 
-  /**
-   * read html template.
-   * @param {string} fileName - template file name.
-   * @return {string} html of template.
-   * @protected
-   */
-  _readTemplate(fileName) {
-    const filePath = path.resolve(this._template, `./${fileName}`);
-    return fs.readFileSync(filePath, {encoding: 'utf-8'});
-  }
 
 
-  /**
-   * build common layout output.
-   * @return {IceCap} layout output.
-   * @private
-   */
-  _buildLayoutDoc() {
-    const ice = new IceCap(this._readTemplate('layout.html'), {autoClose: false});
-
-    const packageObj = NPMUtil.findPackage();
-    if (packageObj) {
-      ice.text('esdocVersion', `(${packageObj.version})`);
-    } else {
-      ice.drop('esdocVersion');
-    }
-
-    const existTest = this._tags.find(tag => tag.kind.indexOf('test') === 0);
-    ice.drop('testLink', !existTest);
-
-    const existManual = this._tags.find(tag => tag.kind.indexOf('manual') === 0);
-    ice.drop('manualHeaderLink', !existManual);
-
-    const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
-    if (manualIndex && manualIndex.globalIndex) {
-      ice.drop('manualHeaderLink');
-    }
-
-    ice.load('nav', this._buildNavDoc());
-    return ice;
-  }
 
   /**
    * build common navigation output.
@@ -501,33 +452,6 @@ export default class DocBuilder {
     });
 
     return ice;
-  }
-
-  /**
-   * get output html page title.
-   * @param {DocObject} doc - target doc object.
-   * @returns {string} page title.
-   * @private
-   */
-  _getTitle(doc = '') {
-    const name = doc.name || doc.toString();
-
-    if (name) {
-      return `${name}`;
-    } else {
-      return '';
-    }
-  }
-
-  /**
-   * get base url html page. it is used html base tag.
-   * @param {string} fileName - output file path.
-   * @returns {string} base url.
-   * @protected
-   */
-  _getBaseUrl(fileName) {
-    const baseUrl = '../'.repeat(fileName.split('/').length - 1);
-    return baseUrl;
   }
 
   /**
