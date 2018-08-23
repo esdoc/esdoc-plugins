@@ -20,7 +20,7 @@ const defaultManualRequirements = [
  */
 export default class ManualDocBuilder extends DocBuilder {
 
-  exec({writeFile, copyDir, readFile}, {badgeFileNamePatterns=defaultManualRequirements}) {
+  exec({writeFile, copyDir, readFile}) {
 
     const manuals = this._tags.filter(tag => tag.kind === 'manual');
     const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
@@ -32,6 +32,7 @@ export default class ManualDocBuilder extends DocBuilder {
     ice.autoDrop = false;
     ice.attr('rootContainer', 'class', ' manual-root');
 
+    const badgeFileNamePatterns = this._builderOptions.badgeFileNamePatterns || defaultManualRequirements;
     {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);

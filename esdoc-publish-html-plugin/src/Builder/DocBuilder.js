@@ -1,11 +1,9 @@
 /* eslint-disable max-lines */
-import fs from 'fs';
 import path from 'path';
 import escape from 'escape-html';
 import IceCap from 'ice-cap';
 import {shorten, parseExample, escapeURLHash} from './util.js';
 import DocResolver from './DocResolver.js';
-import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
 import Builder from './Builder';
 
 /**
@@ -16,9 +14,12 @@ export default class DocBuilder extends Builder {
    * create instance.
    * @param {String} template - template absolute path
    * @param {Taffy} data - doc object database.
+   * @param tags - Tag data.
+   * @param builderOptions {object} - options/data specific to the builder.
+   * @param globalOptions {object} - options/data available to each builder.
    */
-  constructor(template, data, tags) {
-    super(template, data, tags);
+  constructor(template, data, tags, builderOptions, globalOptions) {
+    super(template, data, tags, builderOpts, globalOpts);
     new DocResolver(this).resolve();
   }
 

@@ -7,7 +7,7 @@ import {escapeURLHash} from './util';
  * Identifier output builder class.
  */
 export default class IdentifiersDocBuilder extends DocBuilder {
-  exec({writeFile, copyDir}, _) {
+  exec({writeFile, copyDir}) {
     const ice = this._buildLayoutDoc();
     const title = this._getTitle('Reference');
     ice.load('content', this._buildIdentifierDoc());

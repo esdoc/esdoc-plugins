@@ -5,7 +5,7 @@ import DocBuilder from './DocBuilder.js';
  * File output html builder class.
  */
 export default class TestFileDocBuilder extends DocBuilder {
-  exec({writeFile, copyDir}, _) {
+  exec({writeFile, copyDir}) {
       const testDoc = this._find({kind: 'test'})[0];
       if (!testDoc) return;
 

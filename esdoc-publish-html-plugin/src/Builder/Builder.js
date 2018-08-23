@@ -8,16 +8,21 @@ import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
  * Builder base class.
  */
 export default class Builder {
+
     /**
      * Create builder base instance.
      * @param {String} template - template absolute path
      * @param {Taffy} data - doc object database.
      * @param tags -
+     * @param builderOptions {object} - options/data specific to the builder.
+     * @param globalOptions {object} - options/data available to each builder.
      */
-    constructor(template, data, tags) {
+    constructor(template, data, tags, builderOptions={}, globalOptions={}) {
         this._template = template;
         this._data = data;
         this._tags = tags;
+        this._builderOptions = builderOptions;
+        this._globalOptions = globalOptions;
     }
 
     /* eslint-disable no-unused-vars */
@@ -28,9 +33,8 @@ export default class Builder {
      * @param builderUtil.writeFile {function(html: string, filePath: string)} - to write files with.
      * @param builderUtil.copyDir {function(src: string, dest: string)} - to copy directories with.
      * @param builderUtil.readFile {function(filePath: string): string} - to read files with.
-     * @param builderOptions {object} - options/data specific to the builder.
      */
-    exec({writeFile, copyDir, readFile}, builderOptions) {
+    exec({writeFile, copyDir, readFile}) {
     }
 
     /**
@@ -99,16 +103,51 @@ export default class Builder {
     _buildPageHeader() {
         const ice = new IceCap(this._readTemplate('header.html'), {autoClose: false});
 
-        const existTest = this._tags.find(tag => tag.kind.indexOf('test') === 0);
-        ice.drop('testLink', !existTest);
+        let headerLinks = this._globalOptions.headerLinks;
 
-        const existManual = this._tags.find(tag => tag.kind.indexOf('manual') === 0);
-        ice.drop('manualHeaderLink', !existManual);
+        // If there is no headerLink configuration available, then use the old behaviour:
+        //  insert default headerLinks based on available data.
+        if (!headerLinks) {
 
-        const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
-        if (manualIndex && manualIndex.globalIndex) {
-            ice.drop('manualHeaderLink');
+            headerLinks.push({
+                text: "Home",
+                href: "./"
+            });
+
+            const existManual = this._tags.find(tag => tag.kind.indexOf('manual') === 0);
+            const manualIndex = this._tags.find(tag => tag.kind === 'manualIndex');
+            if (!(!existManual || (manualIndex && manualIndex.globalIndex))) {
+                headerLinks.push({
+                    text: "Manual",
+                    href: "manual/index.html",
+                    cssClass: 'header-manual-link'
+                });
+            }
+            headerLinks.push({
+                text: "Reference",
+                href: "identifiers.html",
+                cssClass: 'header-reference-link'
+            });
+            headerLinks.push({
+                text: "Source",
+                href: "source.html",
+                cssClass: 'header-source-link'
+            });
+
+            const existTest = this._tags.find(tag => tag.kind.indexOf('test') === 0);
+            if (existTest) headerLinks.push({
+                text: "Test",
+                href: "test.html",
+                cssClass: 'header-test-link'
+            });
         }
+
+        // Insert all headerLinks into the template
+        ice.loop('headerLink', headerLinks, (i, link, ice)=>{
+            ice.text('headerLinkInner', link.text);
+            ice.attr('headerLinkInner', 'href', link.href);
+            if (link.cssClass) ice.attr('headerLinkInner', 'class', link.cssClass);
+        });
 
         return ice;
     }

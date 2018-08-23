@@ -4,7 +4,7 @@ import DocBuilder from './DocBuilder.js';
  * Search index of identifier builder class.
  */
 export default class SearchIndexBuilder extends DocBuilder {
-  exec({writeFile, copyDir}, _) {
+  exec({writeFile, copyDir}) {
     const searchIndex = [];
     const docs = this._find({});
 

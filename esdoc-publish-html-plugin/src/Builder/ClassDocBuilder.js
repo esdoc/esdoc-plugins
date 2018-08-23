@@ -6,7 +6,7 @@ import {parseExample} from './util.js';
  * Class Output Builder class.
  */
 export default class ClassDocBuilder extends DocBuilder {
-  exec({writeFile}, _) {
+  exec({writeFile}) {
     const ice = this._buildLayoutDoc();
     ice.autoDrop = false;
     const docs = this._find({kind: ['class']});

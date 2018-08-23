@@ -31,19 +31,23 @@ export default class HtmlBasePlugin {
             "testFileDoc"
         ];
 
+        // helper method to remove boilerplate.
+        const builder = (clazz) => ((template, data, tags, builderOpts, globalOpts) =>
+            new clazz(template, data, tags, builderOpts, globalOpts));
+
         // Plugins can extend this Plugin and add custom builders.
         this.builders = {
-            indetifiersDoc: (template, data, tags) => new IdentifiersDocBuilder(template, data, tags),
-            indexDoc: (template, data, tags) => new IndexDocBuilder(template, data, tags),
-            classDoc: (template, data, tags) => new ClassDocBuilder(template, data, tags),
-            singleDoc: (template, data, tags) => new SingleDocBuilder(template, data, tags),
-            fileDoc: (template, data, tags) => new FileDocBuilder(template, data, tags),
-            staticFile: (template, data, tags) => new StaticFileBuilder(template, data, tags),
-            searchIndex: (template, data, tags) => new SearchIndexBuilder(template, data, tags),
-            sourceDoc: (template, data, tags) => new SourceDocBuilder(template, data, tags),
-            manual: (template, data, tags) => new ManualDocBuilder(template, data, tags),
-            testDoc: (template, data, tags) => new TestDocBuilder(template, data, tags),
-            testFileDoc: (template, data, tags) => new TestFileDocBuilder(template, data, tags)
+            indetifiersDoc: builder(IdentifiersDocBuilder),
+            indexDoc:       builder(IndexDocBuilder),
+            classDoc:       builder(ClassDocBuilder),
+            singleDoc:      builder(SingleDocBuilder),
+            fileDoc:        builder(FileDocBuilder),
+            staticFile:     builder(StaticFileBuilder),
+            searchIndex:    builder(SearchIndexBuilder),
+            sourceDoc:      builder(SourceDocBuilder),
+            manual:         builder(ManualDocBuilder),
+            testDoc:        builder(TestDocBuilder),
+            testFileDoc:    builder(TestFileDocBuilder)
         };
     }
 
@@ -66,7 +70,7 @@ export default class HtmlBasePlugin {
 
         //bad hack: for other plugin uses builder.
         DocBuilder.createDefaultBuilder = () => {
-            return new DocBuilder(this._template, data, tags);
+            return new DocBuilder(this._template, data, tags, null, null);
         };
 
         const builderUtil = {writeFile, copyDir, readFile};
@@ -86,11 +90,9 @@ export default class HtmlBasePlugin {
                 console.log(`Warning: esdoc-publish-html-plugin does not recognize a builder: ${builderName}.`)
             } else {
                 // Get a new instance of the builder.
-                const builder = builderCreator(this._template, data, tags);
-                // Run the builder, it will build using the util,
-                // and with the options as configured by the user
-                // (fallback to empty object, builder can document and set defaults in a destructured object param)
-                builder.exec(builderUtil, buildersOptions[builderName] || {});
+                const builder = builderCreator(this._template, data, tags, buildersOptions[builderName] || {});
+                // Run the builder, it will build using the util
+                builder.exec(builderUtil);
             }
         }
     }
