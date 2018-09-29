@@ -8,7 +8,7 @@ describe('TestExtendsBuiltin', ()=> {
     find(doc, '.self-detail [data-ice="extendsChain"]', (doc)=>{
       assert.includes(doc, null, 'Array → TestExtendsBuiltin');
       assert.includes(doc, 'a', 'Array');
-      assert.includes(doc, 'a', 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array', 'href');
+      assert.includes(doc, 'a', 'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array', 'href');
     });
   });
 });

@@ -1,192 +1,192 @@
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects
+// https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects
 
 // Value properties
 /**
- * @external {Infinity} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity
+ * @external {Infinity} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Infinity
  */
 
 /**
- * @external {NaN} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN
+ * @external {NaN} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/NaN
  */
 
 /**
- * @external {undefined} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined
+ * @external {undefined} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined
  */
 
 /**
- * @external {null} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null
+ * @external {null} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/null
  */
 
 // Fundamental objects
 /**
- * @external {Object} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
+ * @external {Object} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
  */
 /**
- * @external {object} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object
- */
-
-/**
- * @external {Function} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
- */
-/**
- * @external {function} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function
+ * @external {object} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
  */
 
 /**
- * @external {Boolean} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+ * @external {Function} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function
  */
 /**
- * @external {boolean} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean
- */
-
-/**
- * @external {Symbol} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+ * @external {function} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Function
  */
 
 /**
- * @external {Error} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
+ * @external {Boolean} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+ */
+/**
+ * @external {boolean} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
  */
 
 /**
- * @external {EvalError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError
+ * @external {Symbol} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol
  */
 
 /**
- * @external {InternalError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError
+ * @external {Error} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error
  */
 
 /**
- * @external {RangeError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError
+ * @external {EvalError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/EvalError
  */
 
 /**
- * @external {ReferenceError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
+ * @external {InternalError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/InternalError
  */
 
 /**
- * @external {SyntaxError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
+ * @external {RangeError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RangeError
  */
 
 /**
- * @external {TypeError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError
+ * @external {ReferenceError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError
  */
 
 /**
- * @external {URIError} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError
+ * @external {SyntaxError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError
+ */
+
+/**
+ * @external {TypeError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/TypeError
+ */
+
+/**
+ * @external {URIError} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/URIError
  */
 
 // Numbers and dates
 /**
- * @external {Number} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+ * @external {Number} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
  */
 /**
- * @external {number} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+ * @external {number} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
  */
 
 /**
- * @external {Date} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+ * @external {Date} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Date
  */
 
 // Text processing
 /**
- * @external {String} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+ * @external {String} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
  */
 /**
- * @external {string} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+ * @external {string} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
  */
 
 /**
- * @external {RegExp} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+ * @external {RegExp} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/RegExp
  */
 
 // Indexed collections
 /**
- * @external {Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+ * @external {Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
  */
 
 /**
- * @external {Int8Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array
+ * @external {Int8Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int8Array
  */
 /**
- * @external {Uint8Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
- */
-
-/**
- * @external {Uint8ClampedArray} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray
+ * @external {Uint8Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array
  */
 
 /**
- * @external {Int16Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array
+ * @external {Uint8ClampedArray} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray
  */
 
 /**
- * @external {Uint16Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array
+ * @external {Int16Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int16Array
  */
 
 /**
- * @external {Int32Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array
+ * @external {Uint16Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array
  */
 
 /**
- * @external {Uint32Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array
+ * @external {Int32Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Int32Array
  */
 
 /**
- * @external {Float32Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array
+ * @external {Uint32Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array
  */
 
 /**
- * @external {Float64Array} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array
+ * @external {Float32Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float32Array
+ */
+
+/**
+ * @external {Float64Array} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float64Array
  */
 
 // Keyed collections
 /**
- * @external {Map} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
+ * @external {Map} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Map
  */
 
 /**
- * @external {Set} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+ * @external {Set} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Set
  */
 
 /**
- * @external {WeakMap} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+ * @external {WeakMap} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
  */
 
 /**
- * @external {WeakSet} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
+ * @external {WeakSet} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
  */
 
 // Structured data
 /**
- * @external {ArrayBuffer} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
+ * @external {ArrayBuffer} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer
  */
 
 /**
- * @external {DataView} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView
+ * @external {DataView} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView
  */
 
 /**
- * @external {JSON} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON
+ * @external {JSON} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON
  */
 
 // Control abstraction objects
 /**
- * @external {Promise} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+ * @external {Promise} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
  */
 
 /**
- * @external {Generator} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator
+ * @external {Generator} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Generator
  */
 
 /**
- * @external {GeneratorFunction} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction
+ * @external {GeneratorFunction} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction
  */
 
 // Reflection
 /**
- * @external {Reflect} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+ * @external {Reflect} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Reflect
  */
 
 /**
- * @external {Proxy} https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+ * @external {Proxy} https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Proxy
  */

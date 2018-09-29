@@ -11,7 +11,7 @@ describe('TestTypeSpread', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {
       assert.includes(doc, null, 'method1(p1: ...number)');
       assert.multiIncludes(doc, '[data-ice="signature"] a', [
-        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number'
+        'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number'
       ], 'href');
     });
   });
@@ -20,7 +20,7 @@ describe('TestTypeSpread', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method2"]', '[data-ice="target"]', (doc)=> {
       assert.includes(doc, null, 'method2(config: Object)');
       assert.multiIncludes(doc, '[data-ice="signature"] a', [
-        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'
+        'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object'
       ], 'href');
     });
   });

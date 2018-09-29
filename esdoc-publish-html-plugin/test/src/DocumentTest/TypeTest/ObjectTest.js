@@ -11,7 +11,7 @@ describe('TestTypeObject', ()=> {
     findParent(doc, '[data-ice="summary"] [href$="#instance-method-method1"]', '[data-ice="target"]', (doc)=> {
       assert.includes(doc, null, 'method1(p1: Object)');
       assert.multiIncludes(doc, '[data-ice="signature"] a', [
-        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object'
+        'https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object'
       ], 'href');
     });
   });
