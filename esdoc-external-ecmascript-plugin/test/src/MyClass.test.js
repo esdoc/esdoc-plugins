@@ -8,7 +8,7 @@ describe('test external ecmascript results:', ()=>{
 
   it('has external ecmascript.', ()=>{
     const tag = tags.find(tag => tag.kind === 'external' && tag.name === 'number');
-    assert.equal(tag.externalLink, "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number");
+    assert.equal(tag.externalLink, "https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number");
   });
 
   it('removed external-ecmascript.js', ()=>{

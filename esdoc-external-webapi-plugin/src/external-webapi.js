@@ -1,27 +1,27 @@
-// https://developer.mozilla.org/en-US/docs/Web/API
+// https://developer.mozilla.org/docs/Web/API
 
 /**
- * @external {CanvasRenderingContext2D} https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
+ * @external {CanvasRenderingContext2D} https://developer.mozilla.org/docs/Web/API/CanvasRenderingContext2D
  */
 
 /**
- * @external {DocumentFragment} https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment
+ * @external {DocumentFragment} https://developer.mozilla.org/docs/Web/API/DocumentFragment
  */
 
 /**
- * @external {Element} https://developer.mozilla.org/en-US/docs/Web/API/Element
+ * @external {Element} https://developer.mozilla.org/docs/Web/API/Element
  */
 
 /**
- * @external {Event} https://developer.mozilla.org/en-US/docs/Web/API/Event
+ * @external {Event} https://developer.mozilla.org/docs/Web/API/Event
  */
 
 /**
- * @external {Node} https://developer.mozilla.org/en-US/docs/Web/API/Node
+ * @external {Node} https://developer.mozilla.org/docs/Web/API/Node
  */
 
 /**
- * @external {NodeList} https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+ * @external {NodeList} https://developer.mozilla.org/docs/Web/API/NodeList
  */
 
 /**
