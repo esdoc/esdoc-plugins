@@ -18,6 +18,7 @@ class Plugin {
     }
 
     this._logo = option.logo;
+    this._logoDimensions = option.logoDimensions || { width: '34px' };
     this._description = option.description || packageObj.description;
     this._title = option.title || packageObj.name;
     this._repository = option.repository || this._getRepositoryURL(packageObj);
@@ -51,7 +52,10 @@ class Plugin {
       const $el = $('header a[href="./"]');
       $el.text('');
       $el.css({display: 'flex', 'align-items': 'center'});
-      $el.append('<img src="./image/brand_logo' + path.extname(this._logo) + '" style="width:34px;">');
+
+      const $logo = $('<img src="./image/brand_logo' + path.extname(this._logo) + '">');
+      $logo.css(this._logoDimensions);
+      $logo.appendTo($el);
     }
 
     // title
