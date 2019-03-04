@@ -1,14 +1,35 @@
-import IceCap from 'ice-cap';
-import path from 'path';
-import {Buffer} from 'buffer';
-import cheerio from 'cheerio';
-import DocBuilder from './DocBuilder.js';
-import {markdown, escapeURLHash} from './util.js';
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _iceCap = require('ice-cap');
+
+var _iceCap2 = _interopRequireDefault(_iceCap);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _buffer = require('buffer');
+
+var _cheerio = require('cheerio');
+
+var _cheerio2 = _interopRequireDefault(_cheerio);
+
+var _DocBuilder = require('./DocBuilder.js');
+
+var _DocBuilder2 = _interopRequireDefault(_DocBuilder);
+
+var _util = require('./util.js');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Manual Output Builder class.
  */
-export default class ManualDocBuilder extends DocBuilder {
+class ManualDocBuilder extends _DocBuilder2.default {
   exec(writeFile, copyDir, readFile) {
 
     const manuals = this._tags.filter(tag => tag.kind === 'manual');
@@ -25,27 +46,27 @@ export default class ManualDocBuilder extends DocBuilder {
       const fileName = 'manual/index.html';
       const baseUrl = this._getBaseUrl(fileName);
       const badge = this._writeBadge(manuals, writeFile);
-      ice.load('content', this._buildManualCardIndex(manuals, manualIndex, badge), IceCap.MODE_WRITE);
-      ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
-      ice.text('title', 'Manual', IceCap.MODE_WRITE);
-      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+      ice.load('content', this._buildManualCardIndex(manuals, manualIndex, badge), _iceCap2.default.MODE_WRITE);
+      ice.load('nav', this._buildManualNav(manuals), _iceCap2.default.MODE_WRITE);
+      ice.text('title', 'Manual', _iceCap2.default.MODE_WRITE);
+      ice.attr('baseUrl', 'href', baseUrl, _iceCap2.default.MODE_WRITE);
       ice.attr('rootContainer', 'class', ' manual-index');
       writeFile(fileName, ice.html);
 
       if (manualIndex.globalIndex) {
-        ice.attr('baseUrl', 'href', './', IceCap.MODE_WRITE);
+        ice.attr('baseUrl', 'href', './', _iceCap2.default.MODE_WRITE);
         writeFile('index.html', ice.html);
       }
 
-      ice.attr('rootContainer', 'class', ' manual-index', IceCap.MODE_REMOVE);
+      ice.attr('rootContainer', 'class', ' manual-index', _iceCap2.default.MODE_REMOVE);
     }
 
     for (const manual of manuals) {
       const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
       const baseUrl = this._getBaseUrl(fileName);
-      ice.load('content', this._buildManual(manual), IceCap.MODE_WRITE);
-      ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
-      ice.attr('baseUrl', 'href', baseUrl, IceCap.MODE_WRITE);
+      ice.load('content', this._buildManual(manual), _iceCap2.default.MODE_WRITE);
+      ice.load('nav', this._buildManualNav(manuals), _iceCap2.default.MODE_WRITE);
+      ice.attr('baseUrl', 'href', baseUrl, _iceCap2.default.MODE_WRITE);
       writeFile(fileName, ice.html);
     }
 
@@ -62,22 +83,13 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _writeBadge(manuals, writeFile) {
-    const specialFileNamePatterns = [
-      '(overview.*)',
-      '(design.*)',
-      '(installation.*)|(install.*)',
-      '(usage.*)',
-      '(configuration.*)|(config.*)',
-      '(example.*)',
-      '(faq.*)',
-      '(changelog.*)'
-    ];
+    const specialFileNamePatterns = ['(overview.*)', '(design.*)', '(installation.*)|(install.*)', '(usage.*)', '(configuration.*)|(config.*)', '(example.*)', '(faq.*)', '(changelog.*)'];
 
     let count = 0;
     for (const pattern of specialFileNamePatterns) {
       const regexp = new RegExp(pattern, 'i');
       for (const manual of manuals) {
-        const fileName = path.parse(manual.name).name;
+        const fileName = _path2.default.parse(manual.name).name;
         if (fileName.match(regexp)) {
           count++;
           break;
@@ -102,27 +114,27 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _buildManualNav(manuals) {
-    const ice = new IceCap(this._readTemplate('manualIndex.html'));
+    const ice = new _iceCap2.default(this._readTemplate('manualIndex.html'));
 
-    ice.loop('manual', manuals, (i, manual, ice)=>{
+    ice.loop('manual', manuals, (i, manual, ice) => {
       const toc = [];
       const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
-      const html = markdown(manual.content);
-      const $root = cheerio.load(html).root();
+      const html = (0, _util.markdown)(manual.content);
+      const $root = _cheerio2.default.load(html).root();
       const h1Count = $root.find('h1').length;
 
-      $root.find('h1,h2,h3,h4,h5').each((i, el)=>{
-        const $el = cheerio(el);
+      $root.find('h1,h2,h3,h4,h5').each((i, el) => {
+        const $el = (0, _cheerio2.default)(el);
         const label = $el.text();
         const indent = `indent-${el.tagName.toLowerCase()}`;
 
         let link = `${fileName}#${$el.attr('id')}`;
         if (el.tagName.toLowerCase() === 'h1' && h1Count === 1) link = fileName;
 
-        toc.push({label, link, indent});
+        toc.push({ label, link, indent });
       });
 
-      ice.loop('manualNav', toc, (i, tocItem, ice)=>{
+      ice.loop('manualNav', toc, (i, tocItem, ice) => {
         ice.attr('manualNav', 'class', tocItem.indent);
         ice.attr('manualNav', 'data-link', tocItem.link.split('#')[0]);
         ice.text('link', tocItem.label);
@@ -140,22 +152,22 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _buildManual(manual) {
-    const html = markdown(manual.content);
-    const ice = new IceCap(this._readTemplate('manual.html'));
+    const html = (0, _util.markdown)(manual.content);
+    const ice = new _iceCap2.default(this._readTemplate('manual.html'));
     ice.load('content', html);
 
     // convert relative src to base url relative src.
-    const $root = cheerio.load(ice.html).root();
-    $root.find('img').each((i, el)=>{
-      const $el = cheerio(el);
+    const $root = _cheerio2.default.load(ice.html).root();
+    $root.find('img').each((i, el) => {
+      const $el = (0, _cheerio2.default)(el);
       const src = $el.attr('src');
       if (!src) return;
       if (src.match(/^http[s]?:/)) return;
       if (src.charAt(0) === '/') return;
       $el.attr('src', `./manual/${src}`);
     });
-    $root.find('a').each((i, el)=>{
-      const $el = cheerio(el);
+    $root.find('a').each((i, el) => {
+      const $el = (0, _cheerio2.default)(el);
       const href = $el.attr('href');
       if (!href) return;
       if (href.match(/^http[s]?:/)) return;
@@ -178,11 +190,11 @@ export default class ManualDocBuilder extends DocBuilder {
     for (const manual of manuals) {
       const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
       const html = this._buildManual(manual);
-      const $root = cheerio.load(html).root();
+      const $root = _cheerio2.default.load(html).root();
       const h1Count = $root.find('h1').length;
 
-      $root.find('h1').each((i, el)=>{
-        const $el = cheerio(el);
+      $root.find('h1').each((i, el) => {
+        const $el = (0, _cheerio2.default)(el);
         const label = $el.text();
         const link = h1Count === 1 ? fileName : `${fileName}#${$el.attr('id')}`;
         let card = `<h1>${label}</h1>`;
@@ -192,22 +204,22 @@ export default class ManualDocBuilder extends DocBuilder {
           const next = nextAll.get(i);
           const tagName = next.tagName.toLowerCase();
           if (tagName === 'h1') return;
-          const $next = cheerio(next);
+          const $next = (0, _cheerio2.default)(next);
           card += `<${tagName}>${$next.html()}</${tagName}>`;
         }
 
-        cards.push({label, link, card});
+        cards.push({ label, link, card });
       });
     }
 
-    const ice = new IceCap(this._readTemplate('manualCardIndex.html'));
-    ice.loop('cards', cards, (i, card, ice)=>{
+    const ice = new _iceCap2.default(this._readTemplate('manualCardIndex.html'));
+    ice.loop('cards', cards, (i, card, ice) => {
       ice.attr('link', 'href', card.link);
       ice.load('card', card.card);
     });
 
     if (manualIndex && manualIndex.content) {
-      const userIndex = markdown(manualIndex.content);
+      const userIndex = (0, _util.markdown)(manualIndex.content);
       ice.load('manualUserIndex', userIndex);
     } else {
       ice.drop('manualUserIndex', true);
@@ -226,8 +238,9 @@ export default class ManualDocBuilder extends DocBuilder {
    * @private
    */
   _getManualOutputFileName(filePath, destPrefix) {
-    const fileName = path.parse(filePath).name;
-    const prefixedPath = destPrefix ? path.join(destPrefix, fileName) : fileName
+    const fileName = _path2.default.parse(filePath).name;
+    const prefixedPath = destPrefix ? _path2.default.join(destPrefix, fileName) : fileName;
     return `manual/${prefixedPath}.html`;
   }
 }
+exports.default = ManualDocBuilder;

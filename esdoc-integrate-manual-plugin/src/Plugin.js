@@ -63,14 +63,27 @@ class Plugin {
     }
 
     for (const filePath of manual.files) {
-      results.push({
-        kind: 'manual',
-        longname: path.resolve(filePath),
-        name: filePath,
-        content: fs.readFileSync(filePath).toString(),
-        static: true,
-        access: 'public'
-      });
+      if (typeof filePath === "string") {
+        results.push({
+          kind: 'manual',
+          longname: path.resolve(filePath),
+          name: filePath,
+          content: fs.readFileSync(filePath).toString(),
+          static: true,
+          access: 'public'
+        });
+      } else if (typeof filePath === "object") {
+        const {src, destPrefix} = filePath;
+        results.push({
+          kind: 'manual',
+          longname: path.resolve(src),
+          name: src,
+          destPrefix: destPrefix,
+          content: fs.readFileSync(src).toString(),
+          static: true,
+          access: 'public'
+        });
+      }
     }
 
     return results;

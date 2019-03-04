@@ -12,7 +12,7 @@ exports.find = function(key, ...values) {
   for (const value of values) {
     const result = global.docs.find(doc => {
       if (typeof value === 'string') return doc[key] === value;
-      if (value instanceof RegExp) return doc[key].match(value);
+      if (value instanceof RegExp) return doc[key] && doc[key].match(value);
     });
 
     results.push(result);

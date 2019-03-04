@@ -95,6 +95,14 @@ describe('test manual', ()=>{
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/CHANGELOG.html', 'href');
           assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(2) a', 'manual/CHANGELOG.html#0-0-1', 'href');
         });
+        // dest1/destPrefixChange.md
+        find(doc, '[data-ice="manual"]:nth-of-type(12)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/dest1/destPrefixChange.html', 'href');
+        });
+        // dest2/destPrefixChange.md
+        find(doc, '[data-ice="manual"]:nth-of-type(13)', (doc)=>{
+          assert.includes(doc, '[data-ice="manualNav"]:nth-of-type(1) a', 'manual/dest2/destPrefixChange.html', 'href');
+        });
       });
     });
   });
@@ -163,9 +171,21 @@ describe('test manual', ()=>{
       });
     });
 
-    it('has changelog heading tags', ()=>{
-      find(doc, '.manual-card-wrap:nth-of-type(11)', (doc)=>{
+    it('has changelog heading tags', () => {
+      find(doc, '.manual-card-wrap:nth-of-type(11)', (doc) => {
         assert.includes(doc, '.manual-card > a', 'manual/CHANGELOG.html', 'href');
+      });
+    });
+
+    it('has dest1/destinationPrefixChange heading tags', () => {
+      find(doc, '.manual-card-wrap:nth-of-type(12)', (doc) => {
+        assert.includes(doc, '.manual-card > a', 'manual/dest1/destPrefixChange.html', 'href');
+      });
+    });
+
+    it('has dest2/destinationPrefixChange heading tags', () => {
+      find(doc, '.manual-card-wrap:nth-of-type(13)', (doc) => {
+        assert.includes(doc, '.manual-card > a', 'manual/dest2/destPrefixChange.html', 'href');
       });
     });
   });
@@ -218,6 +238,18 @@ describe('test manual', ()=>{
       const doc = readDoc('manual/CHANGELOG.html');
       assert.includes(doc, '.github-markdown h1', 'Changelog');
       assert.includes(doc, '.github-markdown[data-ice="content"] h2:nth-of-type(1)', '0.0.1');
+    });
+
+    it('has dest1/destPrefixChange', () => {
+      const doc = readDoc('manual/dest1/destPrefixChange.html');
+      assert.includes(doc, '.github-markdown h1', 'Destination Prefix');
+      assert.includes(doc, '.github-markdown[data-ice="content"]', 'this file is generated in different prefix locations');
+    });
+
+    it('has dest2/destPrefixChange', () => {
+      const doc = readDoc('manual/dest2/destPrefixChange.html');
+      assert.includes(doc, '.github-markdown h1', 'Destination Prefix');
+      assert.includes(doc, '.github-markdown[data-ice="content"]', 'this file is generated in different prefix locations');
     });
   });
 });

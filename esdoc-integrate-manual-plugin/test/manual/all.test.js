@@ -63,4 +63,12 @@ describe('test/manual:', ()=>{
     const doc = find('longname', /CHANGELOG.md$/);
     assert.equal(doc.content, file(doc.name));
   });
+
+  it('has manual file(s) with destination prefix', () => {
+    const [doc1, doc2] = find('destPrefix', /dest1/, /dest2/);
+    assert.equal(doc1.content, file(doc1.name));
+    assert.equal(doc1.destPrefix, 'dest1');
+    assert.equal(doc2.content, file(doc2.name));
+    assert.equal(doc2.destPrefix, 'dest2');
+  });
 });
