@@ -25,7 +25,15 @@
         "./test/fixture/manual/example.md",
         "./test/fixture/manual/advanced.md",
         "./test/fixture/manual/faq.md",
-        "./test/fixture/CHANGELOG.md"
+        "./test/fixture/CHANGELOG.md",
+        {
+          "src": "./test/fixture/manual/destPrefixChange.md",
+          "destPrefix": "dest1"
+        },
+        {
+          "src": "./test/fixture/manual/destPrefixChange.md",
+          "destPrefix": "dest2"
+        }
       ]
     }},
     {"name": "esdoc-integrate-test-plugin", "option": {

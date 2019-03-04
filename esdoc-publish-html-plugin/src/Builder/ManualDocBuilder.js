@@ -41,7 +41,7 @@ export default class ManualDocBuilder extends DocBuilder {
     }
 
     for (const manual of manuals) {
-      const fileName = this._getManualOutputFileName(manual.name);
+      const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
       const baseUrl = this._getBaseUrl(fileName);
       ice.load('content', this._buildManual(manual), IceCap.MODE_WRITE);
       ice.load('nav', this._buildManualNav(manuals), IceCap.MODE_WRITE);
@@ -106,7 +106,7 @@ export default class ManualDocBuilder extends DocBuilder {
 
     ice.loop('manual', manuals, (i, manual, ice)=>{
       const toc = [];
-      const fileName = this._getManualOutputFileName(manual.name);
+      const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
       const html = markdown(manual.content);
       const $root = cheerio.load(html).root();
       const h1Count = $root.find('h1').length;
@@ -176,7 +176,7 @@ export default class ManualDocBuilder extends DocBuilder {
   _buildManualCardIndex(manuals, manualIndex, badgeFlag) {
     const cards = [];
     for (const manual of manuals) {
-      const fileName = this._getManualOutputFileName(manual.name);
+      const fileName = this._getManualOutputFileName(manual.name, manual.destPrefix);
       const html = this._buildManual(manual);
       const $root = cheerio.load(html).root();
       const h1Count = $root.find('h1').length;
@@ -225,8 +225,9 @@ export default class ManualDocBuilder extends DocBuilder {
    * @returns {string} file name.
    * @private
    */
-  _getManualOutputFileName(filePath) {
+  _getManualOutputFileName(filePath, destPrefix) {
     const fileName = path.parse(filePath).name;
-    return `manual/${fileName}.html`;
+    const prefixedPath = destPrefix ? path.join(destPrefix, fileName) : fileName
+    return `manual/${prefixedPath}.html`;
   }
 }
