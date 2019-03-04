@@ -20,7 +20,15 @@
           "./test/manual/example.md",
           "./test/manual/advanced.md",
           "./test/manual/faq.md",
-          "./test/CHANGELOG.md"
+          "./test/CHANGELOG.md",
+          {
+            "src": "./test/manual/destPrefixChange.md",
+            "destPrefix": "dest1"
+          },
+          {
+            "src": "./test/manual/destPrefixChange.md",
+            "destPrefix": "dest2"
+          }
         ]
       }
     }
