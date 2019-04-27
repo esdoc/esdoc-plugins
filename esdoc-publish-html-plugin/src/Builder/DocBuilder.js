@@ -5,7 +5,7 @@ import escape from 'escape-html';
 import IceCap from 'ice-cap';
 import {shorten, parseExample, escapeURLHash} from './util.js';
 import DocResolver from './DocResolver.js';
-import NPMUtil from 'esdoc/out/src/Util/NPMUtil.js';
+import NPMUtil from '@sebastianwessel/esdoc/out/src/Util/NPMUtil.js';
 
 /**
  * Builder base class.

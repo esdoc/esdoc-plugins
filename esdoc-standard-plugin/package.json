@@ -1,6 +1,6 @@
 {
   "name": "@sebastianwessel/esdoc-standard-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A standard plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,20 +10,20 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "esdoc-lint-plugin": "@sebastianwessel/esdoc-plugins-esdoc-lint-plugin",
-    "esdoc-coverage-plugin": "@sebastianwessel/esdoc-plugins-esdoc-coverage-plugin",
-    "esdoc-accessor-plugin": "@sebastianwessel/esdoc-plugins-esdoc-accessor-plugin",
-    "esdoc-external-ecmascript-plugin": "@sebastianwessel/esdoc-plugins-esdoc-external-ecmascript-plugin",
-    "esdoc-brand-plugin": "@sebastianwessel/esdoc-plugins-esdoc-brand-plugin",
-    "esdoc-undocumented-identifier-plugin": "@sebastianwessel/esdoc-undocumented-identifier-plugin",
-    "esdoc-unexported-identifier-plugin": "@sebastianwessel/esdoc-unexported-identifier-plugin",
-    "esdoc-publish-html-plugin": "@sebastianwessel/esdoc-publish-html-plugin",
-    "esdoc-type-inference-plugin": "@sebastianwessel/esdoc-type-inference-plugin",
-    "esdoc-integrate-manual-plugin": "@sebastianwessel/esdoc-integrate-manual-plugin",
-    "esdoc-integrate-test-plugin": "@sebastianwessel/esdoc-integrate-test-plugin"
+    "@sebastianwessel/esdoc-lint-plugin": "latest",
+    "@sebastianwessel/esdoc-coverage-plugin": "latest",
+    "@sebastianwessel/esdoc-accessor-plugin": "latest",
+    "@sebastianwessel/esdoc-external-ecmascript-plugin": "latest",
+    "@sebastianwessel/esdoc-brand-plugin": "latest",
+    "@sebastianwessel/esdoc-undocumented-identifier-plugin": "latest",
+    "@sebastianwessel/esdoc-unexported-identifier-plugin": "latest",
+    "@sebastianwessel/esdoc-publish-html-plugin": "latest",
+    "@sebastianwessel/esdoc-type-inference-plugin": "latest",
+    "@sebastianwessel/esdoc-integrate-manual-plugin": "latest",
+    "@sebastianwessel/esdoc-integrate-test-plugin": "latest"
   },
   "devDependencies": {
-    "esdoc": "@sebastianwessel/esdoc",
+    "@sebastianwessel/esdoc": "latest",
     "mocha": "6.1.4"
   },
   "engines": {

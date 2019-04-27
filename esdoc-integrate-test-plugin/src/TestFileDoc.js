@@ -1,5 +1,5 @@
-// hack: depends on esdoc internal class
-const FileDoc = require('esdoc/out/src/Doc/FileDoc').default;
+// hack: depends on @sebastianwessel/esdoc internal class
+const FileDoc = require('@sebastianwessel/esdoc/out/src/Doc/FileDoc').default;
 
 /**
  * Doc class for test code file.

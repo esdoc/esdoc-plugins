@@ -1,6 +1,6 @@
 {
   "name": "@sebastianwessel/esdoc-react-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A React plugin for ESDoc [PoC]",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -13,8 +13,8 @@
     "cheerio": "1.0.0-rc.1"
   },
   "devDependencies": {
-    "esdoc": "@sebastianwessel/esdoc",
-    "esdoc-standard-plugin": "@sebastianwessel/esdoc-plugins",
+    "@sebastianwessel/esdoc": "latest",
+    "@sebastianwessel/esdoc-standard-plugin": "latest",
     "mocha": "6.1.4"
   },
   "engines": {

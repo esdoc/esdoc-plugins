@@ -1,5 +1,5 @@
-const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').default;
-const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
+const ASTNodeContainer = require('@sebastianwessel/esdoc/out/src/Util/ASTNodeContainer.js').default;
+const ASTUtil = require('@sebastianwessel/esdoc/out/src/Util/ASTUtil').default;
 
 class Plugin {
   onHandleDocs(ev) {

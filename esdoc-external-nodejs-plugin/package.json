@@ -1,6 +1,6 @@
 {
   "name": "@sebastianwessel/esdoc-external-nodejs-plugin",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A external Node.js plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -13,7 +13,7 @@
     "fs-extra": "7.0.1"
   },
   "devDependencies": {
-    "esdoc": "@sebastianwessel/esdoc",
+    "@sebastianwessel/esdoc": "latest",
     "mocha": "6.1.4"
   },
   "engines": {
