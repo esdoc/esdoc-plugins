@@ -9,7 +9,7 @@ class Plugin {
     if (option.all || option.functionBind) plugins.push('functionBind');
     if (option.all || option.functionSent) plugins.push('functionSent');
     if (option.all || option.asyncGenerators) plugins.push('asyncGenerators');
-    if (option.all || option.decorators) plugins.push('decorators');
+    if (option.all || option.decorators) plugins.push(['decorators', { decoratorsBeforeExport: false }]);
     if (option.all || option.exportExtensions) plugins.push('exportExtensions');
     if (option.all || option.dynamicImport) plugins.push('dynamicImport');
   }
