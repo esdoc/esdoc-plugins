@@ -29,6 +29,9 @@ class Plugin {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if (!doc.params) doc.params = this._inferenceParam(node);
       if (!doc.return) doc.return = this._inferenceReturn(node);
+      if(node.accessibility){
+        doc.access=node.accessibility
+      }
     }
   }
 
@@ -39,6 +42,9 @@ class Plugin {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if (!doc.params) doc.params = this._inferenceParam(node);
       if (!doc.return) doc.return = this._inferenceReturn(node);
+      if(node.accessibility){
+        doc.access=node.accessibility
+      }
     }
   }
 
@@ -47,26 +53,43 @@ class Plugin {
 
     for (const doc of docs) {
       const node = ASTNodeContainer.getNode(doc.__docId__);
-      if (!doc.type) doc.type = this._inferenceReturn(node);
+      if (!doc.type) {
+        if(node.returnType){
+          doc.type = {types:[this.convertType(node.returnType.typeAnnotation)]};
+        }else doc.type = this._inferenceReturn(node);
+        
+      }
     }
   }
 
   _inferenceSetter() {
-    // todo: infer setter is not working. please implement inference.
-    // const docs = this._docs.filter((doc) => doc.kind === 'set');
-    //
-    // for (const doc of docs) {
-    //   const node = ASTNodeContainer.getNode(doc.__docId__);
-    //   if (!doc.type) doc.type = this._inferenceType(node.right);
-    // }
+    const docs = this._docs.filter((doc) => doc.kind === 'set');
+
+    for (const doc of docs) {
+      const node = ASTNodeContainer.getNode(doc.__docId__);
+      
+      if (!doc.type) {
+
+        if(node.params && node.params.length>0){
+          if(node.params[0].typeAnnotation){
+            doc.type = {types:[this.convertType(node.params[0].typeAnnotation.typeAnnotation)]};
+          }
+        }
+      }
+    }
   }
 
   _inferenceMember() {
     const docs = this._docs.filter((doc) => doc.kind === 'member');
-
     for (const doc of docs) {
       const node = ASTNodeContainer.getNode(doc.__docId__);
+      if(node.typeAnnotation){
+        doc.type = {types:[this.convertType(node.typeAnnotation.typeAnnotation)]}
+      }
       if (!doc.type) doc.type = this._inferenceType(node.right);
+      if(node.accessibility){
+        doc.access=node.accessibility
+      }
     }
   }
 
@@ -233,7 +256,6 @@ class Plugin {
           } else if (param.left.type === 'ArrayPattern') {
             result.name = `arrayPattern${i === 0 ? '' : i}`;
           }
-
           result.optional = true;
 
           if(param.right.type==='NullLiteral'){
@@ -427,7 +449,7 @@ class Plugin {
       return {types: [`{${types.join(', ')}}`]};
     }
 
-    return {types: ['*2']};
+    return {types: ['*']};
   }
 }
 
