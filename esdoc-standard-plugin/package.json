@@ -1,6 +1,6 @@
 {
   "name": "esdoc-standard-plugin",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A standard plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,21 +10,21 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "esdoc-lint-plugin": "^1.0.0",
-    "esdoc-coverage-plugin": "^1.0.0",
-    "esdoc-accessor-plugin": "^1.0.0",
-    "esdoc-external-ecmascript-plugin": "^1.0.0",
-    "esdoc-brand-plugin": "^1.0.0",
-    "esdoc-undocumented-identifier-plugin": "^1.0.0",
-    "esdoc-unexported-identifier-plugin": "^1.0.0",
-    "esdoc-publish-html-plugin": "^1.0.0",
-    "esdoc-type-inference-plugin": "^1.0.0",
-    "esdoc-integrate-manual-plugin": "^1.0.0",
-    "esdoc-integrate-test-plugin": "^1.0.0"
+    "esdoc-lint-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-coverage-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-accessor-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-external-ecmascript-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-brand-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-undocumented-identifier-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-unexported-identifier-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-publish-html-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-type-inference-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-integrate-manual-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc-integrate-test-plugin": "sebastianwessel/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "latest",
-    "mocha": "2.5.3"
+    "esdoc": "sebastianwessel/esdoc",
+    "mocha": "6.1.4"
   },
   "engines": {
     "node": ">= 6.0.0"

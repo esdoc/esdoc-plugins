@@ -1,6 +1,6 @@
 {
   "name": "esdoc-brand-plugin",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A brand plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
@@ -10,11 +10,11 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "0.22.0"
+    "cheerio": "1.0.0-rc.3"
   },
   "devDependencies": {
-    "esdoc": "latest",
-    "mocha": "2.5.3"
+    "esdoc": "sebastianwessel/esdoc",
+    "mocha": "6.1.4"
   },
   "engines": {
     "node": ">= 6.0.0"
