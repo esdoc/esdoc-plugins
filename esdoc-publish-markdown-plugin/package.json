@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-publish-markdown-plugin",
+  "name": "@sebastianwessel/esdoc-publish-markdown-plugin",
   "version": "2.0.0",
   "description": "A publish markdown plugin for ESDoc [PoC]",
   "author": "h13i32maru",

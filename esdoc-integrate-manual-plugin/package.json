@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-integrate-manual-plugin",
+  "name": "@sebastianwessel/esdoc-integrate-manual-plugin",
   "version": "2.0.0",
   "description": "A integrate manual plugin for ESDoc",
   "author": "h13i32maru",

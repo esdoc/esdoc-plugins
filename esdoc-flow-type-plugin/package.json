@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-flow-type-plugin",
+  "name": "@sebastianwessel/esdoc-flow-type-plugin",
   "version": "2.0.0",
   "description": "A flow type plugin for ESDoc [PoC]",
   "author": "h13i32maru",

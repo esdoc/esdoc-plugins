@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-external-ecmascript-plugin",
+  "name": "@sebastianwessel/esdoc-external-ecmascript-plugin",
   "version": "2.0.0",
   "description": "A external ECMAScript plugin for ESDoc",
   "author": "h13i32maru",

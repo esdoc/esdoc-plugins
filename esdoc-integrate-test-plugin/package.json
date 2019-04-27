@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-integrate-test-plugin",
+  "name": "@sebastianwessel/esdoc-integrate-test-plugin",
   "version": "2.0.0",
   "description": "A integrate test plugin for ESDoc",
   "author": "h13i32maru",

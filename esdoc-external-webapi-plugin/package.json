@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-external-webapi-plugin",
+  "name": "@sebastianwessel/esdoc-external-webapi-plugin",
   "version": "2.0.0",
   "description": "A external Web API plugin for ESDoc",
   "author": "h13i32maru",

@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-ecmascript-proposal-plugin",
+  "name": "@sebastianwessel/esdoc-ecmascript-proposal-plugin",
   "version": "2.0.0",
   "description": "A ECMAScript proposal plugin for ESDoc",
   "author": "h13i32maru",

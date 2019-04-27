@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-external-nodejs-plugin",
+  "name": "@sebastianwessel/esdoc-external-nodejs-plugin",
   "version": "2.0.0",
   "description": "A external Node.js plugin for ESDoc",
   "author": "h13i32maru",

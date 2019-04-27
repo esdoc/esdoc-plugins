@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-standard-plugin",
+  "name": "@sebastianwessel/esdoc-standard-plugin",
   "version": "2.0.0",
   "description": "A standard plugin for ESDoc",
   "author": "h13i32maru",

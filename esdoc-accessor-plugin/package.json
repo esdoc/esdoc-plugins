@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-accessor-plugin",
+  "name": "@sebastianwessel/esdoc-accessor-plugin",
   "version": "2.0.0",
   "description": "A accessor plugin for ESDoc",
   "author": "h13i32maru",

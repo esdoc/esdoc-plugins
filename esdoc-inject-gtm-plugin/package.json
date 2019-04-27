@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-inject-gtm-plugin",
+  "name": "@sebastianwessel/esdoc-inject-gtm-plugin",
   "description": "A inject google-tag-manager plugin for ESDoc",
   "version": "2.0.0",
   "author": "9renpoto",

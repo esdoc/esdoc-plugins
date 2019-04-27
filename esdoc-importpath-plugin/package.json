@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-importpath-plugin",
+  "name": "@sebastianwessel/esdoc-importpath-plugin",
   "version": "2.0.0",
   "description": "A import path plugin for ESDoc",
   "author": "h13i32maru",

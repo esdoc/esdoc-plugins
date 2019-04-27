@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-brand-plugin",
+  "name": "@sebastianwessel/esdoc-brand-plugin",
   "version": "2.0.0",
   "description": "A brand plugin for ESDoc",
   "author": "h13i32maru",

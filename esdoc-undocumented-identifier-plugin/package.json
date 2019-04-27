@@ -1,5 +1,5 @@
 {
-  "name": "esdoc-undocumented-identifier-plugin",
+  "name": "@sebastianwessel/esdoc-undocumented-identifier-plugin",
   "version": "2.0.0",
   "description": "A undocumented identifier plugin for ESDoc",
   "author": "h13i32maru",
