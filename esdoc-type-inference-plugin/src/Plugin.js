@@ -76,6 +76,8 @@ class Plugin {
     for (const doc of docs) {
       if (doc.type) continue;
 
+      
+
       const node = ASTNodeContainer.getNode(doc.__docId__);
 
       let className;
@@ -137,23 +139,95 @@ class Plugin {
     }
   }
 
+  handleTypeAnnotation(typeAnnotation) {
+    const result = []
+    if(!typeAnnotation) return result
+    if(typeAnnotation.type==='TSUnionType'){
+      typeAnnotation.types.forEach((type)=>{
+        const t = this.convertType(type)
+        if(t){
+          result.push(t)
+        }
+        
+      })
+    }else if(typeAnnotation.type==='TSTypeReference'){
+      const t = this.convertType(typeAnnotation)
+      if(t){
+        result.push(t)
+      }
+    }
+    return result
+  }
+
+  convertType(type){
+    switch(type.type){
+      case 'TSAnyKeyword':
+        return '*'
+        break
+      case 'TSNumberKeyword':
+        return 'number'
+        break
+      case 'TSStringKeyword':
+        return 'string'
+        break
+      case 'TSNullKeyword':
+        return 'null'
+        break
+      case 'TSObjectKeyword':
+        return 'object'
+        break
+      case 'SSymbolKeyword':
+        return 'symbol'
+        break
+      case 'TSTypeReference':
+        return type.typeName.name
+        break
+      case 'TSBooleanKeyword':
+        return 'boolean'
+        break
+      case 'TSNullKeyword':
+        return 'null'
+        break
+      case 'TSUndefinedKeyword':
+        return 'undefined'
+        break
+      case 'TSVoidKeyword':
+        return 'void'
+        break
+      case 'TSUnionType':
+      return 'union'
+        break
+      default:
+      return null
+    }
+  }
+
   _inferenceParam(node) {
     const params = node.params;
     const _params = [];
     for (let i = 0; i < params.length; i++) {
       const param = params[i];
-      const result = {};
+      const result = {
+        types:[]
+      };
 
       switch (param.type) {
         case 'Identifier':
           // e.g. func(a){}
           result.name = param.name;
-          result.types = ['*'];
+          if(param.typeAnnotation){
+            result.types = this.handleTypeAnnotation(param.typeAnnotation.typeAnnotation)
+          }else {
+            result.types.push('*')
+          }
           break;
 
         case 'AssignmentPattern':
           if (param.left.type === 'Identifier') {
             result.name = param.left.name;
+            if(param.left.typeAnnotation){
+              result.types = this.handleTypeAnnotation(param.left.typeAnnotation.typeAnnotation)
+            }
           } else if (param.left.type === 'ObjectPattern') {
             result.name = `objectPattern${i === 0 ? '' : i}`;
           } else if (param.left.type === 'ArrayPattern') {
@@ -162,14 +236,17 @@ class Plugin {
 
           result.optional = true;
 
-          if (param.right.type.includes('Literal')) {
+          if(param.right.type==='NullLiteral'){
+            result.defaultRaw = null;
+            result.defaultValue = `${result.defaultRaw}`;
+          }else if (param.right.type.includes('Literal')) {
             // e.g. func(a = 10){}
-            result.types = param.right.value === null ? ['*'] : [typeof param.right.value];
+            result.types.push(param.right.value === null ? '*' : typeof param.right.value);
             result.defaultRaw = param.right.value;
             result.defaultValue = `${result.defaultRaw}`;
           } else if (param.right.type === 'ArrayExpression') {
             // e.g. func(a = [123]){}
-            result.types = param.right.elements.length ? [`${typeof param.right.elements[0].value}[]`] : ['*[]'];
+            result.types.push(param.right.elements.length ? `${typeof param.right.elements[0].value}[]` : '*[]');
             result.defaultRaw = param.right.elements.map((elm)=> elm.value);
             result.defaultValue = `${JSON.stringify(result.defaultRaw)}`;
           } else if (param.right.type === 'ObjectExpression') {
@@ -350,7 +427,7 @@ class Plugin {
       return {types: [`{${types.join(', ')}}`]};
     }
 
-    return {types: ['*']};
+    return {types: ['*2']};
   }
 }
 
