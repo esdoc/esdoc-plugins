@@ -13,7 +13,7 @@
     "cheerio": "1.0.0-rc.3"
   },
   "devDependencies": {
-    "esdoc": "sebastianwessel/esdoc",
+    "esdoc": "@sebastianwessel/esdoc",
     "mocha": "6.1.4"
   },
   "engines": {

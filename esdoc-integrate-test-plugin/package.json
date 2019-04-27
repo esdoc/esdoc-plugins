@@ -10,7 +10,7 @@
     "url": "https://github.com/esdoc/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "sebastianwessel/esdoc",
+    "esdoc": "@sebastianwessel/esdoc",
     "mocha": "6.1.4"
   },
   "engines": {

@@ -13,8 +13,8 @@
     "cheerio": "1.0.0-rc.1"
   },
   "devDependencies": {
-    "esdoc": "sebastianwessel/esdoc",
-    "esdoc-standard-plugin": "sebastianwessel/esdoc-plugins",
+    "esdoc": "@sebastianwessel/esdoc",
+    "esdoc-standard-plugin": "@sebastianwessel/esdoc-plugins",
     "mocha": "6.1.4"
   },
   "engines": {
