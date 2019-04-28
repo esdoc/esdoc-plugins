@@ -28,7 +28,18 @@ class Plugin {
     for (const doc of docs) {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if (!doc.params) doc.params = this._inferenceParam(node);
-      if (!doc.return) doc.return = this._inferenceReturn(node);
+      if (!doc.type) {
+        if(node.returnType){
+          const types = this.convertType(node.returnType.typeAnnotation)
+          if(Array.isArray(types)){
+            doc.type = {types};
+          }else {
+            doc.type = {types:[types]};
+          }
+          
+        }else doc.type = this._inferenceReturn(node);
+        
+      }
       if(node.accessibility){
         doc.access=node.accessibility
       }
@@ -41,7 +52,18 @@ class Plugin {
     for (const doc of docs) {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if (!doc.params) doc.params = this._inferenceParam(node);
-      if (!doc.return) doc.return = this._inferenceReturn(node);
+      if (!doc.type) {
+        if(node.returnType){
+          const types = this.convertType(node.returnType.typeAnnotation)
+          if(Array.isArray(types)){
+            doc.type = {types};
+          }else {
+            doc.type = {types:[types]};
+          }
+          
+        }else doc.type = this._inferenceReturn(node);
+        
+      }
       if(node.accessibility){
         doc.access=node.accessibility
       }
@@ -55,7 +77,13 @@ class Plugin {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if (!doc.type) {
         if(node.returnType){
-          doc.type = {types:[this.convertType(node.returnType.typeAnnotation)]};
+          const types = this.convertType(node.returnType.typeAnnotation)
+          if(Array.isArray(types)){
+            doc.type = {types};
+          }else {
+            doc.type = {types:[types]};
+          }
+          
         }else doc.type = this._inferenceReturn(node);
         
       }
@@ -72,7 +100,12 @@ class Plugin {
 
         if(node.params && node.params.length>0){
           if(node.params[0].typeAnnotation){
-            doc.type = {types:[this.convertType(node.params[0].typeAnnotation.typeAnnotation)]};
+            const types = this.convertType(node.params[0].typeAnnotation.typeAnnotation)
+            if(Array.isArray(types)){
+              doc.type = {types};
+            }else {
+              doc.type = {types:[types]};
+            }
           }
         }
       }
@@ -84,7 +117,13 @@ class Plugin {
     for (const doc of docs) {
       const node = ASTNodeContainer.getNode(doc.__docId__);
       if(node.typeAnnotation){
-        doc.type = {types:[this.convertType(node.typeAnnotation.typeAnnotation)]}
+        const types = this.convertType(node.typeAnnotation.typeAnnotation)
+        if(Array.isArray(types)){
+          doc.type = {types}
+        }else {
+          doc.type = {types:[types]}
+        }
+        
       }
       if (!doc.type) doc.type = this._inferenceType(node.right);
       if(node.accessibility){
@@ -168,14 +207,18 @@ class Plugin {
     if(typeAnnotation.type==='TSUnionType'){
       typeAnnotation.types.forEach((type)=>{
         const t = this.convertType(type)
-        if(t){
+        if(Array.isArray(t)){
+          result.concat(t)
+        }else if(t){
           result.push(t)
         }
         
       })
     }else if(typeAnnotation.type==='TSTypeReference'){
       const t = this.convertType(typeAnnotation)
-      if(t){
+      if(Array.isArray(t)){
+        result.concat(t)
+      }else if(t){
         result.push(t)
       }
     }
@@ -203,7 +246,7 @@ class Plugin {
         return 'symbol'
         break
       case 'TSTypeReference':
-        return type.typeName.name
+        return type.typeName.name==='{}'? 'object':type.typeName.name
         break
       case 'TSBooleanKeyword':
         return 'boolean'
@@ -218,10 +261,12 @@ class Plugin {
         return 'void'
         break
       case 'TSUnionType':
-      return 'union'
+        return type.types.map((entry)=>{
+          return this.convertType(entry)
+        })
         break
       default:
-      return null
+        return null
     }
   }
 
@@ -368,17 +413,30 @@ class Plugin {
     const body = node.body;
     const result = {};
     const inferenceType = this._inferenceType.bind(this);
-
+    
     ASTUtil.traverse(body, (node, parent, path)=>{
+      
       // `return` in Function is not the body's `return`
       if (node.type.includes('Function')) {
         path.skip();
+        if(node.returnType) {
+          const types = this.convertType(node.returnType.typeAnnotation)
+          if(Array.isArray(types)){
+            result.types = types
+          }else {
+            result.types = [types]
+          }
+          return result
+        }
+        
         return;
       }
-
+      
       if (node.type !== 'ReturnStatement') return;
 
       if (!node.argument) return;
+
+     
 
       result.types = inferenceType(node.argument).types;
     });
@@ -415,6 +473,14 @@ class Plugin {
       }
     }
 
+    if(right.type==='AwaitExpression') {
+      return {types: ['Promise']};
+    }
+
+    if(right.type==='ThisExpression') {
+      return {types: ['this']};
+    }
+
     if (right.type === 'ObjectExpression') {
       const typeMap = {};
       for (const prop of right.properties) {
@@ -430,6 +496,11 @@ class Plugin {
             break;
           }
           case 'SpreadProperty': {
+            const name = `...${prop.argument.name}`;
+            typeMap[name] = 'Object';
+            break;
+          }
+          case 'SpreadElement': {
             const name = `...${prop.argument.name}`;
             typeMap[name] = 'Object';
             break;

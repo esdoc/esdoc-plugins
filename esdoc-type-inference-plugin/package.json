@@ -1,6 +1,6 @@
 {
   "name": "@sebastianwessel/esdoc-type-inference-plugin",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "A type inference plugin for ESDoc [PoC]",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
