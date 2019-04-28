@@ -627,6 +627,7 @@ export default class DocBuilder {
    */
   _buildTypeDocLinkHTML(typeName) {
     // e.g. number[]
+    if(!typeName) typeName='SOMEUNKNOWN'
     let matched = typeName.match(/^(.*?)\[\]$/);
     if (matched) {
       typeName = matched[1];
