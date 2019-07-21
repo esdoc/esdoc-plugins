@@ -89,6 +89,7 @@ code {
 
 pre > code {
   display: block;
+  overflow: auto;
 }
 
 pre.prettyprint, pre > code {
