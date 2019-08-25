@@ -13,7 +13,7 @@ class Plugin {
     const autoPrivate = option.autoPrivate;
     for (const doc of ev.data.docs) {
       if (!doc.access) {
-        if (autoPrivate && doc.name.charAt(0) === '_') {
+        if (autoPrivate && doc.name && doc.name.charAt(0) === '_') {
           doc.access = 'private';
         } else {
           doc.access = 'public';
