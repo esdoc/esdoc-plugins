@@ -10,7 +10,7 @@ class Plugin {
     const option = ev.data.option;
 
     for (let item of option.replaces) {
-      item.from = new RegExp(item.from);
+      item.from = new RegExp(item.from, item.fromFlags);
     }
 
     // get package.json
