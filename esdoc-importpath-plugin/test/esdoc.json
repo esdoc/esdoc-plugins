@@ -7,7 +7,7 @@
       "name": "./src/Plugin.js",
       "option": {
         "replaces": [
-          {"from": "^src/", "to": "lib/"},
+          {"from": "^src/", "fromFlags": "i", "to": "lib/"},
           {"from": "^lib/MyClass2.js", "to": "lib/foo"}
         ]
       }

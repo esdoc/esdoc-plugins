@@ -19,7 +19,7 @@ Therefore, convert the import path by using following setting.
       "option": {
         "stripPackageName": false,
         "replaces": [
-          {"from": "^src/", "to": "lib/"}
+          {"from": "^src/", "fromFlags": "i", "to": "lib/"}
         ]
       }
     }
@@ -27,7 +27,7 @@ Therefore, convert the import path by using following setting.
 }
 ```
 
-``from`` is regular expression and ``to``is letter. In the internal ``from`` and ``to`` are used with ``String#replace(new RegExp (from), to)``.
+``from`` is regular expression, ``fromFlags`` is flags of regular expression, and ``to``is letter. In the internal ``from``, ``fromFlags`` and ``to`` are used with ``String#replace(new RegExp (from, fromFlags), to)``.
 
 When writing multi rules, it will also be carried out transformation many times.
 For example, ``[{from: "^src/", to: "lib/"}, {from: "MyFooClass", to: "my-foo"}]`` converted as follows:
