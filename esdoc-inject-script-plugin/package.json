@@ -1,21 +1,21 @@
 {
   "name": "@sebastianwessel/esdoc-inject-script-plugin",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A inject script plugin for ESDoc",
   "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.3",
-    "fs-extra": "7.0.1"
+    "cheerio": "^1.0.0-rc.3",
+    "fs-extra": "^7.0.1"
   },
   "devDependencies": {
     "@sebastianwessel/esdoc": "latest",
-    "mocha": "6.1.4"
+    "mocha": "^6.1.4"
   },
   "engines": {
     "node": ">= 6.0.0"

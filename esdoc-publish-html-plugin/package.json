@@ -1,28 +1,28 @@
 {
   "name": "@sebastianwessel/esdoc-publish-html-plugin",
-  "version": "2.0.4",
+  "version": "2.1.0",
   "description": "A publish HTML plugin for ESDoc",
   "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.3",
+    "@babel/generator": "^7.6.4",
+    "cheerio": "^1.0.0-rc.3",
+    "escape-html": "^1.0.3",
     "fs-extra": "7.0.1",
-    "escape-html": "1.0.3",
-    "@babel/generator": "^7.3.2",
-    "ice-cap": "0.0.4",
-    "marked": "^0.6.2",
-    "taffydb": "2.7.3"
+    "ice-cap": "^0.0.4",
+    "marked": "^0.6.3",
+    "taffydb": "^2.7.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
-    "@babel/register": "^7.0.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "@babel/register": "^7.6.2",
     "@sebastianwessel/esdoc": "latest",
     "@sebastianwessel/esdoc-accessor-plugin": "latest",
     "@sebastianwessel/esdoc-brand-plugin": "latest",
@@ -34,7 +34,7 @@
     "@sebastianwessel/esdoc-type-inference-plugin": "latest",
     "@sebastianwessel/esdoc-undocumented-identifier-plugin": "latest",
     "@sebastianwessel/esdoc-unexported-identifier-plugin": "latest",
-    "mocha": "6.1.4"
+    "mocha": "^6.2.2"
   },
   "engines": {
     "node": ">= 6.0.0"

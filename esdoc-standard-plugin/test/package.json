@@ -3,7 +3,7 @@
   "version": "1.2.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/sebastianwessel/esdoc-pluginsesdoc"
   },
   "main": "./src/Class/Definition.js"
 }

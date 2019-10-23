@@ -1,17 +1,17 @@
 {
   "name": "esdoc-template-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A __TEMPLATE__ plugin for ESDoc",
   "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-plugins"
   },
   "devDependencies": {
     "esdoc": "alpha",
-    "mocha": "2.5.3"
+    "mocha": "^2.5.3"
   },
   "engines": {
     "node": ">= 6.0.0"

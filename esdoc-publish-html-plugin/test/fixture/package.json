@@ -10,7 +10,7 @@
   "homepage": "http://esdoc.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc"
+    "url": "https://github.com/sebastianwessel/esdoc-pluginsesdoc"
   },
   "main": "./src/Class/Definition.js"
 }

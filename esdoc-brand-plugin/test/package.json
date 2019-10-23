@@ -1,7 +1,7 @@
 {
   "name": "esdoc-brand-plugin-test",
   "description": "this is esdoc-brand-plugin test",
-  "repository": "https://github.com/esdoc/esdoc-optional-plugins",
+  "repository": "https://github.com/sebastianwessel/esdoc-pluginsesdoc-optional-plugins",
   "homepage": "https://esdoc.org",
   "author": {
     "name": "h13i32maru",
