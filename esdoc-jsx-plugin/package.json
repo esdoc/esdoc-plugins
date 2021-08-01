@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-jsx-plugin",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A JSX plugin for ESDoc",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
