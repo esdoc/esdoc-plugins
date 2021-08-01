@@ -29,7 +29,7 @@
     "esdoc-integrate-manual-plugin": "^1.0.0",
     "esdoc-integrate-test-plugin": "^1.0.0",
     "esdoc-latest": "^1.0.1",
-    "esdoc-type-inference-plugin": "^1.0.1",
+    "esdoc-latest-type-inference-plugin": "^1.0.1",
     "esdoc-undocumented-identifier-plugin": "^1.0.0",
     "esdoc-unexported-identifier-plugin": "^1.0.0",
     "mocha": "^9.0.3"
