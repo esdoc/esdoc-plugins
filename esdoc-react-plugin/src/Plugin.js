@@ -1,7 +1,7 @@
 const path = require('path');
 const cheerio = require('cheerio');
-const ParamParser = require('esdoc/out/src/Parser/ParamParser').default;
-const DocBuilder = require('esdoc-publish-html-plugin/out/src/Builder/DocBuilder').default;
+const ParamParser = require('esdoc-latest/out/src/Parser/ParamParser').default;
+const DocBuilder = require('esdoc-latest-publish-html-plugin/out/src/Builder/DocBuilder').default;
 
 class Plugin {
   constructor() {

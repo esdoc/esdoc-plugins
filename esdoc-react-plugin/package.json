@@ -1,21 +1,20 @@
 {
-  "name": "esdoc-react-plugin",
+  "name": "esdoc-latest-react-plugin",
   "version": "1.0.1",
   "description": "A React plugin for ESDoc [PoC]",
-  "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/esdoc-latest/esdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "1.0.0-rc.1"
+    "cheerio": "^1.0.0-rc.10"
   },
   "devDependencies": {
     "esdoc": "latest",
-    "esdoc-standard-plugin": "latest",
-    "mocha": "2.5.3"
+    "esdoc-latest-standard-plugin": "latest",
+    "mocha": "^9.0.3"
   },
   "engines": {
     "node": ">= 6.0.0"
