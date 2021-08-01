@@ -1,8 +1,7 @@
 {
   "name": "esdoc-latest-lint-plugin",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A lint plugin for ESDoc",
- 
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
