@@ -1,20 +1,19 @@
 {
-  "name": "esdoc-brand-plugin",
+  "name": "esdoc-latest-brand-plugin",
   "version": "1.0.0",
   "description": "A brand plugin for ESDoc",
-  "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/esdoc-latest/esdoc-plugins"
   },
   "dependencies": {
-    "cheerio": "0.22.0"
+    "cheerio": "^1.0.0-rc.10"
   },
   "devDependencies": {
     "esdoc": "latest",
-    "mocha": "2.5.3"
+    "mocha": "^9.0.3"
   },
   "engines": {
     "node": ">= 6.0.0"
