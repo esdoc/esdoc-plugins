@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-flow-type-plugin",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A flow type plugin for ESDoc [PoC]",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
