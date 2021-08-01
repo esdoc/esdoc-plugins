@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-standard-plugin",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A standard plugin for ESDoc",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
