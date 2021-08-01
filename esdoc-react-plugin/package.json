@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-react-plugin",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A React plugin for ESDoc [PoC]",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
