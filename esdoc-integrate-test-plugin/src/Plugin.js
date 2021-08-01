@@ -4,10 +4,10 @@ const fs = require('fs');
 const TestDocFactory = require('./TestDocFactory');
 
 // hack
-const ESParser = require('esdoc/out/src/Parser/ESParser').default;
-const InvalidCodeLogger = require('esdoc/out/src/Util/InvalidCodeLogger').default;
-const PathResolver = require('esdoc/out/src/Util/PathResolver').default;
-const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
+const ESParser = require('esdoc-latest/out/src/Parser/ESParser').default;
+const InvalidCodeLogger = require('esdoc-latest/out/src/Util/InvalidCodeLogger').default;
+const PathResolver = require('esdoc-latest/out/src/Util/PathResolver').default;
+const ASTUtil = require('esdoc-latest/out/src/Util/ASTUtil').default;
 
 class Plugin {
   onHandleDocs(ev) {
