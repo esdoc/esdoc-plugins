@@ -1,8 +1,7 @@
 {
   "name": "esdoc-latest-coverage-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A coverage plugin for ESDoc",
-
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
