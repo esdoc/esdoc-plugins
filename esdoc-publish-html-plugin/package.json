@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-publish-html-plugin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A publish HTML plugin for ESDoc",
   "license": "MIT",
   "repository": {
@@ -22,13 +22,13 @@
     "@babel/preset-env": "^7.14.8",
     "@babel/register": "^7.14.5",
     "esdoc-accessor-plugin": "^1.0.0",
+    "esdoc-latest": "^1.0.1",
     "esdoc-latest-brand-plugin": "^1.0.0",
     "esdoc-latest-coverage-plugin": "^1.1.0",
     "esdoc-latest-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-latest-external-ecmascript-plugin": "^1.0.0",
     "esdoc-latest-integrate-manual-plugin": "^1.0.0",
     "esdoc-latest-integrate-test-plugin": "^1.0.0",
-    "esdoc-latest": "^1.0.1",
     "esdoc-latest-type-inference-plugin": "^1.0.1",
     "esdoc-latest-undocumented-identifier-plugin": "^1.0.0",
     "esdoc-latest-unexported-identifier-plugin": "^1.0.0",
