@@ -1,17 +1,16 @@
 {
-  "name": "esdoc-type-inference-plugin",
+  "name": "esdoc-latest-type-inference-plugin",
   "version": "1.0.1",
   "description": "A type inference plugin for ESDoc [PoC]",
-  "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/esdoc-latest/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "latest",
-    "mocha": "2.5.3"
+    "esdoc-latest": "latest",
+    "mocha": "^9.0.3"
   },
   "engines": {
     "node": ">= 6.0.0"

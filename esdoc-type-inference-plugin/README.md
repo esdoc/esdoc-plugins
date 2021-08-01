@@ -2,7 +2,7 @@
 **This is Proof of Concept**
 ## Install
 ```bash
-npm install esdoc-type-inference-plugin
+npm install esdoc-latest-type-inference-plugin
 ```
 
 ## Config
@@ -11,7 +11,7 @@ npm install esdoc-type-inference-plugin
   "source": "./src",
   "destination": "./doc",
   "plugins": [
-    {"name": "esdoc-type-inference-plugin", "option": {"enable": true}}
+    {"name": "esdoc-latest-type-inference-plugin", "option": {"enable": true}}
   ]
 }
 ```
@@ -21,5 +21,3 @@ npm install esdoc-type-inference-plugin
 ## LICENSE
 MIT
 
-## Author
-[Ryo Maruyama@h13i32maru](https://github.com/h13i32maru)

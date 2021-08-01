@@ -1,5 +1,5 @@
-const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').default;
-const ASTUtil = require('esdoc/out/src/Util/ASTUtil').default;
+const ASTNodeContainer = require('esdoc-latest/out/src/Util/ASTNodeContainer.js').default;
+const ASTUtil = require('esdoc-latest/out/src/Util/ASTUtil').default;
 
 class Plugin {
   onHandleDocs(ev) {
@@ -331,6 +331,11 @@ class Plugin {
             break;
           }
           case 'SpreadProperty': {
+            const name = `...${prop.argument.name}`;
+            typeMap[name] = 'Object';
+            break;
+          }
+          case 'SpreadElement': {
             const name = `...${prop.argument.name}`;
             typeMap[name] = 'Object';
             break;
