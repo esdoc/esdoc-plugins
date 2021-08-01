@@ -1,30 +1,29 @@
 {
-  "name": "esdoc-standard-plugin",
+  "name": "esdoc-latest-standard-plugin",
   "version": "1.0.0",
   "description": "A standard plugin for ESDoc",
-  "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/esdoc-latest/esdoc-plugins"
   },
   "dependencies": {
-    "esdoc-lint-plugin": "^1.0.0",
-    "esdoc-coverage-plugin": "^1.0.0",
-    "esdoc-accessor-plugin": "^1.0.0",
-    "esdoc-external-ecmascript-plugin": "^1.0.0",
-    "esdoc-brand-plugin": "^1.0.0",
-    "esdoc-undocumented-identifier-plugin": "^1.0.0",
-    "esdoc-unexported-identifier-plugin": "^1.0.0",
-    "esdoc-publish-html-plugin": "^1.0.0",
-    "esdoc-type-inference-plugin": "^1.0.0",
-    "esdoc-integrate-manual-plugin": "^1.0.0",
-    "esdoc-integrate-test-plugin": "^1.0.0"
+    "esdoc-latest-accessor-plugin": "^1.1.0",
+    "esdoc-latest-brand-plugin": "^1.1.0",
+    "esdoc-latest-coverage-plugin": "^1.2.0",
+    "esdoc-latest-external-ecmascript-plugin": "^1.5.0",
+    "esdoc-latest-integrate-manual-plugin": "^1.1.0",
+    "esdoc-latest-integrate-test-plugin": "^1.3.0",
+    "esdoc-latest-lint-plugin": "^1.0.4",
+    "esdoc-latest-publish-html-plugin": "^1.1.2",
+    "esdoc-latest-type-inference-plugin": "^1.0.2",
+    "esdoc-latest-undocumented-identifier-plugin": "^1.1.0",
+    "esdoc-latest-unexported-identifier-plugin": "^1.1.0"
   },
   "devDependencies": {
-    "esdoc": "latest",
-    "mocha": "2.5.3"
+    "esdoc-latest": "latest",
+    "mocha": "^9.0.3"
   },
   "engines": {
     "node": ">= 6.0.0"

@@ -2,17 +2,17 @@ class Plugin {
   onHandlePlugins(ev) {
     const option = ev.data.option || {};
     const plugins = [
-      {name: 'esdoc-lint-plugin', option: option.lint},
-      {name: 'esdoc-coverage-plugin', option: option.coverage},
-      {name: 'esdoc-accessor-plugin', option: option.accessor},
-      {name: 'esdoc-type-inference-plugin', option: option.typeInference},
-      {name: 'esdoc-external-ecmascript-plugin'},
-      {name: 'esdoc-brand-plugin', option: option.brand},
-      {name: 'esdoc-undocumented-identifier-plugin', option: option.undocumentIdentifier},
-      {name: 'esdoc-unexported-identifier-plugin', option: option.unexportedIdentifier},
-      {name: 'esdoc-integrate-manual-plugin', option: option.manual},
-      {name: 'esdoc-integrate-test-plugin', option: option.test},
-      {name: 'esdoc-publish-html-plugin'}
+      {name: 'esdoc-latest-lint-plugin', option: option.lint},
+      {name: 'esdoc-latest-coverage-plugin', option: option.coverage},
+      {name: 'esdoc-latest-accessor-plugin', option: option.accessor},
+      {name: 'esdoc-latest-type-inference-plugin', option: option.typeInference},
+      {name: 'esdoc-latest-external-ecmascript-plugin'},
+      {name: 'esdoc-latest-brand-plugin', option: option.brand},
+      {name: 'esdoc-latest-undocumented-identifier-plugin', option: option.undocumentIdentifier},
+      {name: 'esdoc-latest-unexported-identifier-plugin', option: option.unexportedIdentifier},
+      {name: 'esdoc-latest-integrate-manual-plugin', option: option.manual},
+      {name: 'esdoc-latest-integrate-test-plugin', option: option.test},
+      {name: 'esdoc-latest-publish-html-plugin'}
     ];
 
     const existPluginNames = ev.data.plugins.map(plugin => plugin.name);

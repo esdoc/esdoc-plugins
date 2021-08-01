@@ -19,25 +19,25 @@ describe('test standard plugin:', ()=>{
         }
       }},
       {name: './test/spy-plugin.js'},
-      {name: 'esdoc-lint-plugin'},
-      {name: 'esdoc-coverage-plugin'},
-      {name: 'esdoc-accessor-plugin'},
-      {name: 'esdoc-type-inference-plugin'},
-      {name: 'esdoc-external-ecmascript-plugin'},
-      {name: 'esdoc-brand-plugin', option: {title: 'My Library'}},
-      {name: 'esdoc-undocumented-identifier-plugin'},
-      {name: 'esdoc-unexported-identifier-plugin'},
-      {name: 'esdoc-integrate-manual-plugin', option: {
+      {name: 'esdoc-latest-lint-plugin'},
+      {name: 'esdoc-latest-coverage-plugin'},
+      {name: 'esdoc-latest-accessor-plugin'},
+      {name: 'esdoc-latest-type-inference-plugin'},
+      {name: 'esdoc-latest-external-ecmascript-plugin'},
+      {name: 'esdoc-latest-brand-plugin', option: {title: 'My Library'}},
+      {name: 'esdoc-latest-undocumented-identifier-plugin'},
+      {name: 'esdoc-latest-unexported-identifier-plugin'},
+      {name: 'esdoc-latest-integrate-manual-plugin', option: {
         coverage: true,
         files: ['./test/manual/overview.md']
       }},
-      {name: 'esdoc-integrate-test-plugin', option: {
+      {name: 'esdoc-latest-integrate-test-plugin', option: {
         source: "./test/test",
         interfaces: ["describe", "it", "context", "suite", "test"],
         includes: ["Test.js$"],
         excludes: ["\\.config\\.js$"]
       }},
-      {name: 'esdoc-publish-html-plugin'},
+      {name: 'esdoc-latest-publish-html-plugin'},
     ]);
 
   });
