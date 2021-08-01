@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 // hack: using a internal code of esdoc.
-const ASTNodeContainer = require('esdoc/out/src/Util/ASTNodeContainer.js').default;
+const ASTNodeContainer = require('esdoc-latest/out/src/Util/ASTNodeContainer.js').default;
 
 /**
  * Lint Output Builder class.
