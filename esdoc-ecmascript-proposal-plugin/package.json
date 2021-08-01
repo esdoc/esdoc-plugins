@@ -1,17 +1,16 @@
 {
-  "name": "esdoc-ecmascript-proposal-plugin",
-  "version": "1.0.0",
+  "name": "esdoc-latest-ecmascript-proposal-plugin",
+  "version": "1.1.0",
   "description": "A ECMAScript proposal plugin for ESDoc",
-  "author": "h13i32maru",
-  "homepage": "https://github.com/esdoc/esdoc-plugins",
+  "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esdoc/esdoc-plugins"
+    "url": "https://github.com/esdoc-latest/esdoc-plugins"
   },
   "devDependencies": {
-    "esdoc": "^1.1.0",
-    "mocha": "2.5.3"
+    "esdoc-latest": "latest",
+    "mocha": "^9.0.3"
   },
   "engines": {
     "node": ">= 6.0.0"
