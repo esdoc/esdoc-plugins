@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-external-ecmascript-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A external ECMAScript plugin for ESDoc",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
