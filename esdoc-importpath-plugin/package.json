@@ -1,6 +1,6 @@
 {
   "name": "esdoc-latest-importpath-plugin",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "description": "A import path plugin for ESDoc",
   "homepage": "https://github.com/esdoc-latest/esdoc-plugins",
   "license": "MIT",
