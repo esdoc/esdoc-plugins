@@ -4,6 +4,6 @@
   "excludes": ["\\.test\\.js"],
   "plugins": [
     {"name": "./src/Plugin.js"},
-    {"name": "esdoc-standard-plugin"}
+    {"name": "esdoc-latest-standard-plugin"}
   ]
 }
