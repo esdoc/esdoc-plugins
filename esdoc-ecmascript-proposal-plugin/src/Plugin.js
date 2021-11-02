@@ -12,6 +12,7 @@ class Plugin {
     if (option.all || option.decorators) plugins.push('decorators');
     if (option.all || option.exportExtensions) plugins.push('exportExtensions');
     if (option.all || option.dynamicImport) plugins.push('dynamicImport');
+    if (option.all || option.optionalCatchBinding) plugins.push('optionalCatchBinding');
   }
 }
 

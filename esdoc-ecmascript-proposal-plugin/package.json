@@ -1,10 +1,16 @@
 {
   "name": "esdoc-ecmascript-proposal-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A ECMAScript proposal plugin for ESDoc",
   "author": "h13i32maru",
   "homepage": "https://github.com/esdoc/esdoc-plugins",
   "license": "MIT",
+  "contributors": [
+    {
+      "name": "Fabio Costa",
+      "url": "https://github.com/fab1o"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/esdoc/esdoc-plugins"

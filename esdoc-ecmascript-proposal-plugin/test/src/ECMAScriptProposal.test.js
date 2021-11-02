@@ -47,6 +47,11 @@ describe('test ecmascript proposal result:', ()=> {
     assert(doc);
   });
 
+  it('parses OptionalCatchBinding', ()=>{
+    const doc = find('longname', 'src/OptionalCatchBinding.js~OptionalCatchBinding');
+    assert(doc);
+  });
+
   it('parses ExportExtensions', ()=>{
     const doc = find('longname', 'src/ExportExtensions.js~ExportExtensions');
     assert(doc);

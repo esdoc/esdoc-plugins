@@ -32,7 +32,8 @@ If you want to enable each proposals,
         "asyncGenerators": true,
         "decorators": true,
         "exportExtensions": true,
-        "dynamicImport": true
+        "dynamicImport": true,
+        "optionalCatchBinding": true
       }
     }
   ]
@@ -44,3 +45,6 @@ MIT
 
 ## Author
 [Ryo Maruyama@h13i32maru](https://github.com/h13i32maru)
+
+## Contributors
+[Fabio Costa@fab1o](https://github.com/fab1o)
