@@ -15,7 +15,7 @@
     "escape-html": "1.0.3",
     "babel-generator": "6.11.4",
     "ice-cap": "0.0.4",
-    "marked": "0.3.19",
+    "marked": "4.0.10",
     "taffydb": "2.7.2"
   },
   "devDependencies": {
