@@ -8,6 +8,7 @@ class Plugin {
     const option = ev.data.option || {};
     if (!('access' in option)) option.access = ['public', 'protected', 'private'];
     if (!('autoPrivate' in option)) option.autoPrivate = true;
+    if (!('defaultAccess' in option)) option.defaultAccess = 'public';
 
     const access = option.access;
     const autoPrivate = option.autoPrivate;
@@ -16,7 +17,7 @@ class Plugin {
         if (autoPrivate && doc.name.charAt(0) === '_') {
           doc.access = 'private';
         } else {
-          doc.access = 'public';
+          doc.access = option.defaultAccess;
         }
       }
 
